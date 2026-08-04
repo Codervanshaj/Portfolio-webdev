@@ -15,7 +15,7 @@ export default function Hero() {
           style={{
             fontFamily: "'Geist', 'Inter Tight', 'Helvetica Neue', Arial, sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(120px, 46vh, 330px)",
+            fontSize: "clamp(120px, 49vh, 350px)",
             lineHeight: "0.8",
             letterSpacing: "-0.065em",
             color: "#F4FF00",
@@ -33,7 +33,7 @@ export default function Hero() {
         className="absolute flex items-center justify-center p-4 rounded-[12px] pointer-events-auto"
         style={{
           zIndex: 2,
-          left: "17vw",
+          left: "18.2vw",
           top: "56vh",
           width: "15vw",
           height: "16vh",
@@ -91,7 +91,7 @@ export default function Hero() {
         className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto"
         style={{
           zIndex: 2,
-          left: "20vw",
+          left: "21.2vw",
           top: "75vh",
           width: "9vw",
           height: "22vh",
@@ -131,14 +131,14 @@ export default function Hero() {
       {/* ─── LAYER 3: Portrait ─── */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none flex justify-center items-end"
-        style={{ zIndex: 3, width: "37vw", height: "94.5vh" }}
+        style={{ zIndex: 3, width: "39.5vw", height: "96.5vh" }}
       >
         <div className="relative w-full h-full">
           <Image
             src="/Vanshaj-pic.png"
             alt="Vanshaj"
             fill
-            sizes="37vw"
+            sizes="39.5vw"
             className="object-cover object-top"
             priority
             unoptimized
@@ -151,7 +151,7 @@ export default function Hero() {
         className="absolute left-1/2 -translate-x-1/2 pointer-events-none text-center flex flex-col justify-between"
         style={{
           zIndex: 4,
-          top: "51vh",
+          top: "55vh",
           height: "31vh",
           width: "31vw",
         }}
@@ -181,7 +181,7 @@ export default function Hero() {
       {/* Navigation (mid-height, flanking the portrait) */}
       <div
         className="absolute left-[3.5vw] right-[3.5vw] flex justify-between items-center pointer-events-auto"
-        style={{ zIndex: 5, top: "63vh", transform: "translateY(-50%)" }}
+        style={{ zIndex: 5, top: "64.2vh", transform: "translateY(-50%)" }}
       >
         {/* Left nav */}
         <div
@@ -223,7 +223,7 @@ export default function Hero() {
         className="absolute flex flex-col justify-center gap-3.5 px-5 py-4 rounded-[12px] pointer-events-auto"
         style={{
           zIndex: 5,
-          left: "64vw",
+          left: "65.2vw",
           top: "52vh",
           width: "12vw",
           height: "29vh",
@@ -260,7 +260,7 @@ export default function Hero() {
       {/* ─── LAYER 6: CTA buttons below headline ─── */}
       <div
         className="absolute left-1/2 -translate-x-1/2 flex gap-3 pointer-events-auto"
-        style={{ zIndex: 6, top: "87vh" }}
+        style={{ zIndex: 6, top: "91vh" }}
       >
         <a
           href="#"
