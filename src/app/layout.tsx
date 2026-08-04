@@ -24,7 +24,7 @@ export default function RootLayout({ children }: Readonly<{children: React.React
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="h-screen w-screen overflow-hidden bg-[#F1F0EA] text-[#171717] selection:bg-[#171717] selection:text-[#F1F0EA]">
+      <body className="h-screen w-screen overflow-hidden bg-[#D7D1C1] text-[#171715] selection:bg-[#171715] selection:text-[#D7D1C1]">
         {children}
       </body>
     </html>
