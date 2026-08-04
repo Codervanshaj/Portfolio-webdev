@@ -1,9 +1,49 @@
 "use client";
 import Image from "next/image";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      ".gsap-vanshaj",
+      { y: "100%" },
+      { y: "0%", duration: 1.1, ease: "power4.out" }
+    )
+    .fromTo(
+      ".gsap-portrait",
+      { y: "20%" },
+      { y: "0%", duration: 1.2, ease: "power4.out" },
+      "-=0.7"
+    )
+    .fromTo(
+      ".gsap-headline-line",
+      { y: "110%" },
+      { y: "0%", duration: 0.9, ease: "power4.out", stagger: 0.12 },
+      "-=0.9"
+    )
+    .fromTo(
+      ".gsap-side-element",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1 },
+      "-=0.7"
+    )
+    .fromTo(
+      ".gsap-cta-btn",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1 },
+      "-=0.5"
+    );
+  }, { scope: container });
+
   return (
     <section
+      ref={container}
       className="relative w-full h-screen overflow-hidden select-none"
       style={{ background: "#D7D1C1" }}
     >
@@ -11,26 +51,30 @@ export default function Hero() {
         className="absolute left-0 right-0 flex items-center justify-center pointer-events-none"
         style={{ zIndex: 1, top: "5vh", height: "52vh" }}
       >
-        <span
-          style={{
-            fontFamily: "'Geist', 'Inter Tight', 'Helvetica Neue', Arial, sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(120px, 49vh, 350px)",
-            lineHeight: "0.8",
-            letterSpacing: "-0.065em",
-            color: "#F4FF00",
-            whiteSpace: "nowrap",
-            userSelect: "none",
-          }}
-        >
-          VANSHAJ
-        </span>
+        <div style={{ overflow: "hidden", display: "flex" }}>
+          <span
+            className="gsap-vanshaj"
+            style={{
+              fontFamily: "'Geist', 'Inter Tight', 'Helvetica Neue', Arial, sans-serif",
+              fontWeight: 900,
+              fontSize: "clamp(120px, 49vh, 350px)",
+              lineHeight: "0.8",
+              letterSpacing: "-0.065em",
+              color: "#F4FF00",
+              whiteSpace: "nowrap",
+              userSelect: "none",
+              display: "block",
+            }}
+          >
+            VANSHAJ
+          </span>
+        </div>
       </div>
 
       {/* ─── LAYER 2: Stat Cards (Project & Experience) ─── */}
       {/* Project Card */}
       <div
-        className="absolute flex items-center justify-center p-4 rounded-[12px] pointer-events-auto"
+        className="absolute flex items-center justify-center p-4 rounded-[12px] pointer-events-auto gsap-side-element"
         style={{
           zIndex: 2,
           left: "18.2vw",
@@ -88,7 +132,7 @@ export default function Hero() {
 
       {/* Experience Card */}
       <div
-        className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto"
+        className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto gsap-side-element"
         style={{
           zIndex: 2,
           left: "21.2vw",
@@ -133,16 +177,18 @@ export default function Hero() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none flex justify-center items-end"
         style={{ zIndex: 3, width: "39.5vw", height: "96.5vh" }}
       >
-        <div className="relative w-full h-full">
-          <Image
-            src="/Vanshaj-pic.png"
-            alt="Vanshaj"
-            fill
-            sizes="39.5vw"
-            className="object-cover object-top"
-            priority
-            unoptimized
-          />
+        <div style={{ overflow: "hidden", width: "100%", height: "100%" }}>
+          <div className="relative w-full h-full gsap-portrait">
+            <Image
+              src="/Vanshaj-pic.png"
+              alt="Vanshaj"
+              fill
+              sizes="39.5vw"
+              className="object-cover object-top"
+              priority
+              unoptimized
+            />
+          </div>
         </div>
       </div>
 
@@ -171,16 +217,22 @@ export default function Hero() {
             height: "100%",
           }}
         >
-          <span>Next.js,</span>
-          <span>Applied</span>
-          <span>Differently.</span>
+          <span style={{ overflow: "hidden", display: "block" }}>
+            <span className="gsap-headline-line" style={{ display: "block" }}>Next.js,</span>
+          </span>
+          <span style={{ overflow: "hidden", display: "block" }}>
+            <span className="gsap-headline-line" style={{ display: "block" }}>Applied</span>
+          </span>
+          <span style={{ overflow: "hidden", display: "block" }}>
+            <span className="gsap-headline-line" style={{ display: "block" }}>Differently.</span>
+          </span>
         </h2>
       </div>
 
       {/* ─── LAYER 5: Navigation & Descriptor Panel ─── */}
       {/* Navigation (mid-height, flanking the portrait) */}
       <div
-        className="absolute left-[3.5vw] right-[3.5vw] flex justify-between items-center pointer-events-auto"
+        className="absolute left-[3.5vw] right-[3.5vw] flex justify-between items-center pointer-events-auto gsap-side-element"
         style={{ zIndex: 5, top: "64.2vh", transform: "translateY(-50%)" }}
       >
         {/* Left nav */}
@@ -194,9 +246,19 @@ export default function Hero() {
             color: "#171715",
           }}
         >
-          <a href="#" className="hover:opacity-50 transition-opacity whitespace-nowrap">HOME</a>
+          <a href="#" className="group whitespace-nowrap relative inline-block">
+            <span className="relative overflow-hidden inline-flex">
+              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">HOME</span>
+              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">HOME</span>
+            </span>
+          </a>
           <span className="opacity-30">|</span>
-          <a href="#" className="hover:opacity-50 transition-opacity whitespace-nowrap">ABOUT ME</a>
+          <a href="#" className="group whitespace-nowrap relative inline-block">
+            <span className="relative overflow-hidden inline-flex">
+              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">ABOUT ME</span>
+              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">ABOUT ME</span>
+            </span>
+          </a>
         </div>
 
         {/* Right nav */}
@@ -210,17 +272,32 @@ export default function Hero() {
             color: "#171715",
           }}
         >
-          <a href="#" className="hover:opacity-50 transition-opacity whitespace-nowrap">SERVICES</a>
+          <a href="#" className="group whitespace-nowrap relative inline-block">
+            <span className="relative overflow-hidden inline-flex">
+              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">SERVICES</span>
+              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">SERVICES</span>
+            </span>
+          </a>
           <span className="opacity-30">|</span>
-          <a href="#" className="hover:opacity-50 transition-opacity whitespace-nowrap">CLIENTS</a>
+          <a href="#" className="group whitespace-nowrap relative inline-block">
+            <span className="relative overflow-hidden inline-flex">
+              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">CLIENTS</span>
+              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">CLIENTS</span>
+            </span>
+          </a>
           <span className="opacity-30">|</span>
-          <a href="#" className="hover:opacity-50 transition-opacity whitespace-nowrap">FAQ</a>
+          <a href="#" className="group whitespace-nowrap relative inline-block">
+            <span className="relative overflow-hidden inline-flex">
+              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">FAQ</span>
+              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">FAQ</span>
+            </span>
+          </a>
         </div>
       </div>
 
       {/* Descriptor Panel */}
       <div
-        className="absolute flex flex-col justify-center gap-3.5 px-5 py-4 rounded-[12px] pointer-events-auto"
+        className="absolute flex flex-col justify-center gap-3.5 px-5 py-4 rounded-[12px] pointer-events-auto gsap-side-element"
         style={{
           zIndex: 5,
           left: "65.2vw",
@@ -264,6 +341,7 @@ export default function Hero() {
       >
         <a
           href="#"
+          className="gsap-cta-btn group"
           style={{
             background: "#F4FF00",
             color: "#171715",
@@ -282,13 +360,15 @@ export default function Hero() {
             minWidth: "130px",
             transition: "opacity 0.2s",
           }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
         >
-          Book a Call
+          <span className="relative overflow-hidden inline-flex">
+            <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">Book a Call</span>
+            <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">Book a Call</span>
+          </span>
         </a>
         <a
           href="#"
+          className="gsap-cta-btn group"
           style={{
             background: "#F4FF00",
             color: "#171715",
@@ -307,17 +387,18 @@ export default function Hero() {
             minWidth: "130px",
             transition: "opacity 0.2s",
           }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
         >
-          About Me
+          <span className="relative overflow-hidden inline-flex">
+            <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">About Me</span>
+            <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">About Me</span>
+          </span>
         </a>
       </div>
 
       {/* ─── LAYER 7: Bottom Corner Texts (Left & Right) ─── */}
       {/* Bottom-left corner text */}
       <div
-        className="absolute pointer-events-none"
+        className="absolute pointer-events-none gsap-side-element"
         style={{
           zIndex: 10,
           left: "3.5vw",
@@ -334,7 +415,7 @@ export default function Hero() {
 
       {/* Bottom-right description */}
       <div
-        className="absolute pointer-events-none"
+        className="absolute pointer-events-none gsap-side-element"
         style={{
           zIndex: 10,
           left: "70vw",
