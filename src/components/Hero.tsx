@@ -12,32 +12,33 @@ export default function Hero() {
 
     tl.fromTo(
       ".gsap-vanshaj",
-      { y: "100%" },
-      { y: "0%", duration: 1.1, ease: "power4.out" }
+      { yPercent: 105 },
+      { yPercent: 0, duration: 1.15, ease: "power4.out" },
+      0
     )
     .fromTo(
       ".gsap-portrait",
-      { y: "20%" },
-      { y: "0%", duration: 1.2, ease: "power4.out" },
-      "-=0.7"
+      { yPercent: 25 },
+      { yPercent: 0, duration: 1.1, ease: "power4.out" },
+      0.35
     )
     .fromTo(
       ".gsap-headline-line",
-      { y: "110%" },
-      { y: "0%", duration: 0.9, ease: "power4.out", stagger: 0.12 },
-      "-=0.9"
+      { yPercent: 110 },
+      { yPercent: 0, duration: 0.85, ease: "power4.out", stagger: 0.10 },
+      0.75
     )
     .fromTo(
       ".gsap-side-element",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1 },
-      "-=0.7"
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.05 },
+      1.1
     )
     .fromTo(
       ".gsap-cta-btn",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1 },
-      "-=0.5"
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 },
+      1.3
     );
   }, { scope: container });
 
@@ -248,15 +249,15 @@ export default function Hero() {
         >
           <a href="#" className="group whitespace-nowrap relative inline-block">
             <span className="relative overflow-hidden inline-flex">
-              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">HOME</span>
-              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">HOME</span>
+              <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">HOME</span>
+              <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">HOME</span>
             </span>
           </a>
           <span className="opacity-30">|</span>
           <a href="#" className="group whitespace-nowrap relative inline-block">
             <span className="relative overflow-hidden inline-flex">
-              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">ABOUT ME</span>
-              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">ABOUT ME</span>
+              <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">ABOUT ME</span>
+              <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">ABOUT ME</span>
             </span>
           </a>
         </div>
@@ -274,22 +275,22 @@ export default function Hero() {
         >
           <a href="#" className="group whitespace-nowrap relative inline-block">
             <span className="relative overflow-hidden inline-flex">
-              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">SERVICES</span>
-              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">SERVICES</span>
+              <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">SERVICES</span>
+              <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">SERVICES</span>
             </span>
           </a>
           <span className="opacity-30">|</span>
           <a href="#" className="group whitespace-nowrap relative inline-block">
             <span className="relative overflow-hidden inline-flex">
-              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">CLIENTS</span>
-              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">CLIENTS</span>
+              <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">CLIENTS</span>
+              <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">CLIENTS</span>
             </span>
           </a>
           <span className="opacity-30">|</span>
           <a href="#" className="group whitespace-nowrap relative inline-block">
             <span className="relative overflow-hidden inline-flex">
-              <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">FAQ</span>
-              <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">FAQ</span>
+              <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">FAQ</span>
+              <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">FAQ</span>
             </span>
           </a>
         </div>
@@ -362,8 +363,8 @@ export default function Hero() {
           }}
         >
           <span className="relative overflow-hidden inline-flex">
-            <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">Book a Call</span>
-            <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">Book a Call</span>
+            <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">Book a Call</span>
+            <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">Book a Call</span>
           </span>
         </a>
         <a
@@ -389,8 +390,8 @@ export default function Hero() {
           }}
         >
           <span className="relative overflow-hidden inline-flex">
-            <span className="block transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:-translate-y-[110%]">About Me</span>
-            <span className="absolute left-0 top-0 block translate-y-[110%] transition-transform duration-300 ease-[cubic-bezier(0.215,0.61,0.355,1)] group-hover:translate-y-0">About Me</span>
+            <span className="block transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:-translate-y-full">About Me</span>
+            <span className="absolute left-0 top-0 block translate-y-full transition-transform duration-[350ms] ease-[cubic-bezier(0.645,0.045,0.355,1)] group-hover:translate-y-0">About Me</span>
           </span>
         </a>
       </div>
