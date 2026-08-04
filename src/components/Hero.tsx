@@ -16,30 +16,30 @@ export default function Hero() {
       { yPercent: 0, duration: 1.15, ease: "power4.out" },
       0
     )
-    .fromTo(
-      ".gsap-portrait",
-      { yPercent: 25 },
-      { yPercent: 0, duration: 1.1, ease: "power4.out" },
-      0.35
-    )
-    .fromTo(
-      ".gsap-headline-line",
-      { yPercent: 110 },
-      { yPercent: 0, duration: 0.85, ease: "power4.out", stagger: 0.10 },
-      0.75
-    )
-    .fromTo(
-      ".gsap-side-element",
-      { y: 15, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.05 },
-      1.1
-    )
-    .fromTo(
-      ".gsap-cta-btn",
-      { y: 15, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 },
-      1.3
-    );
+      .fromTo(
+        ".gsap-portrait",
+        { yPercent: 25 },
+        { yPercent: 0, duration: 1.1, ease: "power4.out" },
+        0.35
+      )
+      .fromTo(
+        ".gsap-headline-line",
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.85, ease: "power4.out", stagger: 0.10 },
+        0.75
+      )
+      .fromTo(
+        ".gsap-side-element",
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.05 },
+        1.1
+      )
+      .fromTo(
+        ".gsap-cta-btn",
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 },
+        1.3
+      );
   }, { scope: container });
 
   return (
