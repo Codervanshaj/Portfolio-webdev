@@ -13,7 +13,6 @@ export default function Hero() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // === ENTRANCE ANIMATIONS (on page load) ===
     const tl = gsap.timeline();
 
     tl.fromTo(
@@ -47,7 +46,7 @@ export default function Hero() {
         1.3
       );
 
-    // === EXIT ANIMATIONS (as user scrolls - ALL MOVING LEFT with dissolve) ===
+    // ScrollTrigger-driven exit animations
     const exitTl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
@@ -55,234 +54,153 @@ export default function Hero() {
         end: "+=100%",
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: true,
       }
     });
 
-    // Large VANSHAJ text - moves LEFT and dissolves/blurs heavily
     exitTl.fromTo(
-      ".gsap-vanshaj",
-      { 
-        x: 0, 
-        y: 0,
-        scale: 1, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-55vw",
-        y: "-15vh",
-        scale: 0.12,
-        opacity: 0,
-        filter: "blur(60px)",
-        ease: "power2.inOut",
-        duration: 1,
-      },
-      0
-    )
-
-    // Headline lines (description text) - move LEFT and blur
-    .fromTo(
       ".gsap-headline-line",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
+      { y: 0, opacity: 1, filter: "blur(0px)" },
       {
-        x: "-40vw",
-        y: "-8vh",
+        y: -220,
         opacity: 0,
-        filter: "blur(40px)",
-        ease: "power2.inOut",
-        duration: 0.85,
-      },
-      0.05
-    )
-
-    // CTA buttons - move LEFT toward sidebar area and blur
-    .fromTo(
-      ".gsap-cta-btn",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-45vw",
-        y: "5vh",
-        opacity: 0,
-        filter: "blur(30px)",
-        ease: "power2.inOut",
-        duration: 0.8,
-      },
-      0.1
-    )
-
-    // Project card - moves LEFT into sidebar area and dissolves
-    .fromTo(
-      ".gsap-card-projects",
-      { 
-        x: 0, 
-        y: 0, 
-        scale: 1, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-35vw",
-        y: "8vh",
-        scale: 0.3,
-        opacity: 0,
-        filter: "blur(35px)",
-        ease: "power2.inOut",
-        duration: 0.8,
-      },
-      0.08
-    )
-
-    // Experience card - moves LEFT into sidebar area and dissolves
-    .fromTo(
-      ".gsap-card-experience",
-      { 
-        x: 0, 
-        y: 0, 
-        scale: 1, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-38vw",
-        y: "12vh",
-        scale: 0.3,
-        opacity: 0,
-        filter: "blur(35px)",
-        ease: "power2.inOut",
-        duration: 0.8,
-      },
-      0.1
-    )
-
-    // Descriptor panel - moves LEFT and dissolves
-    .fromTo(
-      ".gsap-descriptors",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-42vw",
-        y: "10vh",
-        scale: 0.25,
-        opacity: 0,
-        filter: "blur(35px)",
-        ease: "power2.inOut",
-        duration: 0.85,
-      },
-      0.12
-    )
-
-    // Bottom description text - moves LEFT and blurs
-    .fromTo(
-      ".gsap-bottom-right",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-48vw",
-        y: "8vh",
-        opacity: 0,
-        filter: "blur(40px)",
-        ease: "power2.inOut",
-        duration: 0.75,
-      },
-      0.08
-    )
-
-    // Bottom-left text - moves LEFT and blurs
-    .fromTo(
-      ".gsap-bottom-left",
-      { 
-        x: 0, 
-        y: 0,
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-30vw",
-        y: "5vh",
-        opacity: 0,
-        filter: "blur(30px)",
-        ease: "power2.inOut",
-        duration: 0.7,
-      },
-      0.12
-    )
-
-    // Navigation bars - move LEFT and dissolve
-    .fromTo(
-      ".gsap-nav-left",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-25vw",
-        y: "-3vh",
-        opacity: 0,
-        filter: "blur(25px)",
-        ease: "power2.inOut",
-        duration: 0.6,
-      },
-      0.15
-    )
-    .fromTo(
-      ".gsap-nav-right",
-      { 
-        x: 0, 
-        y: 0, 
-        opacity: 1, 
-        filter: "blur(0px)" 
-      },
-      {
-        x: "-50vw",
-        y: "-3vh",
-        opacity: 0,
-        filter: "blur(30px)",
-        ease: "power2.inOut",
-        duration: 0.6,
-      },
-      0.15
-    )
-
-    // Portrait - HEAVY BLUR effect as it fades to background
-    .fromTo(
-      ".gsap-portrait",
-      { 
-        yPercent: 0, 
-        scale: 1, 
-        filter: "blur(0px)", 
-        opacity: 1 
-      },
-      {
-        yPercent: 5,
-        scale: 1.1,
-        filter: "blur(80px)",
-        opacity: 0.1,
-        ease: "power2.inOut",
-        duration: 1,
+        filter: "blur(8px)",
+        ease: "none",
+        duration: 0.45,
       },
       0
-    );
+    )
+      .fromTo(
+        ".gsap-cta-btn",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "-38vw",
+          y: "2vh",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-card-projects",
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(20px - 18.2vw)",
+          y: "calc(220px - 56vh)",
+          scale: 0.6,
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-card-experience",
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(130px - 21.2vw)",
+          y: "calc(220px - 75vh)",
+          scale: 0.6,
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-bottom-left",
+        { x: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "-10vw",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-bottom-right",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(20px - 70vw)",
+          y: "calc(80px - (100vh - 6vh - 100px))",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-descriptors",
+        { x: 0, y: 0, opacity: 1 },
+        {
+          x: "-25vw",
+          y: -40,
+          opacity: 0,
+          ease: "none",
+          duration: 0.55,
+        },
+        0.1
+      )
+      .fromTo(
+        ".gsap-vanshaj",
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "-42vw",
+          y: "-20vh",
+          scale: 0.15,
+          opacity: 0,
+          filter: "blur(8px)",
+          ease: "none",
+          duration: 0.75,
+        },
+        0.1
+      )
+      .fromTo(
+        ".gsap-nav-left",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(20px - 3.5vw)",
+          y: "calc(320px - 64.2vh)",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-nav-right",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(20px - (100vw - 3.5vw - 200px))",
+          y: "calc(380px - 64.2vh)",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-portrait",
+        { yPercent: 0, scale: 1, filter: "blur(0px)", opacity: 1 },
+        {
+          yPercent: -8,
+          scale: 0.95,
+          filter: "blur(60px)",
+          opacity: 0.15,
+          ease: "none",
+          duration: 0.75,
+        },
+        0.1
+      );
   }, { scope: container });
 
   return (
@@ -292,7 +210,6 @@ export default function Hero() {
       className="relative w-full h-screen overflow-hidden select-none"
       style={{ background: "#D7D1C1" }}
     >
-      {/* ─── LAYER 1: Large VANSHAJ Text ─── */}
       <div
         className="absolute left-0 right-0 flex items-center justify-center pointer-events-none"
         style={{ zIndex: 1, top: "5vh", height: "52vh" }}
@@ -334,6 +251,7 @@ export default function Hero() {
         }}
       >
         <div className="flex items-center gap-4 w-full justify-center">
+          {/* Slanted W-like logo */}
           <svg
             width="40"
             height="40"
@@ -380,62 +298,61 @@ export default function Hero() {
         className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto gsap-side-element gsap-card-experience"
         style={{
           zIndex: 2,
-          left: "38.4vw",
+          left: "21.2vw",
           top: "75vh",
-          width: "14vw",
-          height: "12vh",
+          width: "9vw",
+          height: "22vh",
           background: "rgba(255, 255, 255, 0.08)",
           backdropFilter: "blur(12px)",
           border: "1px solid rgba(255, 255, 255, 0.12)",
           boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
         }}
       >
-        <div className="flex items-center gap-3">
-          <span
-            style={{
-              fontFamily: "'Geist', sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(24px, 2.5vw, 36px)",
-              color: "#FFFFFF",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            7+
-          </span>
-          <span
-            style={{
-              fontFamily: "'Geist', sans-serif",
-              fontWeight: 600,
-              fontSize: "clamp(10px, 0.8vw, 13px)",
-              color: "rgba(255, 255, 255, 0.8)",
-              letterSpacing: "0.05em",
-            }}
-          >
-            Years of<br />experience
-          </span>
-        </div>
+        <span
+          style={{
+            fontFamily: "'Geist', sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(36px, 3.5vw, 54px)",
+            color: "#F4FF00",
+            lineHeight: "1",
+            letterSpacing: "-0.03em",
+          }}
+        >
+          7+
+        </span>
+        <span
+          style={{
+            fontFamily: "'Geist', sans-serif",
+            fontWeight: 600,
+            fontSize: "clamp(10px, 0.8vw, 13px)",
+            color: "#FFFFFF",
+            letterSpacing: "0.04em",
+            lineHeight: "1.3",
+            marginTop: "6px",
+          }}
+        >
+          Years of<br />experience
+        </span>
       </div>
 
-      {/* ─── LAYER 3: Portrait Image ─── */}
+      {/* ─── LAYER 3: Portrait ─── */}
       <div
-        className="absolute flex items-center justify-center overflow-hidden gsap-portrait"
-        style={{
-          zIndex: 3,
-          right: "5vw",
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: "clamp(180px, 28vw, 400px)",
-          height: "clamp(240px, 40vw, 560px)",
-        }}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none flex justify-center items-end"
+        style={{ zIndex: 3, width: "39.5vw", height: "96.5vh" }}
       >
-        <Image
-          src="/Vanshaj-pic.png"
-          alt="Vanshaj"
-          fill
-          className="object-cover object-center"
-          priority
-          unoptimized
-        />
+        <div style={{ overflow: "hidden", width: "100%", height: "100%" }}>
+          <div className="relative w-full h-full gsap-portrait">
+            <Image
+              src="/Vanshaj-pic.png"
+              alt="Vanshaj"
+              fill
+              sizes="39.5vw"
+              className="object-cover object-top"
+              priority
+              unoptimized
+            />
+          </div>
+        </div>
       </div>
 
       {/* ─── LAYER 4: White headline overlay on portrait ─── */}
@@ -641,7 +558,7 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* ─── LAYER 7: Bottom Corner Texts ─── */}
+      {/* ─── LAYER 7: Bottom Corner Texts (Left & Right) ─── */}
       {/* Bottom-left corner text */}
       <div
         className="absolute pointer-events-none gsap-side-element gsap-bottom-left"
@@ -679,3 +596,5 @@ export default function Hero() {
     </section>
   );
 }
+
+
