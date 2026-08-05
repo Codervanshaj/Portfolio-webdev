@@ -18,7 +18,7 @@ const DETAIL_DATA = {
     style: {
       right: "calc(100% - 79.86% + 40px)",
       left: "auto",
-      top: "20.0%",
+      top: "26.67%",
     }
   },
   2025: {
@@ -28,7 +28,7 @@ const DETAIL_DATA = {
     style: {
       left: "calc(20.83% + 40px)",
       right: "auto",
-      top: "41.67%",
+      top: "55.56%",
     }
   },
   2026: {
@@ -38,7 +38,7 @@ const DETAIL_DATA = {
     style: {
       right: "calc(100% - 76.39% + 40px)",
       left: "auto",
-      top: "65.0%",
+      top: "86.67%",
     }
   }
 };
@@ -98,26 +98,39 @@ export default function AboutTimeline() {
         transformOrigin: "center center",
       });
 
+      // Cards setup (initially hidden)
+      gsap.set([cardInner1Ref.current, cardInner2Ref.current, cardInner3Ref.current], {
+        opacity: 0,
+        y: 50,
+        filter: "blur(8px)",
+      });
+
       // Timeline path and nodes timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 75%",
-          once: true,
+          start: "top 70%",
+          end: "bottom bottom",
+          scrub: 1,
         },
       });
 
-      tl.to(path, { strokeDashoffset: 0, duration: 1.8, ease: "power2.out" }, 0);
-      tl.to(node1Ref.current, { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }, 0.36);
-      tl.to(node2Ref.current, { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }, 0.9);
-      tl.to(node3Ref.current, { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" }, 1.44);
+      // 1. Draw the path
+      tl.to(path, { strokeDashoffset: 0, ease: "none", duration: 1 }, 0);
 
-      // Once the path timeline is complete, clear scale inline styles so CSS hover rules can take effect
-      tl.eventCallback("onComplete", () => {
-        gsap.set([node1Ref.current, node2Ref.current, node3Ref.current], { clearProps: "scale" });
-      });
+      // 2. Node 1 and Card 1 reveal at progress 0.313
+      tl.to(node1Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.313)
+        .to(cardInner1Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.313);
 
-      // Card parallax, entry, and active triggers
+      // 3. Node 2 and Card 2 reveal at progress 0.657
+      tl.to(node2Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.657)
+        .to(cardInner2Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.657);
+
+      // 4. Node 3 and Card 3 reveal at progress 0.95
+      tl.to(node3Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.95)
+        .to(cardInner3Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.95);
+
+      // Card parallax, and active triggers
       const cards = [
         { outer: cardOuter1Ref.current, inner: cardInner1Ref.current },
         { outer: cardOuter2Ref.current, inner: cardInner2Ref.current },
@@ -126,13 +139,6 @@ export default function AboutTimeline() {
 
       cards.forEach(({ outer, inner }) => {
         if (!outer || !inner) return;
-
-        // Entry state
-        gsap.set(inner, {
-          opacity: 0,
-          y: 50,
-          filter: "blur(10px)",
-        });
 
         // Parallax scrubber
         gsap.fromTo(
@@ -148,24 +154,6 @@ export default function AboutTimeline() {
             },
           }
         );
-
-        // Entry trigger (once)
-        gsap.to(inner, {
-          opacity: 0.9,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.85,
-          ease: "power3.out",
-          onComplete: () => {
-            // Clear inline reveal styles so native CSS hover scale & transforms function correctly
-            gsap.set(inner, { clearProps: "y,opacity,filter" });
-          },
-          scrollTrigger: {
-            trigger: outer,
-            start: "top 75%",
-            once: true,
-          },
-        });
 
         // Centering highlight trigger
         ScrollTrigger.create({
@@ -250,8 +238,9 @@ export default function AboutTimeline() {
   return (
     <section
       ref={containerRef}
+      id="timeline"
       className="relative w-full bg-[#D7D1C1] overflow-hidden select-none"
-      style={{ height: "3000px" }}
+      style={{ height: "2250px" }}
     >
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 1024px) {
@@ -286,19 +275,24 @@ export default function AboutTimeline() {
           transform: translateY(-8px) !important;
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
         }
+        
+        /* Node hover scale interaction */
+        .timeline-node:hover {
+          transform: scale(1.12) !important;
+        }
       `}} />
 
       {/* ─── Timeline Canvas (SVG Path) ─── */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1440 3000"
+        viewBox="0 0 1440 2250"
         preserveAspectRatio="none"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
           ref={pathRef}
-          d="M 280,150 C 280,350 1150,300 1150,600 C 1150,900 300,850 300,1250 C 300,1650 1100,1550 1100,1950 C 1100,2350 350,2250 350,2600 C 350,2850 1150,2800 1150,2950"
+          d="M 280,150 C 280,350 1150,300 1150,600 C 1150,900 300,850 300,1250 C 300,1650 1100,1550 1100,1950"
           stroke="#171715"
           strokeWidth="3"
           strokeLinecap="round"
@@ -310,10 +304,10 @@ export default function AboutTimeline() {
       {/* Node 2024 */}
       <div
         ref={node1Ref}
-        className="absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
+        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
           left: "79.86%",
-          top: "20.0%",
+          top: "26.67%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -322,10 +316,10 @@ export default function AboutTimeline() {
       {/* Node 2025 */}
       <div
         ref={node2Ref}
-        className="absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
+        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
           left: "20.83%",
-          top: "41.67%",
+          top: "55.56%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -334,10 +328,10 @@ export default function AboutTimeline() {
       {/* Node 2026 */}
       <div
         ref={node3Ref}
-        className="absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
+        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
           left: "76.39%",
-          top: "65.0%",
+          top: "86.67%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -350,7 +344,7 @@ export default function AboutTimeline() {
         className="timeline-card absolute w-[480px] pointer-events-auto"
         style={{
           right: "calc(100% - 79.86% + 40px)",
-          top: "20.0%",
+          top: "26.67%",
           transform: "translateY(-50%)",
         }}
       >
@@ -415,7 +409,7 @@ export default function AboutTimeline() {
         className="timeline-card absolute w-[480px] pointer-events-auto"
         style={{
           left: "calc(20.83% + 40px)",
-          top: "41.67%",
+          top: "55.56%",
           transform: "translateY(-50%)",
         }}
       >
@@ -480,7 +474,7 @@ export default function AboutTimeline() {
         className="timeline-card absolute w-[480px] pointer-events-auto"
         style={{
           right: "calc(100% - 76.39% + 40px)",
-          top: "65.0%",
+          top: "86.67%",
           transform: "translateY(-50%)",
         }}
       >

@@ -2,7 +2,12 @@
 import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Hero() {
   const container = useRef<HTMLDivElement>(null);
@@ -40,11 +45,132 @@ export default function Hero() {
         { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 },
         1.3
       );
+
+    // ScrollTrigger-driven exit animations
+    const exitTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top top",
+        end: "+=100%",
+        pin: true,
+        pinSpacing: true,
+        scrub: true,
+      }
+    });
+
+    exitTl.fromTo(
+      ".gsap-headline-line",
+      { y: 0, opacity: 1, filter: "blur(0px)" },
+      {
+        y: -180,
+        opacity: 0,
+        filter: "blur(6px)",
+        ease: "none",
+        duration: 0.45,
+      },
+      0
+    )
+      .fromTo(
+        ".gsap-cta-btn",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "-35vw",
+          y: "2vh",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        [".gsap-card-projects", ".gsap-card-experience"],
+        { x: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "-15vw",
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        [".gsap-bottom-left", ".gsap-bottom-right"],
+        { x: 0, opacity: 1 },
+        {
+          x: "-10vw",
+          opacity: 0,
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-descriptors",
+        { x: 0, y: 0, opacity: 1 },
+        {
+          x: "-18vw",
+          y: -60,
+          opacity: 0,
+          ease: "none",
+          duration: 0.55,
+        },
+        0.1
+      )
+      .fromTo(
+        ".gsap-vanshaj",
+        { x: 0, y: 0, opacity: 1 },
+        {
+          x: "-18vw",
+          y: "-6vh",
+          opacity: 0.9,
+          ease: "none",
+          duration: 0.75,
+        },
+        0.1
+      )
+      .fromTo(
+        ".gsap-nav-left",
+        { x: 0, opacity: 1 },
+        {
+          x: "-12vw",
+          opacity: 0,
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-nav-right",
+        { x: 0, opacity: 1 },
+        {
+          x: "-25vw",
+          opacity: 0,
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-portrait",
+        { yPercent: 0, scale: 1, filter: "blur(0px)", opacity: 1 },
+        {
+          yPercent: -12,
+          scale: 0.97,
+          filter: "blur(12px)",
+          opacity: 0.35,
+          ease: "none",
+          duration: 0.75,
+        },
+        0.1
+      );
   }, { scope: container });
 
   return (
     <section
       ref={container}
+      id="hero"
       className="relative w-full h-screen overflow-hidden select-none"
       style={{ background: "#D7D1C1" }}
     >
@@ -75,7 +201,7 @@ export default function Hero() {
       {/* ─── LAYER 2: Stat Cards (Project & Experience) ─── */}
       {/* Project Card */}
       <div
-        className="absolute flex items-center justify-center p-4 rounded-[12px] pointer-events-auto gsap-side-element"
+        className="absolute flex items-center justify-center p-4 rounded-[12px] pointer-events-auto gsap-side-element gsap-card-projects"
         style={{
           zIndex: 2,
           left: "18.2vw",
@@ -133,7 +259,7 @@ export default function Hero() {
 
       {/* Experience Card */}
       <div
-        className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto gsap-side-element"
+        className="absolute flex flex-col justify-center px-6 py-4 rounded-[12px] pointer-events-auto gsap-side-element gsap-card-experience"
         style={{
           zIndex: 2,
           left: "21.2vw",
@@ -233,12 +359,12 @@ export default function Hero() {
       {/* ─── LAYER 5: Navigation & Descriptor Panel ─── */}
       {/* Navigation (mid-height, flanking the portrait) */}
       <div
-        className="absolute left-[3.5vw] right-[3.5vw] flex justify-between items-center pointer-events-auto gsap-side-element"
+        className="absolute left-[3.5vw] right-[3.5vw] flex justify-between items-center pointer-events-auto gsap-side-element gsap-nav"
         style={{ zIndex: 5, top: "64.2vh", transform: "translateY(-50%)" }}
       >
         {/* Left nav */}
         <div
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 gsap-nav-left"
           style={{
             fontFamily: "'Geist', 'Helvetica Neue', Arial, sans-serif",
             fontWeight: 850,
@@ -264,7 +390,7 @@ export default function Hero() {
 
         {/* Right nav */}
         <div
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 gsap-nav-right"
           style={{
             fontFamily: "'Geist', 'Helvetica Neue', Arial, sans-serif",
             fontWeight: 850,
@@ -298,7 +424,7 @@ export default function Hero() {
 
       {/* Descriptor Panel */}
       <div
-        className="absolute flex flex-col justify-center gap-3.5 px-5 py-4 rounded-[12px] pointer-events-auto gsap-side-element"
+        className="absolute flex flex-col justify-center gap-3.5 px-5 py-4 rounded-[12px] pointer-events-auto gsap-side-element gsap-descriptors"
         style={{
           zIndex: 5,
           left: "65.2vw",
@@ -399,7 +525,7 @@ export default function Hero() {
       {/* ─── LAYER 7: Bottom Corner Texts (Left & Right) ─── */}
       {/* Bottom-left corner text */}
       <div
-        className="absolute pointer-events-none gsap-side-element"
+        className="absolute pointer-events-none gsap-side-element gsap-bottom-left"
         style={{
           zIndex: 10,
           left: "3.5vw",
@@ -416,7 +542,7 @@ export default function Hero() {
 
       {/* Bottom-right description */}
       <div
-        className="absolute pointer-events-none gsap-side-element"
+        className="absolute pointer-events-none gsap-side-element gsap-bottom-right"
         style={{
           zIndex: 10,
           left: "70vw",

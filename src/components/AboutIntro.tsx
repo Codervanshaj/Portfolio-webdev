@@ -29,20 +29,20 @@ export default function AboutIntro() {
         targets,
         {
           opacity: 0,
-          y: 30,
-          filter: "blur(6px)",
+          y: 40,
+          filter: "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 0.85,
-          stagger: 0.1,
-          ease: "power3.out",
+          stagger: 0.15,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 72%", // Triggers when the top of the About section reaches 72% viewport height
-            once: true,
+            start: "top 80%",
+            end: "top 45%",
+            scrub: true,
           },
         }
       );
@@ -53,6 +53,7 @@ export default function AboutIntro() {
   return (
     <section
       ref={sectionRef}
+      id="about"
       className="relative w-full min-h-screen bg-[#D7D1C1] flex flex-col justify-start select-none"
     >
       <div
