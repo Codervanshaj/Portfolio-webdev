@@ -15,8 +15,17 @@ export default function Sidebar() {
 
   useGSAP(
     () => {
-      // 1. Slide in sidebar as page scrolls
-      gsap.fromTo(
+      // 1. Slide in sidebar and fade in its children as page scrolls
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "+=100%",
+          scrub: true,
+        },
+      });
+
+      tl.fromTo(
         sidebarRef.current,
         {
           xPercent: -100,
@@ -25,14 +34,34 @@ export default function Sidebar() {
         {
           xPercent: 0,
           opacity: 1,
+          ease: "none",
+          duration: 0.5,
+        },
+        0
+      );
+
+      const contentElements = [
+        ".gsap-sidebar-logo",
+        ".gsap-sidebar-desc",
+        ".gsap-sidebar-stats",
+        ".gsap-sidebar-nav",
+        ".gsap-sidebar-footer",
+      ];
+
+      tl.fromTo(
+        contentElements,
+        {
+          opacity: 0,
+          y: 15,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "300px top",
-            scrub: true,
-          },
-        }
+          duration: 0.4,
+        },
+        0.2
       );
 
       // 2. Track active section to update highlight states
@@ -56,26 +85,26 @@ export default function Sidebar() {
   return (
     <div
       ref={sidebarRef}
-      className="hidden md:flex fixed left-0 top-0 bottom-0 w-[270px] bg-[#DFDECE] border-r border-[#171715]/10 flex-col justify-between py-7 px-5 select-none"
+      className="hidden md:flex fixed left-0 top-0 bottom-0 w-[270px] bg-[rgba(223,222,206,0.75)] backdrop-blur-[20px] border-r border-[#171715]/10 flex-col justify-between py-7 px-5 select-none"
       style={{ zIndex: 100, opacity: 0 }}
     >
       {/* Top Section */}
       <div className="flex flex-col">
         {/* Logo */}
         <div 
-          className="font-sans font-black text-[22px] tracking-[-0.05em] text-[#171715] uppercase leading-none"
+          className="gsap-sidebar-logo opacity-0 font-sans font-black text-[22px] tracking-[-0.05em] text-[#171715] uppercase leading-none"
           style={{ letterSpacing: "-0.05em" }}
         >
           VANSHAJ<span className="text-[10px] font-bold align-super ml-0.5">®</span>
         </div>
 
         {/* Descriptor Card */}
-        <div className="bg-[#D7D1C1]/40 rounded-[12px] border border-[#171715]/10 p-3.5 mt-5 text-[11px] leading-relaxed text-[#595854] font-semibold">
+        <div className="gsap-sidebar-desc opacity-0 bg-[#D7D1C1]/40 rounded-[12px] border border-[#171715]/10 p-3.5 mt-5 text-[11px] leading-relaxed text-[#595854] font-semibold">
           Working closely with your team to deliver custom builds that merge creativity, technical excellence, and long-term value.
         </div>
 
         {/* Stats Card */}
-        <div className="grid grid-cols-2 bg-[#D7D1C1]/40 rounded-[12px] border border-[#171715]/10 p-3 mt-3">
+        <div className="gsap-sidebar-stats opacity-0 grid grid-cols-2 bg-[#D7D1C1]/40 rounded-[12px] border border-[#171715]/10 p-3 mt-3">
           <div className="flex flex-col pl-1 py-0.5">
             <span className="font-sans font-black text-[18px] text-[#171715] leading-none">80+</span>
             <span className="font-sans font-extrabold text-[8px] text-[#6B6A65] tracking-widest uppercase mt-1">Projects</span>
@@ -87,7 +116,7 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex flex-col gap-1.5 mt-6">
+        <nav className="gsap-sidebar-nav opacity-0 flex flex-col gap-1.5 mt-6">
           {[
             { 
               id: "hero", 
@@ -128,7 +157,7 @@ export default function Sidebar() {
       </div>
 
       {/* Bottom Section */}
-      <div className="flex flex-col">
+      <div className="gsap-sidebar-footer opacity-0 flex flex-col">
         {/* Clients Marquee Logos */}
         <div className="border-t border-[#171715]/10 pt-4 flex items-center justify-between opacity-40 hover:opacity-75 transition-opacity duration-300">
           <span className="font-sans font-black text-[9px] tracking-widest text-[#171715] leading-none">INVERT</span>

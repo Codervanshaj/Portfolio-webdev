@@ -62,9 +62,9 @@ export default function Hero() {
       ".gsap-headline-line",
       { y: 0, opacity: 1, filter: "blur(0px)" },
       {
-        y: -180,
+        y: -220,
         opacity: 0,
-        filter: "blur(6px)",
+        filter: "blur(8px)",
         ease: "none",
         duration: 0.45,
       },
@@ -74,7 +74,7 @@ export default function Hero() {
         ".gsap-cta-btn",
         { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
         {
-          x: "-35vw",
+          x: "-38vw",
           y: "2vh",
           opacity: 0,
           filter: "blur(4px)",
@@ -84,10 +84,12 @@ export default function Hero() {
         0.05
       )
       .fromTo(
-        [".gsap-card-projects", ".gsap-card-experience"],
-        { x: 0, opacity: 1, filter: "blur(0px)" },
+        ".gsap-card-projects",
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
         {
-          x: "-15vw",
+          x: "calc(20px - 18.2vw)",
+          y: "calc(220px - 56vh)",
+          scale: 0.6,
           opacity: 0,
           filter: "blur(4px)",
           ease: "none",
@@ -96,11 +98,39 @@ export default function Hero() {
         0.05
       )
       .fromTo(
-        [".gsap-bottom-left", ".gsap-bottom-right"],
-        { x: 0, opacity: 1 },
+        ".gsap-card-experience",
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(130px - 21.2vw)",
+          y: "calc(220px - 75vh)",
+          scale: 0.6,
+          opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-bottom-left",
+        { x: 0, opacity: 1, filter: "blur(0px)" },
         {
           x: "-10vw",
           opacity: 0,
+          filter: "blur(4px)",
+          ease: "none",
+          duration: 0.5,
+        },
+        0.05
+      )
+      .fromTo(
+        ".gsap-bottom-right",
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
+        {
+          x: "calc(20px - 70vw)",
+          y: "calc(80px - (100vh - 6vh - 100px))",
+          opacity: 0,
+          filter: "blur(4px)",
           ease: "none",
           duration: 0.5,
         },
@@ -110,8 +140,8 @@ export default function Hero() {
         ".gsap-descriptors",
         { x: 0, y: 0, opacity: 1 },
         {
-          x: "-18vw",
-          y: -60,
+          x: "-25vw",
+          y: -40,
           opacity: 0,
           ease: "none",
           duration: 0.55,
@@ -120,11 +150,13 @@ export default function Hero() {
       )
       .fromTo(
         ".gsap-vanshaj",
-        { x: 0, y: 0, opacity: 1 },
+        { x: 0, y: 0, scale: 1, opacity: 1, filter: "blur(0px)" },
         {
-          x: "-18vw",
-          y: "-6vh",
-          opacity: 0.9,
+          x: "-42vw",
+          y: "-20vh",
+          scale: 0.15,
+          opacity: 0,
+          filter: "blur(8px)",
           ease: "none",
           duration: 0.75,
         },
@@ -132,10 +164,12 @@ export default function Hero() {
       )
       .fromTo(
         ".gsap-nav-left",
-        { x: 0, opacity: 1 },
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
         {
-          x: "-12vw",
+          x: "calc(20px - 3.5vw)",
+          y: "calc(320px - 64.2vh)",
           opacity: 0,
+          filter: "blur(4px)",
           ease: "none",
           duration: 0.5,
         },
@@ -143,10 +177,12 @@ export default function Hero() {
       )
       .fromTo(
         ".gsap-nav-right",
-        { x: 0, opacity: 1 },
+        { x: 0, y: 0, opacity: 1, filter: "blur(0px)" },
         {
-          x: "-25vw",
+          x: "calc(20px - (100vw - 3.5vw - 200px))",
+          y: "calc(380px - 64.2vh)",
           opacity: 0,
+          filter: "blur(4px)",
           ease: "none",
           duration: 0.5,
         },
@@ -156,10 +192,10 @@ export default function Hero() {
         ".gsap-portrait",
         { yPercent: 0, scale: 1, filter: "blur(0px)", opacity: 1 },
         {
-          yPercent: -12,
-          scale: 0.97,
-          filter: "blur(12px)",
-          opacity: 0.35,
+          yPercent: -8,
+          scale: 0.95,
+          filter: "blur(60px)",
+          opacity: 0.15,
           ease: "none",
           duration: 0.75,
         },
