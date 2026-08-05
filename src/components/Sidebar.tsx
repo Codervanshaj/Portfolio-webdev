@@ -15,31 +15,7 @@ export default function Sidebar() {
 
   useGSAP(
     () => {
-      // 1. Slide in sidebar and fade in its children as page scrolls
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "+=100%",
-          scrub: true,
-        },
-      });
-
-      tl.fromTo(
-        sidebarRef.current,
-        {
-          xPercent: -100,
-          opacity: 0,
-        },
-        {
-          xPercent: 0,
-          opacity: 1,
-          ease: "none",
-          duration: 0.5,
-        },
-        0
-      );
-
+      // Content elements that fade in as hero content dissolves
       const contentElements = [
         ".gsap-sidebar-logo",
         ".gsap-sidebar-desc",
@@ -48,20 +24,26 @@ export default function Sidebar() {
         ".gsap-sidebar-footer",
       ];
 
-      tl.fromTo(
+      // Fade in sidebar content as user scrolls (NOT slide from left)
+      gsap.fromTo(
         contentElements,
         {
           opacity: 0,
-          y: 15,
+          y: 10,
         },
         {
           opacity: 1,
           y: 0,
-          stagger: 0.05,
+          stagger: 0.08,
           ease: "power2.out",
-          duration: 0.4,
-        },
-        0.2
+          duration: 0.3,
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "+=80%",
+            scrub: 0.5,
+          },
+        }
       );
 
       // 2. Track active section to update highlight states
@@ -85,8 +67,8 @@ export default function Sidebar() {
   return (
     <div
       ref={sidebarRef}
-      className="hidden md:flex fixed left-0 top-0 bottom-0 w-[270px] bg-[rgba(223,222,206,0.75)] backdrop-blur-[20px] border-r border-[#171715]/10 flex-col justify-between py-7 px-5 select-none"
-      style={{ zIndex: 100, opacity: 0 }}
+      className="hidden md:flex fixed left-0 top-0 bottom-0 w-[270px] bg-[rgba(223,222,206,0.85)] backdrop-blur-[20px] border-r border-[#171715]/10 flex-col justify-between py-7 px-5 select-none"
+      style={{ zIndex: 100 }}
     >
       {/* Top Section */}
       <div className="flex flex-col">
