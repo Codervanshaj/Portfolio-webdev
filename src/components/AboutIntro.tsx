@@ -40,8 +40,8 @@ export default function AboutIntro() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
-            end: "top 45%",
+            start: "top 95%",
+            end: "top 55%",
             scrub: true,
           },
         }
@@ -54,7 +54,7 @@ export default function AboutIntro() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative w-full min-h-screen bg-[#D7D1C1] flex flex-col justify-start select-none"
+      className="relative z-20 w-full min-h-screen bg-transparent flex flex-col justify-start select-none"
     >
       <div
         className="absolute flex flex-col items-start"

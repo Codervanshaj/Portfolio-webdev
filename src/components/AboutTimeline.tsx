@@ -12,33 +12,33 @@ if (typeof window !== "undefined") {
 
 const DETAIL_DATA = {
   2024: {
-    year: "2024",
+    year: "'24",
     title: "Started Building AI & Cloud Projects",
     description: "In 2024, I focused heavily on integrating advanced artificial intelligence models and scalable cloud microservices. I designed and deployed serverless APIs, built machine learning ingestion pipelines, and automated complex business logic workflows. This allowed me to bridge the gap between heavy backend automation and high-performance server architectures, delivering robust and cost-effective digital solutions for clients looking to harness AI.",
     style: {
-      right: "calc(100% - 79.86% + 40px)",
+      right: "calc(100% - 82.5% + 40px)",
       left: "auto",
-      top: "26.67%",
+      top: "21.33%",
     }
   },
   2025: {
-    year: "2025",
+    year: "'25",
     title: "Scaling Development & Automation",
     description: "During 2025, the focus shifted to optimization and scalability. I built robust CI/CD deployment pipelines, automated system health monitors, and established reliable containerized server setups. By streamlining developer workflows and removing infrastructure bottlenecks, I helped organizations reduce operational overhead, decrease feature lead times, and run high-traffic applications with 99.9% uptime.",
     style: {
       left: "calc(20.83% + 40px)",
       right: "auto",
-      top: "55.56%",
+      top: "51.11%",
     }
   },
   2026: {
-    year: "2026",
+    year: "'26",
     title: "Building Production Systems",
     description: "In 2026, I am engineering state-of-the-art production web platforms. Utilizing high-performance Next.js architectures, modern state-management systems, and custom GSAP web animations, I deliver premium user interfaces with zero-compromise speed. Combined with deep technical SEO configurations and responsive layouts, these applications provide unparalleled user engagement and long-term business value.",
     style: {
-      right: "calc(100% - 76.39% + 40px)",
+      right: "calc(100% - 80% + 40px)",
       left: "auto",
-      top: "86.67%",
+      top: "82.22%",
     }
   }
 };
@@ -118,17 +118,17 @@ export default function AboutTimeline() {
       // 1. Draw the path
       tl.to(path, { strokeDashoffset: 0, ease: "none", duration: 1 }, 0);
 
-      // 2. Node 1 and Card 1 reveal at progress 0.313
-      tl.to(node1Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.313)
-        .to(cardInner1Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.313);
+      // 2. Node 1 and Card 1 reveal at progress 0.22
+      tl.to(node1Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.22)
+        .to(cardInner1Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.22);
 
-      // 3. Node 2 and Card 2 reveal at progress 0.657
-      tl.to(node2Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.657)
-        .to(cardInner2Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.657);
+      // 3. Node 2 and Card 2 reveal at progress 0.58
+      tl.to(node2Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.58)
+        .to(cardInner2Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.58);
 
-      // 4. Node 3 and Card 3 reveal at progress 0.95
-      tl.to(node3Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.95)
-        .to(cardInner3Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.95);
+      // 4. Node 3 and Card 3 reveal at progress 0.90
+      tl.to(node3Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.90)
+        .to(cardInner3Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.90);
 
       // Card parallax, and active triggers
       const cards = [
@@ -238,9 +238,9 @@ export default function AboutTimeline() {
   return (
     <section
       ref={containerRef}
-      id="timeline"
-      className="relative w-full bg-[#D7D1C1] overflow-hidden select-none"
-      style={{ height: "2250px" }}
+      id="about"
+      className="relative z-20 w-full bg-transparent overflow-hidden select-none"
+      style={{ height: "2250px", marginTop: "-15vh" }}
     >
       <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 1024px) {
@@ -249,6 +249,11 @@ export default function AboutTimeline() {
             right: auto !important;
             width: 90vw !important;
             max-width: none !important;
+          }
+          .gsap-about-content {
+            left: 5vw !important;
+            top: 40px !important;
+            width: 90vw !important;
           }
         }
         
@@ -282,6 +287,50 @@ export default function AboutTimeline() {
         }
       `}} />
 
+      {/* ─── About Intro Content (Merged) ─── */}
+      <div
+        className="absolute flex flex-col items-start gsap-about-content"
+        style={{
+          left: "22vw",
+          top: "80px",
+          width: "480px",
+          maxWidth: "75vw",
+        }}
+      >
+        <div
+          className="px-4 py-2 border rounded-full border-[#171715]/10 font-bold uppercase select-none leading-none inline-flex"
+          style={{
+            fontFamily: "'Geist', sans-serif",
+            fontSize: "10px",
+            color: "#171715",
+            letterSpacing: "0.08em",
+            marginBottom: "20px",
+            backgroundColor: "#DFDECE",
+          }}
+        >
+          Start small grow big
+        </div>
+        <h2
+          className="font-sans font-black leading-[0.9] text-[#171715] tracking-tight text-[clamp(44px,4.8vw,76px)]"
+          style={{
+            marginBottom: "24px",
+          }}
+        >
+          About Me (&)<br />My Journey
+        </h2>
+        <p
+          className="font-sans text-[18px] font-semibold leading-[1.6] text-[#595854]"
+          style={{
+            maxWidth: "420px",
+          }}
+        >
+          Seven years ago I opened Webflow for the first time. What happened after that is easier to show than explain.
+        </p>
+      </div>
+
+      {/* ─── Trigger element for #timeline ScrollTrigger ─── */}
+      <div id="timeline" className="absolute top-[400px] w-full h-[calc(100%-400px)] pointer-events-none" />
+
       {/* ─── Timeline Canvas (SVG Path) ─── */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -292,9 +341,9 @@ export default function AboutTimeline() {
       >
         <path
           ref={pathRef}
-          d="M 280,150 C 280,350 1150,300 1150,600 C 1150,900 300,850 300,1250 C 300,1650 1100,1550 1100,1950"
+          d="M 1188,120 L 1188,480 C 1188,800 300,750 300,1150 C 300,1550 1152,1450 1152,1850"
           stroke="#171715"
-          strokeWidth="3"
+          strokeWidth="4"
           strokeLinecap="round"
           fill="none"
         />
@@ -306,8 +355,8 @@ export default function AboutTimeline() {
         ref={node1Ref}
         className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
-          left: "79.86%",
-          top: "26.67%",
+          left: "82.5%",
+          top: "21.33%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -319,7 +368,7 @@ export default function AboutTimeline() {
         className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
           left: "20.83%",
-          top: "55.56%",
+          top: "51.11%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -330,8 +379,8 @@ export default function AboutTimeline() {
         ref={node3Ref}
         className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
         style={{
-          left: "76.39%",
-          top: "86.67%",
+          left: "80%",
+          top: "82.22%",
           marginLeft: "-8px",
           marginTop: "-8px",
         }}
@@ -341,24 +390,24 @@ export default function AboutTimeline() {
       {/* Card 2024 (Left of first node) */}
       <div
         ref={cardOuter1Ref}
-        className="timeline-card absolute w-[480px] pointer-events-auto"
+        className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
-          right: "calc(100% - 79.86% + 40px)",
-          top: "26.67%",
+          right: "calc(100% - 82.5% + 40px)",
+          top: "21.33%",
           transform: "translateY(-50%)",
         }}
       >
         <div
           ref={cardInner1Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-10 md:p-[44px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
         >
-          <div className="font-sans font-black text-[clamp(64px,5.5vw,96px)] text-[#F4FF00] leading-none mb-3">
-            2024
+          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
+            '24
           </div>
-          <h3 className="font-sans font-extrabold text-[clamp(24px,2.2vw,32px)] text-[#171715] leading-[1.1] mb-4">
+          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
             Started Building AI & Cloud Projects
           </h3>
-          <p className="font-sans text-[15px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
             Deep-dived into modern AI integrations and cloud architectures. Developed customized solutions utilizing advanced API designs, cloud functions, and machine learning endpoints to solve automated business workflows.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -406,24 +455,24 @@ export default function AboutTimeline() {
       {/* Card 2025 (Right of second node) */}
       <div
         ref={cardOuter2Ref}
-        className="timeline-card absolute w-[480px] pointer-events-auto"
+        className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
           left: "calc(20.83% + 40px)",
-          top: "55.56%",
+          top: "51.11%",
           transform: "translateY(-50%)",
         }}
       >
         <div
           ref={cardInner2Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-10 md:p-[44px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
         >
-          <div className="font-sans font-black text-[clamp(64px,5.5vw,96px)] text-[#F4FF00] leading-none mb-3">
-            2025
+          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
+            '25
           </div>
-          <h3 className="font-sans font-extrabold text-[clamp(24px,2.2vw,32px)] text-[#171715] leading-[1.1] mb-4">
+          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
             Scaling Development & Automation
           </h3>
-          <p className="font-sans text-[15px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
             Focused on optimizing infrastructure, setting up continuous integration pipelines, and streamlining development workflows. Engineered complex serverless systems and automated deployments to scale operations efficiently.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -471,24 +520,24 @@ export default function AboutTimeline() {
       {/* Card 2026 (Left of third node) */}
       <div
         ref={cardOuter3Ref}
-        className="timeline-card absolute w-[480px] pointer-events-auto"
+        className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
-          right: "calc(100% - 76.39% + 40px)",
-          top: "86.67%",
+          right: "calc(100% - 80% + 40px)",
+          top: "82.22%",
           transform: "translateY(-50%)",
         }}
       >
         <div
           ref={cardInner3Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-10 md:p-[44px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
         >
-          <div className="font-sans font-black text-[clamp(64px,5.5vw,96px)] text-[#F4FF00] leading-none mb-3">
-            2026
+          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
+            '26
           </div>
-          <h3 className="font-sans font-extrabold text-[clamp(24px,2.2vw,32px)] text-[#171715] leading-[1.1] mb-4">
+          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
             Building Production Systems
           </h3>
-          <p className="font-sans text-[15px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
             Currently building production-grade, highly scalable web systems. Specializing in high-performance Next.js architectures, premium UI interactions, and technical search engine optimization for clients worldwide.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -544,7 +593,7 @@ export default function AboutTimeline() {
       {/* ─── Custom Floating Detail Card ─── */}
       <div
         ref={detailCardRef}
-        className="timeline-card absolute w-[520px] bg-[#171715] rounded-[30px] p-10 md:p-[44px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-[50] pointer-events-auto text-white select-none"
+        className="timeline-card absolute w-[480px] bg-[#171715] rounded-[30px] p-10 md:p-[44px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-[50] pointer-events-auto text-white select-none"
         style={{
           display: "none",
           opacity: 0,
