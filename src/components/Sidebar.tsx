@@ -158,7 +158,7 @@ export default function Sidebar() {
           x: () => window.innerWidth / 2 - (logoRect?.width || 112) / 2 - (logoRect?.left || 36),
           xPercent: 0,
           y: () => window.innerHeight * 0.28 - (logoRect?.top || 44) - (logoRect?.height || 22) / 2,
-          scale: 11.5,
+          scale: () => (window.innerWidth * 0.92) / (logoRect?.width || 104),
           color: "#F4FF00",
           transformOrigin: "center center",
         },
@@ -189,7 +189,7 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-sidebar-desc",
         {
-          x: () => window.innerWidth * 0.72 - (descRect?.left || 36),
+          x: () => window.innerWidth * 0.96 - 320 - (descRect?.left || 36),
           y: () => window.innerHeight * 0.78 - (descRect?.top || 88),
           width: 320,
           fontSize: "15px",
@@ -211,16 +211,16 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-sidebar-stats-projects",
         {
-          x: () => window.innerWidth * 0.18 - (projectsRect?.left || 36),
+          x: () => window.innerWidth * 0.185 - (projectsRect?.left || 36),
           y: () => window.innerHeight * 0.60 - (projectsRect?.top || 161),
           backgroundColor: "rgba(255, 255, 255, 0.08)",
           borderColor: "rgba(255, 255, 255, 0.12)",
           boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
           backdropFilter: "blur(12px)",
-          padding: "14px",
+          padding: "12px",
           borderRadius: "12px",
-          width: 170,
-          height: 68,
+          width: 180,
+          height: 72,
         },
         {
           x: 0,
@@ -252,10 +252,10 @@ export default function Sidebar() {
           borderBottomColor: "rgba(255, 255, 255, 0.12)",
           boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.05)",
           backdropFilter: "blur(12px)",
-          padding: "14px",
+          padding: "12px",
           borderRadius: "12px",
-          width: 150,
-          height: 80,
+          width: 160,
+          height: 84,
         },
         {
           x: 0,
@@ -286,25 +286,25 @@ export default function Sidebar() {
       )
       .fromTo(
         ".gsap-stats-projects-num",
-        { fontSize: "22px", color: "#FFFFFF" },
+        { fontSize: "25px", color: "#FFFFFF" },
         { fontSize: "18px", color: "#171715", ease: "power2.inOut", duration: 0.7 },
         0
       )
       .fromTo(
         ".gsap-stats-projects-label",
-        { fontSize: "10px", color: "rgba(255, 255, 255, 0.7)" },
+        { fontSize: "11px", color: "rgba(255, 255, 255, 0.7)" },
         { fontSize: "8px", color: "#6B6A65", ease: "power2.inOut", duration: 0.7 },
         0
       )
       .fromTo(
         ".gsap-stats-exp-num",
-        { fontSize: "36px", color: "#F4FF00" },
+        { fontSize: "40px", color: "#F4FF00" },
         { fontSize: "18px", color: "#171715", ease: "power2.inOut", duration: 0.7 },
         0
       )
       .fromTo(
         ".gsap-stats-exp-label",
-        { fontSize: "10px", color: "#FFFFFF" },
+        { fontSize: "11px", color: "#FFFFFF" },
         { fontSize: "8px", color: "#6B6A65", ease: "power2.inOut", duration: 0.7 },
         0
       );
@@ -314,7 +314,7 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-nav-home",
         {
-          x: () => (window.innerWidth * 0.285 - 86 - 56 - 48) - (navHomeRect?.left || 36),
+          x: () => (window.innerWidth * 0.03) - (navHomeRect?.left || 36),
           y: () => window.innerHeight * 0.53 - (navHomeRect?.top || 368),
         },
         { x: 0, y: 0, ease: "power2.inOut", duration: 0.65 },
@@ -323,7 +323,7 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-nav-about",
         {
-          x: () => (window.innerWidth * 0.285 - 86) - (navAboutRect?.left || 129),
+          x: () => (window.innerWidth * 0.03 + 100) - (navAboutRect?.left || 129),
           y: () => window.innerHeight * 0.53 - (navAboutRect?.top || 409),
         },
         { x: 0, y: 0, ease: "power2.inOut", duration: 0.65 },
@@ -334,8 +334,8 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-nav-div-1",
         {
-          x: () => (window.innerWidth * 0.285 - 86 - 28 - 2) - (div1Rect?.left || 0),
-          y: () => window.innerHeight * 0.53 - (div1Rect?.top || 0),
+          x: () => (window.innerWidth * 0.03 + 72) - (div1Rect?.left || 0),
+          y: () => window.innerHeight * 0.53 + 14 - (div1Rect?.top || 0),
           opacity: 1,
           scale: 1,
         },
@@ -345,10 +345,10 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-nav-div-2",
         {
-          x: 0,
-          y: 0,
-          opacity: 0,
-          scale: 0,
+          x: () => (window.innerWidth * 0.03 + 210) - (div2Rect?.left || 0),
+          y: () => window.innerHeight * 0.53 + 14 - (div2Rect?.top || 0),
+          opacity: 1,
+          scale: 1,
         },
         { x: 0, y: 0, opacity: 0, scale: 0, width: 0, height: 0, margin: 0, padding: 0, display: "none", ease: "power2.inOut", duration: 0.65 },
         0.02
@@ -358,7 +358,7 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-nav-services",
         {
-          x: () => window.innerWidth * 0.715 - (navServicesRect?.left || 36),
+          x: () => window.innerWidth * 0.785 - (navServicesRect?.left || 36),
           y: () => window.innerHeight * 0.53 - (navServicesRect?.top || 533),
         },
         { x: 0, y: 0, ease: "power2.inOut", duration: 0.65 },
@@ -367,7 +367,7 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-nav-clients",
         {
-          x: () => (window.innerWidth * 0.715 + 80 + 56 + 4) - (navClientsRect?.left || 36),
+          x: () => (window.innerWidth * 0.785 + 80 + 56 + 4) - (navClientsRect?.left || 36),
           y: () => window.innerHeight * 0.53 - (navClientsRect?.top || 574),
         },
         { x: 0, y: 0, ease: "power2.inOut", duration: 0.65 },
@@ -376,7 +376,7 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-nav-faq",
         {
-          x: () => (window.innerWidth * 0.715 + 80 + 56 + 4 + 68 + 56 + 4) - (navFaqRect?.left || 36),
+          x: () => (window.innerWidth * 0.785 + 80 + 56 + 4 + 68 + 56 + 4) - (navFaqRect?.left || 36),
           y: () => window.innerHeight * 0.53 - (navFaqRect?.top || 615),
         },
         { x: 0, y: 0, ease: "power2.inOut", duration: 0.65 },
@@ -387,8 +387,8 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-nav-div-3",
         {
-          x: () => (window.innerWidth * 0.715 + 80 + 28) - (div3Rect?.left || 0),
-          y: () => window.innerHeight * 0.53 - (div3Rect?.top || 0),
+          x: () => (window.innerWidth * 0.785 + 80 + 28) - (div3Rect?.left || 0),
+          y: () => window.innerHeight * 0.53 + 14 - (div3Rect?.top || 0),
           opacity: 1,
           scale: 1,
         },
@@ -398,8 +398,8 @@ export default function Sidebar() {
       .fromTo(
         ".gsap-nav-div-4",
         {
-          x: () => (window.innerWidth * 0.715 + 80 + 56 + 4 + 68 + 28) - (div4Rect?.left || 0),
-          y: () => window.innerHeight * 0.53 - (div4Rect?.top || 0),
+          x: () => (window.innerWidth * 0.785 + 80 + 56 + 4 + 68 + 28) - (div4Rect?.left || 0),
+          y: () => window.innerHeight * 0.53 + 14 - (div4Rect?.top || 0),
           opacity: 1,
           scale: 1,
         },
@@ -429,18 +429,6 @@ export default function Sidebar() {
           duration: 0.7,
         },
         0
-      )
-      .fromTo(
-        ".gsap-nav-divider",
-        {
-          fontSize: "16px",
-        },
-        {
-          fontSize: "10px",
-          ease: "power2.inOut",
-          duration: 0.7,
-        },
-        0
       );
  
       // Hidden menu items
@@ -455,9 +443,9 @@ export default function Sidebar() {
       tl.fromTo(
         ".gsap-sidebar-cta",
         {
-          x: () => window.innerWidth / 2 - 140 - (ctaRect?.left || 36),
+          x: () => window.innerWidth / 2 - 160 - (ctaRect?.left || 36),
           y: () => window.innerHeight * 0.85 - (ctaRect?.top || 714),
-          width: 130,
+          width: 150,
         },
         {
           x: 0,
@@ -473,7 +461,7 @@ export default function Sidebar() {
         {
           x: () => window.innerWidth / 2 + 10 - (ctaRect?.left || 36),
           y: () => window.innerHeight * 0.85 - (ctaRect?.top || 714),
-          width: 130,
+          width: 150,
           opacity: 1,
         },
         {
@@ -615,11 +603,15 @@ export default function Sidebar() {
               return (
                 <span
                   key={item.id}
-                  className={`${item.class} gsap-nav-divider text-[#171715]/25 font-black select-none pointer-events-none`}
-                  style={{ alignSelf: "center" }}
-                >
-                  |
-                </span>
+                  className={`${item.class} gsap-nav-divider bg-[#171715]/25 select-none pointer-events-none`}
+                  style={{
+                    display: "inline-block",
+                    width: "1.5px",
+                    height: "10px",
+                    alignSelf: "center",
+                    transformOrigin: "center center",
+                  }}
+                />
               );
             }
             const isActive = activeId === item.id || (item.id === "about" && activeId === "timeline");
@@ -663,14 +655,14 @@ export default function Sidebar() {
         </div>
 
         {/* CTA Button Wrapper */}
-        <div className="relative w-full h-11 pointer-events-auto">
+        <div className="relative w-full h-[48px] pointer-events-auto">
           <div
             className="gsap-sidebar-cta absolute inset-0"
             style={{ zIndex: 2 }}
           >
             <a
               href="#contact"
-              className="cta-btn-inner flex w-full h-full items-center justify-center bg-[#F4FF00] text-[#171715] font-sans font-extrabold text-[11px] tracking-widest uppercase rounded-full shadow-sm border border-[#171715]/5"
+              className="cta-btn-inner flex w-full h-full items-center justify-center bg-[#F4FF00] text-[#171715] font-sans font-extrabold text-[12px] tracking-widest uppercase rounded-full shadow-sm border border-[#171715]/5"
             >
               Book a Call
             </a>
@@ -681,7 +673,7 @@ export default function Sidebar() {
           >
             <a
               href="#about"
-              className="cta-btn-inner flex w-full h-full items-center justify-center bg-[#F4FF00] text-[#171715] font-sans font-extrabold text-[11px] tracking-widest uppercase rounded-full shadow-sm border border-[#171715]/5"
+              className="cta-btn-inner flex w-full h-full items-center justify-center bg-[#F4FF00] text-[#171715] font-sans font-extrabold text-[12px] tracking-widest uppercase rounded-full shadow-sm border border-[#171715]/5"
             >
               About Me
             </a>

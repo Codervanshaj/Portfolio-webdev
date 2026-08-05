@@ -50,7 +50,7 @@ export default function Hero() {
         className="absolute left-[50vw] -translate-x-[50%] pointer-events-none text-center flex flex-col items-center justify-start"
         style={{
           zIndex: 15,
-          top: "36vh",
+          top: "43vh",
           width: "50vw",
           maxWidth: "700px",
         }}
@@ -88,7 +88,7 @@ export default function Hero() {
           zIndex: 25,
           left: "63.5vw",
           top: "40vh",
-          width: "190px",
+          width: "210px",
           height: "auto",
           background: "rgba(255, 255, 255, 0.08)",
           backdropFilter: "blur(16px)",
@@ -109,7 +109,7 @@ export default function Hero() {
             style={{
               fontFamily: "'Geist', sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(12px, 0.8vw, 14px)",
+              fontSize: "clamp(14px, 1.0vw, 17px)",
               color: "#FFFFFF",
               letterSpacing: "0.05em",
             }}

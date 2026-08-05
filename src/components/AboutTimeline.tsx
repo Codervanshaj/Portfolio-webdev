@@ -291,9 +291,9 @@ export default function AboutTimeline() {
       <div
         className="absolute flex flex-col items-start gsap-about-content"
         style={{
-          left: "22vw",
+          left: "24vw",
           top: "80px",
-          width: "480px",
+          width: "500px",
           maxWidth: "75vw",
         }}
       >
@@ -321,7 +321,7 @@ export default function AboutTimeline() {
         <p
           className="font-sans text-[18px] font-semibold leading-[1.6] text-[#595854]"
           style={{
-            maxWidth: "420px",
+            maxWidth: "440px",
           }}
         >
           Seven years ago I opened Webflow for the first time. What happened after that is easier to show than explain.

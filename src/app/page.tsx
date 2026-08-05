@@ -11,7 +11,7 @@ export default function Home() {
         {/* Fixed Background Portrait */}
         <div
           className="fixed bottom-0 left-1/2 -translate-x-1/2 pointer-events-none flex justify-center items-end"
-          style={{ zIndex: 10, width: "39.5vw", height: "96.5vh" }}
+          style={{ zIndex: 10, width: "37vw", height: "96.5vh" }}
         >
           <div style={{ width: "100%", height: "100%" }}>
             <div className="relative w-full h-full gsap-portrait-inner">
@@ -19,7 +19,7 @@ export default function Home() {
                 src="/Vanshaj-pic.png"
                 alt="Vanshaj"
                 fill
-                sizes="39.5vw"
+                sizes="37vw"
                 className="object-cover object-top"
                 priority
                 unoptimized
