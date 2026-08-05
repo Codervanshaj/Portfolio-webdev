@@ -16,9 +16,9 @@ const DETAIL_DATA = {
     title: "Started Building AI & Cloud Projects",
     description: "In 2024, I focused heavily on integrating advanced artificial intelligence models and scalable cloud microservices. I designed and deployed serverless APIs, built machine learning ingestion pipelines, and automated complex business logic workflows. This allowed me to bridge the gap between heavy backend automation and high-performance server architectures, delivering robust and cost-effective digital solutions for clients looking to harness AI.",
     style: {
-      right: "calc(100% - 82.5% + 40px)",
+      right: "calc(100% - 92% + 40px)",
       left: "auto",
-      top: "21.33%",
+      top: "28%",
     }
   },
   2025: {
@@ -26,9 +26,9 @@ const DETAIL_DATA = {
     title: "Scaling Development & Automation",
     description: "During 2025, the focus shifted to optimization and scalability. I built robust CI/CD deployment pipelines, automated system health monitors, and established reliable containerized server setups. By streamlining developer workflows and removing infrastructure bottlenecks, I helped organizations reduce operational overhead, decrease feature lead times, and run high-traffic applications with 99.9% uptime.",
     style: {
-      left: "calc(20.83% + 40px)",
+      left: "calc(18% + 40px)",
       right: "auto",
-      top: "51.11%",
+      top: "54%",
     }
   },
   2026: {
@@ -36,19 +36,49 @@ const DETAIL_DATA = {
     title: "Building Production Systems",
     description: "In 2026, I am engineering state-of-the-art production web platforms. Utilizing high-performance Next.js architectures, modern state-management systems, and custom GSAP web animations, I deliver premium user interfaces with zero-compromise speed. Combined with deep technical SEO configurations and responsive layouts, these applications provide unparalleled user engagement and long-term business value.",
     style: {
-      right: "calc(100% - 80% + 40px)",
+      right: "calc(100% - 82% + 40px)",
       left: "auto",
-      top: "82.22%",
+      top: "82%",
     }
   }
 };
 
+interface StaticRollingYearProps {
+  year: string;
+  digitRef: React.RefObject<HTMLSpanElement | null>;
+}
+
+function StaticRollingYear({ year, digitRef }: StaticRollingYearProps) {
+  const lastChar = year.charAt(year.length - 1);
+  const staticPart = year.slice(0, year.length - 1); // e.g. "'2"
+  
+  const currDigit = parseInt(lastChar);
+  const prevDigit = currDigit - 1;
+
+  return (
+    <span className="inline-flex items-baseline font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3 select-none">
+      <span>{staticPart}</span>
+      <span className="relative inline-block overflow-hidden h-[1em] w-[0.65em] align-baseline">
+        <span
+          ref={digitRef}
+          className="absolute top-0 left-0 flex flex-col w-full"
+          style={{
+            height: "2em",
+            transform: "translateY(0%)",
+          }}
+        >
+          <span className="h-[1em] flex items-center justify-center leading-none">{prevDigit}</span>
+          <span className="h-[1em] flex items-center justify-center leading-none">{currDigit}</span>
+        </span>
+      </span>
+    </span>
+  );
+}
+
 export default function AboutTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const node1Ref = useRef<HTMLDivElement>(null);
-  const node2Ref = useRef<HTMLDivElement>(null);
-  const node3Ref = useRef<HTMLDivElement>(null);
+  const progressPathRef = useRef<SVGPathElement>(null);
 
   // Outer Wrapper Refs for Parallax
   const cardOuter1Ref = useRef<HTMLDivElement>(null);
@@ -59,6 +89,25 @@ export default function AboutTimeline() {
   const cardInner1Ref = useRef<HTMLDivElement>(null);
   const cardInner2Ref = useRef<HTMLDivElement>(null);
   const cardInner3Ref = useRef<HTMLDivElement>(null);
+
+  // New dashed path refs
+  const dashPathRef = useRef<SVGPathElement>(null);
+  const progressDashPathRef = useRef<SVGPathElement>(null);
+
+  // SVG Waypoint Circle Refs
+  const svgCircle1Ref = useRef<SVGCircleElement>(null);
+  const svgCircle2Ref = useRef<SVGCircleElement>(null);
+  const svgCircle3Ref = useRef<SVGCircleElement>(null);
+
+  // Decorative Connector Line Refs (Faded vertical lines side-by-side with cards)
+  const connectorLine1Ref = useRef<HTMLDivElement>(null);
+  const connectorLine2Ref = useRef<HTMLDivElement>(null);
+  const connectorLine3Ref = useRef<HTMLDivElement>(null);
+
+  // Year Digit Rolling Container Refs
+  const yearDigit1Ref = useRef<HTMLSpanElement>(null);
+  const yearDigit2Ref = useRef<HTMLSpanElement>(null);
+  const yearDigit3Ref = useRef<HTMLSpanElement>(null);
 
   // Detail Card & Overlay Refs
   const detailCardRef = useRef<HTMLDivElement>(null);
@@ -80,95 +129,133 @@ export default function AboutTimeline() {
   // ─── Hook 1: ScrollTrigger Animations (Paths, Nodes, Cards Entry & Parallax) ───
   useGSAP(
     () => {
-      const path = pathRef.current;
-      if (!path) return;
+      const path = progressPathRef.current;
+      const dashPath = progressDashPathRef.current;
+      if (!path || !dashPath) return;
 
-      const length = path.getTotalLength();
+      const length = path.getTotalLength() || 2100;
+      const dashLength = dashPath.getTotalLength() || 150;
 
-      // SVG path setup
-      gsap.set(path, {
-        strokeDasharray: length,
-        strokeDashoffset: length,
-      });
+      const mm = gsap.matchMedia();
 
-      // Nodes setup (initially hidden)
-      gsap.set([node1Ref.current, node2Ref.current, node3Ref.current], {
-        scale: 0,
-        opacity: 0,
-        transformOrigin: "center center",
-      });
+      // Desktop layout: apply ScrollTrigger drawing, connectors, and parallax
+      mm.add("(min-width: 768px)", () => {
+        // SVG path setup
+        gsap.set(path, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+        });
+        gsap.set(dashPath, {
+          strokeDasharray: dashLength,
+          strokeDashoffset: dashLength,
+        });
 
-      // Cards setup (initially hidden)
-      gsap.set([cardInner1Ref.current, cardInner2Ref.current, cardInner3Ref.current], {
-        opacity: 0,
-        y: 50,
-        filter: "blur(8px)",
-      });
+        // SVG circles setup (all circles are always visible)
+        gsap.set([svgCircle1Ref.current, svgCircle2Ref.current, svgCircle3Ref.current], {
+          scale: 1,
+          transformOrigin: "50% 50%",
+        });
 
-      // Timeline path and nodes timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-      });
+        // Year digits setup (always at translateY(-50%))
+        gsap.set([yearDigit1Ref.current, yearDigit2Ref.current, yearDigit3Ref.current], {
+          yPercent: -50,
+        });
 
-      // 1. Draw the path
-      tl.to(path, { strokeDashoffset: 0, ease: "none", duration: 1 }, 0);
-
-      // 2. Node 1 and Card 1 reveal at progress 0.22
-      tl.to(node1Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.22)
-        .to(cardInner1Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.22);
-
-      // 3. Node 2 and Card 2 reveal at progress 0.58
-      tl.to(node2Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.58)
-        .to(cardInner2Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.58);
-
-      // 4. Node 3 and Card 3 reveal at progress 0.90
-      tl.to(node3Ref.current, { scale: 1, opacity: 1, duration: 0.08, ease: "power2.out" }, 0.90)
-        .to(cardInner3Ref.current, { y: 0, opacity: 0.9, filter: "blur(0px)", duration: 0.12, ease: "power2.out" }, 0.90);
-
-      // Card parallax, and active triggers
-      const cards = [
-        { outer: cardOuter1Ref.current, inner: cardInner1Ref.current },
-        { outer: cardOuter2Ref.current, inner: cardInner2Ref.current },
-        { outer: cardOuter3Ref.current, inner: cardInner3Ref.current },
-      ];
-
-      cards.forEach(({ outer, inner }) => {
-        if (!outer || !inner) return;
-
-        // Parallax scrubber
-        gsap.fromTo(
-          outer,
-          { yPercent: -50, y: -20 },
-          {
-            y: 20,
-            scrollTrigger: {
-              trigger: outer,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-
-        // Centering highlight trigger
-        ScrollTrigger.create({
-          trigger: outer,
-          start: "top 60%",
-          end: "bottom 40%",
-          onToggle: (self) => {
-            if (self.isActive) {
-              inner.classList.add("is-active");
-            } else {
-              inner.classList.remove("is-active");
-            }
+        // Timeline path and nodes timeline (triggering based on the 1st dot position to ensure it starts when visible)
+        // We set the end to 'top+=1845 60%' (when the 3rd dot reaches 60% of viewport) to guarantee it's fully reachable
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top+=630 80%",
+            end: "top+=1845 60%",
+            scrub: true,
           },
         });
+
+        // 1. Draw the paths sequentially, starting from the 1st dot (y=630) to the end of the dashed path (y=1890)
+        tl.to(path, { strokeDashoffset: 0, ease: "none", duration: 0.95 }, 0);
+        tl.to(dashPath, { strokeDashoffset: 0, ease: "none", duration: 0.05 }, 0.95);
+
+        // Card parallax, entrance reveal, and active triggers
+        const cards = [
+          { outer: cardOuter1Ref.current, inner: cardInner1Ref.current, connector: connectorLine1Ref.current },
+          { outer: cardOuter2Ref.current, inner: cardInner2Ref.current, connector: connectorLine2Ref.current },
+          { outer: cardOuter3Ref.current, inner: cardInner3Ref.current, connector: connectorLine3Ref.current },
+        ];
+
+        cards.forEach(({ outer, inner, connector }, index) => {
+          if (!outer || !inner || !connector) return;
+
+          // Set initial hidden state for entry reveal (shifted down to appear from bottom)
+          gsap.set(inner, { opacity: 0, y: 50 });
+          gsap.set(connector, { scaleY: 0, transformOrigin: "top center" });
+          const children = gsap.utils.toArray(inner.children);
+          gsap.set(children, { opacity: 0, y: 20 });
+
+          // Entrance reveal timeline as the card scrolls into view (independent of the journey line)
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: outer,
+              start: "top 85%",
+              end: "top 60%",
+              scrub: true,
+            }
+          })
+          .to(inner, { opacity: 1, y: 0, ease: "power2.out", duration: 0.3 }, 0)
+          .to(connector, { scaleY: 1, ease: "power1.inOut", duration: 0.3 }, 0.05)
+          .to(children, { opacity: 1, y: 0, stagger: 0.05, ease: "power2.out", duration: 0.25 }, 0.05);
+
+          // Parallax scrubber
+          gsap.fromTo(
+            outer,
+            { yPercent: 0, y: -20 },
+            {
+              y: 20,
+              scrollTrigger: {
+                trigger: outer,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            }
+          );
+
+          // Centering highlight trigger
+          ScrollTrigger.create({
+            trigger: outer,
+            start: "top 60%",
+            end: "bottom 40%",
+            onToggle: (self) => {
+              if (self.isActive) {
+                inner.classList.add("is-active");
+              } else {
+                inner.classList.remove("is-active");
+              }
+            },
+          });
+        });
       });
+
+      // Mobile layout: render static fully drawn timeline without scroll triggers
+      mm.add("(max-width: 767px)", () => {
+        // Draw paths fully
+        gsap.set([path, dashPath], { strokeDashoffset: 0 });
+
+        // Show cards statically
+        gsap.set([cardInner1Ref.current, cardInner2Ref.current, cardInner3Ref.current], { opacity: 1, y: 0, filter: "none" });
+        gsap.set([svgCircle1Ref.current, svgCircle2Ref.current, svgCircle3Ref.current], { scale: 1 });
+        gsap.set([connectorLine1Ref.current, connectorLine2Ref.current, connectorLine3Ref.current], { scaleY: 1 });
+        gsap.set([yearDigit1Ref.current, yearDigit2Ref.current, yearDigit3Ref.current], { yPercent: -50 });
+
+        // Show card children statically
+        const card1Children = cardInner1Ref.current ? gsap.utils.toArray(cardInner1Ref.current.children) : [];
+        const card2Children = cardInner2Ref.current ? gsap.utils.toArray(cardInner2Ref.current.children) : [];
+        const card3Children = cardInner3Ref.current ? gsap.utils.toArray(cardInner3Ref.current.children) : [];
+        gsap.set([...card1Children, ...card2Children, ...card3Children], { opacity: 1, y: 0 });
+      });
+
+      // Return clean callback
+      return () => mm.revert();
     },
     { scope: containerRef }
   );
@@ -184,16 +271,15 @@ export default function AboutTimeline() {
         gsap.fromTo(
           overlayRef.current,
           { opacity: 0 },
-          { opacity: 0.35, duration: 0.20, ease: "power2.out" }
+          { opacity: 0.45, duration: 0.20, ease: "power2.out" }
         );
 
         gsap.fromTo(
           detailCardRef.current,
           {
             opacity: 0,
-            scale: 0.96,
-            yPercent: -50,
-            y: 20,
+            scale: 0.95,
+            y: 30,
           },
           {
             opacity: 1,
@@ -209,9 +295,8 @@ export default function AboutTimeline() {
         // CLOSE TRANSITION (Card fades out, overlay disappears last)
         gsap.to(detailCardRef.current, {
           opacity: 0,
-          scale: 0.96,
-          yPercent: -50,
-          y: 20,
+          scale: 0.95,
+          y: 30,
           duration: 0.35,
           ease: "power3.inOut",
           overwrite: "auto",
@@ -339,52 +424,81 @@ export default function AboutTimeline() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
+        {/* Background solid track (hidden) */}
         <path
           ref={pathRef}
-          d="M 1188,120 L 1188,480 C 1188,800 300,750 300,1150 C 300,1550 1152,1450 1152,1850"
+          d="M 1309,630 C 1309,950 275,900 275,1215 C 275,1550 656,1800 756,1845"
           stroke="#171715"
-          strokeWidth="4"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          fill="none"
+          className="hidden"
+        />
+        {/* Active solid progress line (Thicker for high visibility) */}
+        <path
+          ref={progressPathRef}
+          d="M 1309,630 C 1309,950 275,900 275,1215 C 275,1550 656,1800 756,1845"
+          stroke="#171715"
+          strokeWidth="3.5"
           strokeLinecap="round"
           fill="none"
         />
+        {/* Background dashed track (hidden) */}
+        <path
+          ref={dashPathRef}
+          d="M 756,1845 C 806,1867.5 836,1880 856,1890"
+          stroke="#171715"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeDasharray="6,6"
+          fill="none"
+          className="hidden"
+        />
+        {/* Active dashed progress line (Thicker for high visibility) */}
+        <path
+          ref={progressDashPathRef}
+          d="M 756,1845 C 806,1867.5 836,1880 856,1890"
+          stroke="#171715"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+          strokeDasharray="6,6"
+          fill="none"
+        />
+        {/* Waypoint Dots */}
+        <circle
+          ref={svgCircle1Ref}
+          cx="1309"
+          cy="630"
+          r="8"
+          fill="#F4FF00"
+          stroke="#171715"
+          strokeWidth="2"
+          className="timeline-node pointer-events-auto cursor-pointer transition-transform duration-[250ms] ease-out"
+          style={{ transformOrigin: "center", transformBox: "fill-box" }}
+        />
+        <circle
+          ref={svgCircle2Ref}
+          cx="275"
+          cy="1215"
+          r="8"
+          fill="#F4FF00"
+          stroke="#171715"
+          strokeWidth="2"
+          className="timeline-node pointer-events-auto cursor-pointer transition-transform duration-[250ms] ease-out"
+          style={{ transformOrigin: "center", transformBox: "fill-box" }}
+        />
+        <circle
+          ref={svgCircle3Ref}
+          cx="756"
+          cy="1845"
+          r="8"
+          fill="#F4FF00"
+          stroke="#171715"
+          strokeWidth="2"
+          className="timeline-node pointer-events-auto cursor-pointer transition-transform duration-[250ms] ease-out"
+          style={{ transformOrigin: "center", transformBox: "fill-box" }}
+        />
       </svg>
-
-      {/* ─── Responsive Yellow Nodes (HTML Divs) ─── */}
-      {/* Node 2024 */}
-      <div
-        ref={node1Ref}
-        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
-        style={{
-          left: "82.5%",
-          top: "21.33%",
-          marginLeft: "-8px",
-          marginTop: "-8px",
-        }}
-      />
-
-      {/* Node 2025 */}
-      <div
-        ref={node2Ref}
-        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
-        style={{
-          left: "20.83%",
-          top: "51.11%",
-          marginLeft: "-8px",
-          marginTop: "-8px",
-        }}
-      />
-
-      {/* Node 2026 */}
-      <div
-        ref={node3Ref}
-        className="timeline-node absolute w-[16px] h-[16px] bg-[#F4FF00] border-2 border-[#171715] rounded-full select-none pointer-events-auto transition-transform duration-[250ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.12]"
-        style={{
-          left: "80%",
-          top: "82.22%",
-          marginLeft: "-8px",
-          marginTop: "-8px",
-        }}
-      />
 
       {/* ─── Journey Cards ─── */}
       {/* Card 2024 (Left of first node) */}
@@ -392,22 +506,28 @@ export default function AboutTimeline() {
         ref={cardOuter1Ref}
         className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
-          right: "calc(100% - 82.5% + 40px)",
-          top: "21.33%",
-          transform: "translateY(-50%)",
+          right: "calc(100% - 92% + 40px)",
+          bottom: "calc(100% - 28% + 12px)",
         }}
       >
+        {/* Decorative Vertical Connector Line (faded gradient) */}
+        <div className="hidden md:flex absolute left-full ml-6 top-0 bottom-[-20px] w-4 flex-col items-center pointer-events-none">
+          <div
+            ref={connectorLine1Ref}
+            className="w-[1.5px] absolute top-0 bottom-[32px] bg-gradient-to-b from-[#171715]/40 to-transparent origin-top"
+            style={{ transform: "scaleY(0)" }}
+          />
+        </div>
+
         <div
           ref={cardInner1Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px] border border-[#171715]/15"
         >
-          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
-            '24
-          </div>
-          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
+          <StaticRollingYear year="'24" digitRef={yearDigit1Ref} />
+          <h3 className="font-serif font-black text-[clamp(22px,2vw,28px)] text-[#171715] leading-[1.1] mb-4">
             Started Building AI & Cloud Projects
           </h3>
-          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-timeline-sans text-[16px] font-normal leading-[1.6] text-[#595854] mb-6">
             Deep-dived into modern AI integrations and cloud architectures. Developed customized solutions utilizing advanced API designs, cloud functions, and machine learning endpoints to solve automated business workflows.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -422,17 +542,17 @@ export default function AboutTimeline() {
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-sans font-bold text-[13px] text-[#171715]">
+                <span className="font-timeline-sans font-bold text-[13px] text-[#171715]">
                   @developer
                 </span>
-                <span className="font-sans text-[11px] text-[#6B6A65] mt-1">
+                <span className="font-timeline-sans text-[11px] text-[#6B6A65] mt-1">
                   2 years ago
                 </span>
               </div>
             </div>
             <button
               onClick={() => openDetailCard(2024)}
-              className="group bg-white hover:bg-white text-[#171715] font-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
+              className="group bg-white hover:bg-white text-[#171715] font-timeline-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
             >
               {/* Text sliding wrapper */}
               <span className="relative block overflow-hidden h-[18px]">
@@ -457,22 +577,28 @@ export default function AboutTimeline() {
         ref={cardOuter2Ref}
         className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
-          left: "calc(20.83% + 40px)",
-          top: "51.11%",
-          transform: "translateY(-50%)",
+          left: "calc(18% + 40px)",
+          bottom: "calc(100% - 54% + 12px)",
         }}
       >
+        {/* Decorative Vertical Connector Line (faded gradient) */}
+        <div className="hidden md:flex absolute right-full mr-6 top-0 bottom-[-20px] w-4 flex-col items-center pointer-events-none">
+          <div
+            ref={connectorLine2Ref}
+            className="w-[1.5px] absolute top-0 bottom-[32px] bg-gradient-to-b from-[#171715]/40 to-transparent origin-top"
+            style={{ transform: "scaleY(0)" }}
+          />
+        </div>
+
         <div
           ref={cardInner2Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px] border border-[#171715]/15"
         >
-          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
-            '25
-          </div>
-          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
+          <StaticRollingYear year="'25" digitRef={yearDigit2Ref} />
+          <h3 className="font-serif font-black text-[clamp(22px,2vw,28px)] text-[#171715] leading-[1.1] mb-4">
             Scaling Development & Automation
           </h3>
-          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-timeline-sans text-[16px] font-normal leading-[1.6] text-[#595854] mb-6">
             Focused on optimizing infrastructure, setting up continuous integration pipelines, and streamlining development workflows. Engineered complex serverless systems and automated deployments to scale operations efficiently.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -487,17 +613,17 @@ export default function AboutTimeline() {
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-sans font-bold text-[13px] text-[#171715]">
+                <span className="font-timeline-sans font-bold text-[13px] text-[#171715]">
                   @automation
                 </span>
-                <span className="font-sans text-[11px] text-[#6B6A65] mt-1">
+                <span className="font-timeline-sans text-[11px] text-[#6B6A65] mt-1">
                   1 year ago
                 </span>
               </div>
             </div>
             <button
               onClick={() => openDetailCard(2025)}
-              className="group bg-white hover:bg-white text-[#171715] font-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
+              className="group bg-white hover:bg-white text-[#171715] font-timeline-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
             >
               {/* Text sliding wrapper */}
               <span className="relative block overflow-hidden h-[18px]">
@@ -522,22 +648,28 @@ export default function AboutTimeline() {
         ref={cardOuter3Ref}
         className="timeline-card absolute w-[420px] pointer-events-auto"
         style={{
-          right: "calc(100% - 80% + 40px)",
-          top: "82.22%",
-          transform: "translateY(-50%)",
+          left: "calc(50% + 60px)",
+          bottom: "calc(100% - 82% + 12px)",
         }}
       >
+        {/* Decorative Vertical Connector Line (faded gradient) */}
+        <div className="hidden md:flex absolute right-full mr-6 top-0 bottom-[-20px] w-4 flex-col items-center pointer-events-none">
+          <div
+            ref={connectorLine3Ref}
+            className="w-[1.5px] absolute top-0 bottom-[32px] bg-gradient-to-b from-[#171715]/40 to-transparent origin-top"
+            style={{ transform: "scaleY(0)" }}
+          />
+        </div>
+
         <div
           ref={cardInner3Ref}
-          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px]"
+          className="timeline-card-inner w-full bg-[#DFDECE]/80 backdrop-blur-[10px] rounded-[28px] p-8 md:p-[32px] border border-[#171715]/15"
         >
-          <div className="font-sans font-black text-[clamp(72px,6vw,110px)] text-[#F4FF00] leading-none mb-3">
-            '26
-          </div>
-          <h3 className="font-sans font-extrabold text-[clamp(20px,1.8vw,26px)] text-[#171715] leading-[1.1] mb-4">
+          <StaticRollingYear year="'26" digitRef={yearDigit3Ref} />
+          <h3 className="font-serif font-black text-[clamp(22px,2vw,28px)] text-[#171715] leading-[1.1] mb-4">
             Building Production Systems
           </h3>
-          <p className="font-sans text-[14px] font-normal leading-[1.5] text-[#595854] mb-6">
+          <p className="font-timeline-sans text-[16px] font-normal leading-[1.6] text-[#595854] mb-6">
             Currently building production-grade, highly scalable web systems. Specializing in high-performance Next.js architectures, premium UI interactions, and technical search engine optimization for clients worldwide.
           </p>
           <div className="flex items-center justify-between w-full mt-6">
@@ -552,17 +684,17 @@ export default function AboutTimeline() {
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-sans font-bold text-[13px] text-[#171715]">
+                <span className="font-timeline-sans font-bold text-[13px] text-[#171715]">
                   @vanshaj
                 </span>
-                <span className="font-sans text-[11px] text-[#6B6A65] mt-1">
+                <span className="font-timeline-sans text-[11px] text-[#6B6A65] mt-1">
                   just now
                 </span>
               </div>
             </div>
             <button
               onClick={() => openDetailCard(2026)}
-              className="group bg-white hover:bg-white text-[#171715] font-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
+              className="group bg-white hover:bg-white text-[#171715] font-timeline-sans font-extrabold text-[12px] tracking-[0.02em] rounded-full px-5 py-2 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex items-center gap-2 overflow-hidden shrink-0"
             >
               {/* Text sliding wrapper */}
               <span className="relative block overflow-hidden h-[18px]">
@@ -582,52 +714,54 @@ export default function AboutTimeline() {
         </div>
       </div>
 
-      {/* ─── Dark Overlay ─── */}
+      {/* ─── Fixed Fullscreen Dark Overlay ─── */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-black/35 z-[40] cursor-pointer select-none pointer-events-auto"
+        className="fixed inset-0 bg-black/40 backdrop-blur-[12px] z-[90] cursor-pointer select-none pointer-events-auto"
         style={{ display: "none", opacity: 0 }}
         onClick={closeDetailCard}
       />
 
-      {/* ─── Custom Floating Detail Card ─── */}
+      {/* ─── Custom Floating Detail Card (Centered in Viewport Flex Container) ─── */}
       <div
-        ref={detailCardRef}
-        className="timeline-card absolute w-[480px] bg-[#171715] rounded-[30px] p-10 md:p-[44px] shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-[50] pointer-events-auto text-white select-none"
-        style={{
-          display: "none",
-          opacity: 0,
-          transform: "translateY(-50%)",
-          ...(renderedYear ? DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].style : {}),
-        }}
+        className="fixed inset-0 flex items-center justify-center z-[100] pointer-events-none"
       >
-        {renderedYear && (
-          <>
-            {/* Close Button */}
-            <button
-              className="absolute top-6 right-6 w-8 h-8 rounded-lg bg-[#2A2A25] hover:bg-[#3A3A33] text-white flex items-center justify-center font-bold text-[18px] transition-colors cursor-pointer select-none border border-white/5 shadow-[0_2px_8px_rgba(0,0,0,0.1)] pointer-events-auto"
-              onClick={closeDetailCard}
-              aria-label="Close detail modal"
-            >
-              &times;
-            </button>
+        <div
+          ref={detailCardRef}
+          className="w-[90vw] max-w-[500px] bg-gradient-to-br from-[#3B3D38] via-[#222222] to-[#444444] border border-white/10 rounded-[32px] p-8 md:p-12 shadow-[0_25px_60px_rgba(0,0,0,0.4)] pointer-events-auto text-white select-none relative"
+          style={{
+            display: "none",
+            opacity: 0,
+          }}
+        >
+          {renderedYear && (
+            <>
+              {/* Close Button */}
+              <button
+                className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#2A2A25] hover:bg-white hover:text-[#171715] text-white flex items-center justify-center font-bold text-[20px] transition-all duration-300 cursor-pointer select-none border border-white/5 shadow-[0_2px_8px_rgba(0,0,0,0.1)] pointer-events-auto"
+                onClick={closeDetailCard}
+                aria-label="Close detail modal"
+              >
+                &times;
+              </button>
 
-            {/* Year */}
-            <div className="font-sans font-black text-[clamp(64px,5.5vw,96px)] text-[#F4FF00] leading-none mb-3">
-              {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].year}
-            </div>
+              {/* Year */}
+              <div className="font-timeline-sans font-black text-[clamp(80px,7vw,110px)] text-[#F4FF00] leading-none mb-3 tracking-tighter">
+                {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].year}
+              </div>
 
-            {/* Title */}
-            <h3 className="font-sans font-extrabold text-[clamp(24px,2.2vw,32px)] text-white leading-[1.1] mb-4">
-              {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].title}
-            </h3>
+              {/* Title */}
+              <h3 className="font-serif font-extrabold text-[clamp(24px,2.2vw,32px)] text-white leading-[1.1] mb-4">
+                {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].title}
+              </h3>
 
-            {/* Long Description */}
-            <p className="font-sans text-[15px] font-normal leading-[1.6] text-white/80">
-              {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].description}
-            </p>
-          </>
-        )}
+              {/* Long Description */}
+              <p className="font-timeline-sans text-[16px] font-normal leading-[1.6] text-white/90">
+                {DETAIL_DATA[renderedYear as keyof typeof DETAIL_DATA].description}
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </section>
   );
