@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import "../../public/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/css/nesh-staging.webflow.shared.bea9f6170.min.css";
+import "../../public/heynesh-assets/cdn.jsdelivr.net/npm/swiper-11/swiper-bundle.min.css";
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "NESH Portfolio Rebuild",
+  description: "Pixel-perfect portfolio rebuild using Next.js and GSAP",
 };
 
 export default function RootLayout({
@@ -25,9 +17,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <Script 
+          src="/heynesh-assets/cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js"
+          strategy="beforeInteractive"
+        />
+      </head>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
+

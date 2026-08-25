@@ -1,0 +1,28 @@
+/* ============================================
+   8. SWIPER COMPONENTS
+   ============================================ */
+.swiper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  overflow: visible !important;
+}
+
+.swiper-pagination {
+  width: auto !important;
+  display: flex;
+  margin-bottom: 1.67vw;
+  padding: 0.69vw;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.56vw;
+  position: relative !important;
+}
+
+.swiper-bullet.is-active {
+  width: 2.5vw;
+  background-color: #ffff23;
+}
+
+.swiper-wrapper {
+ cursor: none !Important;
+}
+/* ============================================
