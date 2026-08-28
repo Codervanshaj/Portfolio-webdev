@@ -272,7 +272,7 @@ export function initLogoFlip() {
       const pRect = parent.getBoundingClientRect();
       const computedWidth = window.getComputedStyle(crReal).width;
       const computedHeight = window.getComputedStyle(crReal).height;
-
+ 
       gsap.fromTo(crReal, {
         x: Math.round((gRect.left - pRect.left) / sidebarScale),
         y: Math.round((gRect.top - pRect.top) / sidebarScale),

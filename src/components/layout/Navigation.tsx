@@ -56,7 +56,7 @@ export default function Navigation() {
       data-tl-to="{'zIndex': 100, 'duration': 0.1}"
       data-tl-trigger=".hero"
       data-tl-type="trigger"
-      style={{ zIndex: 100 }}
+      style={{ zIndex: 2 }}
     >
       <div className="nav-container">
 

@@ -73,9 +73,6 @@ export default function Home() {
         });
 
         // Reveal hero content elements with opacity and visibility.
-        // We only animate the non-morphed Hero elements here. Morphed elements
-        // (logo, links, buttons, cards) are handled by initLogoFlip and will render
-        // correctly at their morphed layout coordinates from frame 1, avoiding conflicts.
         tl.fromTo([
           ".profile-img-item",
           ".hero-left-text",

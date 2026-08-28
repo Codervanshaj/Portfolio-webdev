@@ -11,7 +11,7 @@ export default function Hero() {
 
   return (
     <section className="hero" data-flip-start="top top" data-flip-start-trigger="" id="hero">
-      <div className="hero-sticky" style={{ position: "relative", zIndex: 1 }}>
+      <div className="hero-sticky" style={{ position: "relative", zIndex: 3 }}>
 
         {/* Nesh Logo Preload wrapper containing logo ghost and copyright ghost */}
         <div className="nesh-logo-preload">

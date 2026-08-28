@@ -478,3 +478,23 @@
          background-color: transparent;
         }
 }
+
+/* ============================================
+   CARD STRUCTURE & LAYERING OVERRIDES
+   ============================================ */
+
+/* Force card containers to define their own stacking contexts to hide overlapping nav links */
+.hero-card-2,
+.hero-card-1,
+.nav-stats-card {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Disable backdrop-filter on nav-menu-wrap on desktop to resolve graphics conflict and allow cards to blur links correctly */
+@media (min-width: 768px) {
+  .nav-menu-wrap {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
