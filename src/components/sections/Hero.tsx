@@ -12,18 +12,20 @@ export default function Hero() {
   return (
     <section className="hero" data-flip-start="top top" data-flip-start-trigger="" id="hero">
       <div className="hero-sticky" style={{ position: "relative", zIndex: 1 }}>
-        
+
         {/* Nesh Logo Preload wrapper containing logo ghost and copyright ghost */}
         <div className="nesh-logo-preload">
           <div className="nesh-logo-wrap" data-flip-origin="">
             <div className="nesh-logo-ghost-wrap">
-              
+
               {/* Nesh Logo Ghost */}
-              <svg className="nesh-logo-ghost" data-flip-target="" fill="none" viewBox="0 0 1288 338" width="100%" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 330.469V4.83951H163.391L244.51 292.675H250.272L247.737 4.83951H337.383V330.469H174.683L93.1029 42.6337H87.3416L89.6461 330.469H0Z" fill="currentColor"></path>
-                <path d="M463.809 258.798H645.175V330.469H374.163V4.83951H640.797V76.5103H463.809V130.897H626.739V202.568H463.809V258.798Z" fill="currentColor"></path>
-                <path d="M651.997 245.432L721.824 205.794C743.333 245.739 774.905 265.712 816.54 265.712C830.982 265.712 842.197 263.331 850.186 258.568C858.329 253.652 862.4 246.661 862.4 237.597C862.4 228.686 858.713 221.619 851.338 216.395C843.964 211.018 830.982 206.562 812.392 203.029L756.161 192.198C727.893 186.82 706.307 176.45 691.404 161.086C676.655 145.569 669.281 125.904 669.281 102.091C669.281 82.7325 675.042 65.2949 686.565 49.7778C698.241 34.107 714.219 21.893 734.499 13.1358C754.779 4.3786 777.286 0 802.021 0C879.454 0 929.001 31.3416 950.663 94.0247L873.692 117.07C866.164 100.17 857.1 88.2634 846.499 81.3498C836.052 74.4362 822.148 70.9794 804.787 70.9794C791.574 70.9794 780.666 73.7449 772.063 79.2757C763.459 84.8066 759.157 92.2579 759.157 101.63C759.157 110.233 762.768 116.532 769.989 120.527C777.209 124.521 790.115 128.285 808.705 131.819L864.244 142.65C923.393 154.019 952.968 184.977 952.968 235.523C952.968 266.557 940.37 291.292 915.174 309.728C889.978 328.011 856.178 337.152 813.775 337.152C774.598 337.152 742.411 329.855 717.215 315.259C692.019 300.51 670.279 277.235 651.997 245.432Z" fill="currentColor"></path>
-                <path d="M977.765 330.469V4.83951H1067.41V130.897H1197.62V4.83951H1287.49V330.469H1197.62V202.568H1067.41V330.469H977.765Z" fill="currentColor"></path>
+
+              <svg className="nesh-logo-ghost" data-flip-target="" width="100%" viewBox="0 0 851 167" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M678 167V0H724.634V65.2344H786.366V0H833V167H786.366V101.766H724.634V167H678Z" fill="currentColor" />
+                <path d="M617.639 53.1219C617.207 47.8203 615.182 43.6851 611.564 40.7162C607.999 37.7473 602.572 36.2629 595.282 36.2629C590.638 36.2629 586.831 36.8195 583.861 37.9328C580.945 38.9932 578.785 40.4511 577.381 42.3067C575.976 44.1622 575.247 46.2829 575.193 48.6686C575.085 50.6302 575.436 52.4062 576.246 53.9967C577.11 55.5341 578.461 56.939 580.297 58.2114C582.133 59.4308 584.482 60.5441 587.344 61.5514C590.206 62.5587 593.608 63.46 597.55 64.2552L611.159 67.1181C620.339 69.0267 628.196 71.5449 634.73 74.6729C641.264 77.8008 646.611 81.4854 650.769 85.7267C654.927 89.9149 657.978 94.6333 659.922 99.8819C661.92 105.13 662.946 110.856 663 117.059C662.946 127.768 660.219 136.834 654.819 144.256C649.419 151.678 641.696 157.325 631.652 161.195C621.662 165.065 609.646 167 595.606 167C581.188 167 568.605 164.906 557.859 160.718C547.167 156.529 538.85 150.088 532.91 141.393C527.024 132.646 524.054 121.459 524 107.834H566.769C567.039 112.818 568.308 117.006 570.576 120.399C572.844 123.792 576.031 126.363 580.135 128.113C584.293 129.862 589.234 130.737 594.958 130.737C599.764 130.737 603.787 130.154 607.027 128.988C610.267 127.821 612.725 126.204 614.399 124.137C616.073 122.069 616.937 119.71 616.991 117.059C616.937 114.567 616.1 112.394 614.48 110.538C612.914 108.63 610.322 106.933 606.703 105.449C603.085 103.911 598.198 102.48 592.042 101.154L575.518 97.6552C560.829 94.5273 549.246 89.3052 540.767 81.9891C532.343 74.6198 528.158 64.5733 528.212 51.8495C528.158 41.5114 530.966 32.4722 536.636 24.7319C542.361 16.9386 550.272 10.8683 560.37 6.52095C570.522 2.17365 582.16 0 595.282 0C608.674 0 620.258 2.20016 630.032 6.60048C639.806 11.0008 647.34 17.2037 652.632 25.2091C657.978 33.1614 660.678 42.4657 660.732 53.1219H617.639Z" fill="currentColor" />
+                <path d="M507 0V167H463.009L392.851 79.2598H391.713V167H339V0H383.749L452.77 87.4141H454.287V0H507Z" fill="currentColor" />
+                <path d="M196.716 167H147L203.013 0H265.987L322 167H272.284L235.163 45.9902H233.837L196.716 167ZM187.436 101.113H280.901V135.035H187.436V101.113Z" fill="currentColor" />
+                <path d="M53.5227 0L89.3182 117.748H90.6818L126.477 0H180L122.386 167H57.6136L0 0H53.5227Z" fill="currentColor" />
               </svg>
 
               {/* Copyright Ghost */}
@@ -112,7 +114,7 @@ export default function Hero() {
           {/* Stats cards wrappers */}
           <div className="hero-cards-wrap">
             <div className="hero-cards-left">
-              
+
               {/* Webflow projects card */}
               <div className="hero-card-2-wrap">
                 <div className="hero-card-2" data-flip-id="hero-card-2">
@@ -123,7 +125,7 @@ export default function Hero() {
                     </svg>
                   </div>
                   <div className="hero-c-projects-text-wrap">
-                    <p className="hero-webflow-projects-text" data-flip-id="hero-card-2-text" id="projects_start_text">80+<br/>Projects</p>
+                    <p className="hero-webflow-projects-text" data-flip-id="hero-card-2-text" id="projects_start_text">80+<br />Projects</p>
                   </div>
                 </div>
               </div>
@@ -139,7 +141,7 @@ export default function Hero() {
                     </svg>
                   </div>
                   <div className="experience-text-wrap">
-                    <p className="experience-text" id="yrs_small_text_start">Years of <br/>experience</p>
+                    <p className="experience-text" id="yrs_small_text_start">Years of <br />experience</p>
                   </div>
                 </div>
               </div>
@@ -183,12 +185,12 @@ export default function Hero() {
 
           {/* Mobile profile photo */}
           <div className="mobile-hero-image-wrap">
-            <img 
-              alt="Nenad Popadic" 
-              className="mobile-hero-image" 
-              fetchPriority="high" 
-              loading="lazy" 
-              src="/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/69708b99545c57d03ebb5cd9_Frame-202147258154.avif" 
+            <img
+              alt="Nenad Popadic"
+              className="mobile-hero-image"
+              fetchPriority="high"
+              loading="lazy"
+              src="/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/69708b99545c57d03ebb5cd9_Frame-202147258154.avif"
             />
           </div>
         </div>
