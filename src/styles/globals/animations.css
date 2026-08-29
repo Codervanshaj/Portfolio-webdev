@@ -65,6 +65,37 @@
  visibility: hidden;
 }
 
+/*
+  Keep the hero's ghost navigation row in a lower layer than the hero cards.
+  This prevents the PROJECTS ghost label from painting above the glass card
+  before or during the intro animation sequence.
+*/
+.hero-sticky {
+  isolation: isolate;
+}
+
+.hero-navigation-wrap {
+  position: relative;
+  z-index: 1 !important;
+}
+
+.hero-cards-wrap,
+.hero-cards-left,
+.hero-card-1-wrap,
+.hero-card-2-wrap,
+.hero-card-1,
+.hero-card-2 {
+  position: relative;
+  z-index: 3 !important;
+}
+
+.hero-content-layout,
+.hero-left-text,
+.hero-right-text {
+  position: relative;
+  z-index: 4;
+}
+
   /* ============================================
    DESIGN MODE — reveal hidden entrance elements
    ============================================ */

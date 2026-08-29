@@ -78,6 +78,7 @@ export default function Home() {
           ".hero-left-text",
           ".hero-right-text",
           ".hero-heading",
+          ".hero-cards-left",
           ".hero-card-3",
           ".hero-navigation-sep",
         ], {

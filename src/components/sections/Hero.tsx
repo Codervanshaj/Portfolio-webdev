@@ -125,7 +125,7 @@ export default function Hero() {
                     </svg>
                   </div>
                   <div className="hero-c-projects-text-wrap">
-                    <p className="hero-webflow-projects-text" data-flip-id="hero-card-2-text" id="projects_start_text">80+<br />Projects</p>
+                    <p className="hero-webflow-projects-text" data-flip-id="hero-card-2-text">80+<br />Projects</p>
                   </div>
                 </div>
               </div>

@@ -165,7 +165,7 @@ export default function Navigation() {
               </svg>
             </div>
             <div className="nav-webflow-text-wrap">
-              <p className="nav-webflow-text" data-flip-end="40% top" data-flip-start="top top" data-flip-trigger=".hero" data-tl-end="22% top" data-tl-from="{'color': 'white'}" data-tl-start="20% top" data-tl-to="{'color': 'black'}" data-tl-trigger=".hero" data-tl-type="scroll" id="projects_start_text" style={{ color: "white" }}>
+              <p className="nav-webflow-text" data-flip-end="40% top" data-flip-start="top top" data-flip-trigger=".hero" data-tl-end="22% top" data-tl-from="{'color': 'white'}" data-tl-start="20% top" data-tl-to="{'color': 'black'}" data-tl-trigger=".hero" data-tl-type="scroll" style={{ color: "white" }}>
                 80+<br />Projects
               </p>
             </div>
