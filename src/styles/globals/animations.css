@@ -686,96 +686,122 @@
 /* ============================================
    COMPONENT-BY-COMPONENT SIDEBAR TRANSITION
    ============================================ */
-.nav-top-layout.is-dark-theme .nav-top-bg,
-.nav-stats-wrap.is-dark-theme .nav-top-bg,
-.nav-menu-wrap.is-dark-theme .nav-menu-bg,
-.nav-comapny-wrap.is-dark-theme,
-.nav-email-wrap.is-dark-theme {
+/* 1. Universal light theme overrides to match card appearance */
+.navigation .nav-comapny-wrap,
+.navigation .nav-email-wrap {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Social Link Styling - Light Section */
+.navigation .social-link {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  color: #222222 !important; /* turns the inner box .social-bg-path dark gray */
+}
+
+.navigation .social-path-white {
+  fill: #ffffff !important; /* turns the glyph white */
+}
+
+/* 2. Dark theme background overrides with high specificity */
+.navigation .nav-top-layout.is-dark-theme .nav-top-bg,
+.navigation .nav-stats-wrap.is-dark-theme .nav-top-bg,
+.navigation .nav-menu-wrap.is-dark-theme .nav-menu-bg,
+.navigation .nav-comapny-wrap.is-dark-theme,
+.navigation .nav-email-wrap.is-dark-theme {
   background-color: rgba(30, 30, 30, 0.75) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.nav-email-wrap.is-dark-theme .nav-email-item {
-  background-color: transparent !important;
-  border-color: transparent !important;
+/* Email Card Layered Backgrounds - Dark Section */
+.navigation .nav-email-wrap.is-dark-theme .nav-email-item {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
-.nav-top-layout.is-dark-theme .nav-top-text,
-.nav-top-layout.is-dark-theme .nav-top-text .line {
-  color: white !important;
-}
-
-.social-bg-path {
-  display: none !important;
-}
-
-.nav-top-layout.is-dark-theme .social-link {
+.navigation .nav-top-layout.is-dark-theme .social-link {
   background-color: rgba(45, 45, 45, 0.8) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important; /* turns the inner box .social-bg-path white */
+}
+
+.navigation .nav-top-layout.is-dark-theme .social-path-white {
+  fill: #222222 !important; /* turns the glyph dark gray */
+}
+
+/* Social Link Hover - Dark Section */
+.navigation .nav-top-layout.is-dark-theme .social-link:hover {
+  background-color: rgba(45, 45, 45, 0.8) !important;
+  color: var(--yellow) !important; /* turns the inner box .social-bg-path yellow */
+}
+
+.navigation .nav-top-layout.is-dark-theme .social-link:hover .social-path-white {
+  fill: #222222 !important; /* keeps the glyph dark gray */
+}
+
+.navigation .nav-top-layout.is-dark-theme .nav-top-text,
+.navigation .nav-top-layout.is-dark-theme .nav-top-text .line {
   color: white !important;
 }
 
-.nav-top-layout.is-dark-theme .social-path-white {
-  color: white !important;
-}
-
-.nav-top-layout.is-dark-theme .social-link:hover {
-  background-color: var(--yellow) !important;
-  color: black !important;
-}
-
-.nav-top-layout.is-dark-theme .social-link:hover .social-path-white {
-  fill: black !important;
-}
-
-.nav-stats-wrap.is-dark-theme .nav-webflow-bg,
-.nav-stats-wrap.is-dark-theme .nav-experience-bg {
+.navigation .nav-stats-wrap.is-dark-theme .nav-webflow-bg,
+.navigation .nav-stats-wrap.is-dark-theme .nav-experience-bg {
   background-color: rgba(30, 30, 30, 0.75) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-.nav-stats-wrap.is-dark-theme .nav-webflow-text,
-.nav-stats-wrap.is-dark-theme .nav-experience-text {
+.navigation .nav-stats-wrap.is-dark-theme .nav-webflow-text,
+.navigation .nav-stats-wrap.is-dark-theme .nav-experience-text {
   color: white !important;
 }
 
-.nav-menu-wrap.is-dark-theme .nav-item-bg {
+.navigation .nav-menu-wrap.is-dark-theme .nav-item-bg {
   background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-bg,
-.nav-menu-wrap.is-dark-theme .nav-item-bg.is-active {
+.navigation .nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-bg,
+.navigation .nav-menu-wrap.is-dark-theme .nav-item-bg.is-active {
   background-color: var(--yellow) !important;
 }
 
-.nav-menu-wrap.is-dark-theme .hero-navigation-link,
-.nav-menu-wrap.is-dark-theme .nav-item-icon {
+/* Inactive nav tabs and icons color (Light Grey) */
+.navigation .nav-menu-wrap.is-dark-theme .hero-navigation-link,
+.navigation .nav-menu-wrap.is-dark-theme .nav-item-icon {
   color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .hero-navigation-link,
-.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-icon,
-.nav-menu-wrap.is-dark-theme .hero-navigation-link.w--current {
+/* Active nav tab and icon color (Black) */
+.navigation .nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .hero-navigation-link,
+.navigation .nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-icon,
+.navigation .nav-menu-wrap.is-dark-theme .hero-navigation-link.w--current {
   color: black !important;
 }
 
-.nav-email-wrap.is-dark-theme .email-text {
+.navigation .nav-email-wrap.is-dark-theme .email-text {
   color: white !important;
 }
 
-.nav-email-wrap.is-dark-theme .copy-email-icon {
+.navigation .nav-email-wrap.is-dark-theme .copy-email-icon {
   color: white !important;
 }
 
-.nav-button-wrap.is-dark-theme .nav-button-secondary {
+.navigation .nav-button-wrap.is-dark-theme .nav-button-secondary {
   border-color: rgba(255, 255, 255, 0.1) !important;
   background-color: rgba(45, 45, 45, 0.8) !important;
   color: white !important;
 }
 
-.nav-comapny-wrap.is-dark-theme {
+.navigation .nav-comapny-wrap.is-dark-theme {
   color: white !important;
   opacity: 0.8 !important;
+}
+
+/* Prevent double-label layout wrapping on active navigation tabs */
+.hero-navigation-link .clone-text {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 /* Force Turbopack Cache Rebuild */

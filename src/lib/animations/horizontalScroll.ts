@@ -1,4 +1,4 @@
-import { gsap } from "@/lib/animations/gsap";
+import { gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
 let workTween: gsap.core.Tween | null = null;
 let setupTimeout: NodeJS.Timeout | null = null;
@@ -21,10 +21,9 @@ export function destroyHorizontalScroll() {
 /**
  * Sets up horizontal scroll animation for the selected work section using CSS sticky bottom.
  *
- * Design: The parent container (.work_section) stretches to 400vh.
- * The child container (.work-sticky) stays sticky at bottom: 0 natively.
- * GSAP ScrollTrigger tracks the scroll progress of .work_section from top to bottom
- * and translates the .work-track element horizontally.
+ * Design: The parent container (.work_section) has a tall scroll-track sibling (.work-sticky-support)
+ * that gives it height. The .work-sticky child sticks to the viewport bottom natively via CSS.
+ * GSAP ScrollTrigger scrubs .work-track horizontally based on scroll progress of .work_section.
  */
 export function initHorizontalScroll() {
   if (typeof window === "undefined" || window.innerWidth < 768 || !gsap) return;
@@ -56,7 +55,7 @@ export function initHorizontalScroll() {
       const totalXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - paddingLeft));
 
       if (totalXMove === 0) {
-        // All cards fit — no horizontal scroll needed
+        // All cards fit - no horizontal scroll needed
         return;
       }
 
@@ -65,8 +64,8 @@ export function initHorizontalScroll() {
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "top top",           // Start translating when section top hits viewport top
-          end: "bottom bottom",       // End translating when section bottom hits viewport bottom
+          start: "top top",
+          end: "bottom bottom",
           scrub: 1,
           invalidateOnRefresh: true,
           onRefresh() {
@@ -124,7 +123,7 @@ export function initHorizontalScroll() {
             ease: "expo.out",
             scrollTrigger: {
               trigger: card,
-              containerAnimation: workTween,
+              containerAnimation: workTween || undefined,
               start: "left 95%",
               toggleActions: "play none none none",
             },
@@ -134,14 +133,15 @@ export function initHorizontalScroll() {
     };
 
     measureAndCreate();
+    ScrollTrigger.refresh();
   };
 
-  // Wait for images before measuring so card widths/heights are correct
+  // Wait for images to load before measuring so card widths/heights are correct
   const images = Array.from(section.querySelectorAll<HTMLImageElement>("img"));
   const total = images.length;
 
   if (total === 0) {
-    setupTimeout = setTimeout(runSetup, 150);
+    setupTimeout = setTimeout(runSetup, 250);
     return;
   }
 
@@ -149,8 +149,7 @@ export function initHorizontalScroll() {
   const onLoad = () => {
     loaded++;
     if (loaded >= total) {
-      // Small extra delay so Next.js image layout has settled
-      setupTimeout = setTimeout(runSetup, 150);
+      setupTimeout = setTimeout(runSetup, 250);
     }
   };
 
