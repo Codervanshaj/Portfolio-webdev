@@ -49,7 +49,7 @@ export default function Navigation() {
 
   return (
     <header
-      className="navigation"
+      className={`navigation ${activeSection === "projects" ? "is-dark" : ""}`}
       data-tl-desktop=""
       data-tl-from="{'zIndex': 2}"
       data-tl-start="53% top"
@@ -199,7 +199,7 @@ export default function Navigation() {
           <nav className="nav-menu">
             {NAV_LINKS.map((link, idx) => (
               <div
-                className="nav-menu-item"
+                className={`nav-menu-item ${activeSection === link.sectionId ? "is-active" : ""}`}
                 key={link.id}
                 data-flip-end={`${30 + idx}% top`}
                 data-flip-start={`${idx === 2 ? 4 : idx === 3 ? 5 : 7 - idx}% top`}
@@ -207,7 +207,7 @@ export default function Navigation() {
               >
                 <a
                   aria-label={link.label}
-                  className={`nav-link w-inline-block ${idx === 0 ? "w--current" : ""}`}
+                  className={`nav-link w-inline-block ${activeSection === link.sectionId ? "w--current" : ""}`}
                   data-tl-desktop=""
                   data-tl-from="{'scale': 0}"
                   data-tl-start="50% top"
@@ -243,7 +243,7 @@ export default function Navigation() {
                 </svg>
 
                 {/* Text link */}
-                <a className={`hero-navigation-link ${idx === 0 ? "w--current" : "is-text-link"}`} data-button-hover="" data-link-id={link.id} href={link.href} style={{ overflow: "hidden", pointerEvents: "auto" }}>
+                <a className={`hero-navigation-link ${activeSection === link.sectionId ? "w--current" : "is-text-link"}`} data-button-hover="" data-link-id={link.id} href={link.href} style={{ overflow: "hidden", pointerEvents: "auto" }}>
                   <div className="nav-link-mask-inner">
                     {idx === 0 ? (
                       "Home"

@@ -2,6 +2,7 @@ export interface NavLink {
   id: string;
   label: string;
   href: string;
+  sectionId?: string;
 }
 
 export interface Project {
@@ -11,6 +12,7 @@ export interface Project {
   href: string;
   image: string;
   video?: string;
+  description?: string;
 }
 
 export interface Service {

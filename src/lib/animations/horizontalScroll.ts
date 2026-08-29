@@ -1,6 +1,6 @@
 import { gsap } from "@/lib/animations/gsap";
 
-let workTween: any = null;
+let workTween: gsap.core.Tween | null = null;
 let setupTimeout: NodeJS.Timeout | null = null;
 
 /**
@@ -12,134 +12,154 @@ export function destroyHorizontalScroll() {
     setupTimeout = null;
   }
   if (workTween) {
+    workTween.scrollTrigger?.kill();
     workTween.kill();
     workTween = null;
   }
 }
 
 /**
- * Sets up horizontal pin and scroll animation for the selected work cards section.
+ * Sets up horizontal scroll animation for the selected work section using CSS sticky bottom.
+ *
+ * Design: The parent container (.work_section) stretches to 400vh.
+ * The child container (.work-sticky) stays sticky at bottom: 0 natively.
+ * GSAP ScrollTrigger tracks the scroll progress of .work_section from top to bottom
+ * and translates the .work-track element horizontally.
  */
 export function initHorizontalScroll() {
   if (typeof window === "undefined" || window.innerWidth < 768 || !gsap) return;
 
-  const section = document.querySelector(".work_section") as HTMLElement;
-  const stickyEl = document.querySelector(".work-sticky") as HTMLElement;
-  const stickySupportEl = document.querySelector(".work-sticky-support") as HTMLElement;
-  const wrap = document.querySelector(".work-track-wrap") as HTMLElement;
-  const track = document.querySelector(".work-track") as HTMLElement;
+  const section = document.querySelector<HTMLElement>(".work_section");
+  const stickyEl = document.querySelector<HTMLElement>(".work-sticky");
+  const track = document.querySelector<HTMLElement>(".work-track");
+  const wrap = document.querySelector<HTMLElement>(".work-track-wrap");
 
-  if (!section || !stickyEl || !stickySupportEl || !wrap || !track) return;
+  if (!section || !stickyEl || !track || !wrap) return;
 
   destroyHorizontalScroll();
-  gsap.set(track, { clearProps: "transform" });
 
-  setupTimeout = setTimeout(() => {
-    // Force reflow
-    section.offsetHeight;
-    stickyEl.offsetHeight;
-    stickySupportEl.offsetHeight;
-    wrap.offsetHeight;
-    track.offsetHeight;
+  // Clear any leftover transforms
+  gsap.set(track, { clearProps: "transform,x" });
 
-    // Calculate height of the scroll spacer
-    const sectionHeight = section.offsetHeight;
-    const stickyHeight = stickyEl.offsetHeight;
-    const supportHeight = sectionHeight - stickyHeight;
-    stickySupportEl.style.height = supportHeight + "px";
+  const runSetup = () => {
+    // Force layout so measurements are fresh
+    section.getBoundingClientRect();
+    stickyEl.getBoundingClientRect();
+    track.getBoundingClientRect();
+    wrap.getBoundingClientRect();
 
-    const wrapRect = wrap.getBoundingClientRect();
-    const trackRect = track.getBoundingClientRect();
-    const overflowRight = Math.max(0, trackRect.right - wrapRect.right);
-    const xMovement = -overflowRight;
+    const measureAndCreate = () => {
+      // Calculate dynamic padding-left in pixels
+      const paddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
+      
+      // Total translation is track width minus the visible (inner) wrap width
+      const totalXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - paddingLeft));
 
-    const viewportHeight = window.innerHeight;
-    const scrollDistance = sectionHeight - viewportHeight;
-
-    // Create horizontal scroll ScrollTrigger
-    workTween = gsap.to(track, {
-      x: xMovement,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: `+=${scrollDistance}`,
-        scrub: 1,
-        invalidateOnRefresh: true,
-        onRefresh: (self: any) => {
-          const newWrapRect = wrap.getBoundingClientRect();
-          const newTrackRect = track.getBoundingClientRect();
-          const newOverflowRight = Math.max(0, newTrackRect.right - newWrapRect.right);
-
-          const newSectionHeight = section.offsetHeight;
-          const newStickyHeight = stickyEl.offsetHeight;
-          const newSupportHeight = newSectionHeight - newStickyHeight;
-          stickySupportEl.style.height = newSupportHeight + "px";
-
-          const newViewportHeight = window.innerHeight;
-          const newScrollDistance = newSectionHeight - newViewportHeight;
-
-          if (workTween && workTween.scrollTrigger) {
-            gsap.set(track, { x: 0 });
-            workTween.vars.x = -newOverflowRight;
-            workTween.scrollTrigger.vars.end = `+=${newScrollDistance}`;
-            workTween.invalidate();
-          }
-        }
-      }
-    });
-
-    // Animate work cards entering view
-    const workCards = document.querySelectorAll(".work-card");
-    if (workCards.length > 0) {
-      gsap.set(workCards, { y: "10%", opacity: 0, scale: 0.6 });
-
-      const inViewCards: HTMLElement[] = [];
-      const offScreenCards: HTMLElement[] = [];
-
-      workCards.forEach(card => {
-        const el = card as HTMLElement;
-        const cardRect = el.getBoundingClientRect();
-        if (cardRect.left < wrapRect.right) {
-          inViewCards.push(el);
-        } else {
-          offScreenCards.push(el);
-        }
-      });
-
-      // Cards already visible when entering the section
-      if (inViewCards.length > 0) {
-        gsap.to(inViewCards, {
-          y: "0%",
-          opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: "expo.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none none"
-          }
-        });
+      if (totalXMove === 0) {
+        // All cards fit — no horizontal scroll needed
+        return;
       }
 
-      // Off-screen cards animate individually as they scroll into view
-      offScreenCards.forEach(card => {
-        gsap.to(card, {
-          y: "0%",
-          opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: card,
-            containerAnimation: workTween,
-            start: "left right",
-            toggleActions: "play none none none"
+      workTween = gsap.to(track, {
+        x: -totalXMove,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",           // Start translating when section top hits viewport top
+          end: "bottom bottom",       // End translating when section bottom hits viewport bottom
+          scrub: 1,
+          invalidateOnRefresh: true,
+          onRefresh() {
+            const newPaddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
+            const newXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - newPaddingLeft));
+
+            if (workTween) {
+              gsap.set(track, { x: 0 });
+              workTween.vars.x = -newXMove;
+              workTween.invalidate();
+            }
+          },
+        },
+      });
+
+      // Entrance animations for visible cards
+      const workCards = document.querySelectorAll<HTMLElement>(".work-card");
+      if (workCards.length > 0) {
+        gsap.set(workCards, { y: "8%", opacity: 0, scale: 0.92 });
+
+        const inView: HTMLElement[] = [];
+        const offScreen: HTMLElement[] = [];
+
+        workCards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          if (rect.left < wrap.getBoundingClientRect().right + 50) {
+            inView.push(card);
+          } else {
+            offScreen.push(card);
           }
         });
-      });
+
+        if (inView.length > 0) {
+          gsap.to(inView, {
+            y: "0%",
+            opacity: 1,
+            scale: 1,
+            duration: 1.0,
+            ease: "expo.out",
+            stagger: 0.08,
+            scrollTrigger: {
+              trigger: section,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+        }
+
+        offScreen.forEach((card) => {
+          gsap.to(card, {
+            y: "0%",
+            opacity: 1,
+            scale: 1,
+            duration: 1.0,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: workTween,
+              start: "left 95%",
+              toggleActions: "play none none none",
+            },
+          });
+        });
+      }
+    };
+
+    measureAndCreate();
+  };
+
+  // Wait for images before measuring so card widths/heights are correct
+  const images = Array.from(section.querySelectorAll<HTMLImageElement>("img"));
+  const total = images.length;
+
+  if (total === 0) {
+    setupTimeout = setTimeout(runSetup, 150);
+    return;
+  }
+
+  let loaded = 0;
+  const onLoad = () => {
+    loaded++;
+    if (loaded >= total) {
+      // Small extra delay so Next.js image layout has settled
+      setupTimeout = setTimeout(runSetup, 150);
     }
-  }, 100);
+  };
+
+  images.forEach((img) => {
+    if (img.complete) {
+      onLoad();
+    } else {
+      img.addEventListener("load", onLoad, { once: true });
+      img.addEventListener("error", onLoad, { once: true });
+    }
+  });
 }

@@ -529,3 +529,145 @@
     -webkit-backdrop-filter: none !important;
   }
 }
+
+/* ============================================
+   SIDEBAR DARK THEME TRANSITION
+   ============================================ */
+.navigation.is-dark .nav-top-bg,
+.navigation.is-dark .nav-menu-bg,
+.navigation.is-dark .nav-email-wrap {
+  background-color: rgba(30, 30, 30, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navigation.is-dark .nav-item-bg {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navigation.is-dark .nav-item-bg.is-active {
+  background-color: var(--yellow) !important;
+}
+
+.navigation.is-dark .nav-webflow-bg,
+.navigation.is-dark .nav-experience-bg {
+  background-color: rgba(30, 30, 30, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navigation.is-dark .nav-top-text,
+.navigation.is-dark .nav-webflow-text,
+.navigation.is-dark .nav-experience-text,
+.navigation.is-dark .email-text,
+.navigation.is-dark .hero-navigation-link {
+  color: white !important;
+}
+
+.navigation.is-dark .hero-navigation-link.w--current {
+  color: black !important;
+}
+
+.navigation.is-dark .social-link,
+.navigation.is-dark .nav-email-item {
+  background-color: rgba(45, 45, 45, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.navigation.is-dark .social-path-white {
+  color: white !important;
+}
+
+.navigation.is-dark .social-link:hover {
+  background-color: var(--yellow) !important;
+  color: black !important;
+}
+
+.navigation.is-dark .social-link:hover .social-path-white {
+  fill: black !important;
+}
+
+.navigation.is-dark .nav-email-item:hover {
+  background-color: rgba(60, 60, 60, 0.9) !important;
+}
+
+/* Ensure work images are visible after JS loads */
+.work-card .work-image {
+  opacity: 1 !important;
+  transition: opacity 0.6s ease;
+}
+
+@media (min-width: 768px) {
+  /* Restore original Webflow sticky-bottom behavior.
+   * The parent .work_section acts as the scroll track with 400vh height.
+   * The .work-sticky div sticks to the bottom of the viewport natively.
+   * GSAP is only used to translate .work-track horizontally (x coordinate).
+   */
+  .work_section {
+    min-height: 400vh !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .work-sticky {
+    position: sticky !important;
+    bottom: 0px !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 3vw 1.39vw 3vw 21vw !important;
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(34, 34, 34) 44%) !important;
+  }
+
+  .work-container {
+    width: 100% !important;
+    pointer-events: auto !important;
+    display: block !important;
+  }
+
+  .work-track-wrap {
+    padding-left: 55% !important;
+    display: flex !important;
+    overflow: visible !important;
+  }
+
+  .work-track {
+    gap: 2.08vw !important;
+    flex-flow: row !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    height: auto !important;
+  }
+
+  .work-card {
+    border-radius: 0.83vw !important;
+    width: clamp(17rem, 27vw, 30rem) !important;
+    height: clamp(22rem, 36vw, 42rem) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+
+  .work-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Card description text styling */
+  .work-card-content-bottom-layout p {
+    font-size: clamp(0.75rem, 0.9vw, 1rem) !important;
+    line-height: 1.4 !important;
+    opacity: 0.8 !important;
+    margin-top: 0.5vw !important;
+    margin-bottom: 0px !important;
+    max-width: 90% !important;
+  }
+}
+/* Force Turbopack Cache Rebuild */
