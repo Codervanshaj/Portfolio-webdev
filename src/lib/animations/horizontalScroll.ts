@@ -51,7 +51,7 @@ export function initHorizontalScroll() {
     const measureAndCreate = () => {
       // Calculate dynamic padding-left in pixels
       const paddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
-      
+
       // Total translation is track width minus the visible (inner) wrap width
       const totalXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - paddingLeft));
 

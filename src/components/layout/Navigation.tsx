@@ -5,11 +5,83 @@ import { useGSAP } from "@/hooks/useGSAP";
 import { scaleSidebar } from "@/lib/animations/flipAnimations";
 import { NAV_LINKS } from "@/lib/constants/data";
 import { SITE_CONFIG } from "@/lib/constants/site";
+import { gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
 export default function Navigation() {
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 768) return;
+
+    const t = setTimeout(() => {
+      const darkSections = Array.from(document.querySelectorAll(".work_section, .cta_section, footer, .footer"));
+      if (darkSections.length === 0) return;
+
+      const widgets = [
+        { selector: ".nav-top-layout", threshold: 0 },
+        { selector: ".nav-stats-wrap", threshold: 0 },
+        { selector: ".nav-menu-wrap", threshold: 0.35 }, // 35% overlap threshold for links menu
+        { selector: ".nav-comapny-wrap", threshold: 0 },
+        { selector: ".nav-email-wrap", threshold: 0 },
+        { selector: ".nav-button-wrap", threshold: 0 },
+      ];
+
+      const triggers: any[] = [];
+
+      widgets.forEach(({ selector, threshold }) => {
+        const widget = document.querySelector<HTMLElement>(selector);
+        if (!widget) return;
+
+        darkSections.forEach((section) => {
+          const trigger = ScrollTrigger.create({
+            trigger: section,
+            start: () => {
+              const widgetRect = widget.getBoundingClientRect();
+              const widgetHeight = widgetRect.height;
+              const overlapOffset = widgetRect.bottom - (threshold * widgetHeight);
+              return `top ${overlapOffset}px`;
+            },
+            end: () => {
+              const widgetRect = widget.getBoundingClientRect();
+              return `bottom ${widgetRect.top}px`;
+            },
+            onEnter: () => {
+              widget.classList.add("is-dark-theme");
+            },
+            onLeave: () => {
+              widget.classList.remove("is-dark-theme");
+            },
+            onEnterBack: () => {
+              widget.classList.add("is-dark-theme");
+            },
+            onLeaveBack: () => {
+              widget.classList.remove("is-dark-theme");
+            },
+          });
+
+          triggers.push(trigger);
+        });
+      });
+
+      ScrollTrigger.refresh();
+      (window as any).__navThemeTriggers = triggers;
+    }, 150);
+
+    return () => {
+      clearTimeout(t);
+      const triggers = (window as any).__navThemeTriggers;
+      if (triggers && Array.isArray(triggers)) {
+        triggers.forEach((trigger) => {
+          if (trigger && typeof trigger.kill === "function") {
+            trigger.kill();
+          }
+        });
+        (window as any).__navThemeTriggers = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const sections = ["hero", "about", "projects", "overview", "services", "testimonial", "faq"];

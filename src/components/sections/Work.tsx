@@ -16,7 +16,7 @@ export default function Work() {
     <section className="work_section" id="projects">
       <div className="work-sticky">
         <div className="work-container">
-          
+
           {/* Header section with Label, Title, and Description */}
           <div className="work-top-layout">
             <div className="column">
@@ -37,27 +37,27 @@ export default function Work() {
             <div className="work-track">
               {PROJECTS.map((project, index) => {
                 const numberLabel = (index + 1).toString().padStart(2, "0");
-                
+
                 return (
                   <a className="work-card w-inline-block" href={project.href} target="_blank" rel="noopener noreferrer" key={project.id}>
-                    <img 
-                      alt={project.title} 
-                      className="work-image" 
-                      loading="lazy" 
-                      src={project.image} 
+                    <img
+                      alt={project.title}
+                      className="work-image"
+                      loading="lazy"
+                      src={project.image}
                     />
                     {project.video && (
-                      <video 
-                        autoPlay 
-                        className="work-bg" 
-                        loop 
-                        muted 
-                        playsInline 
-                        src={project.video} 
+                      <video
+                        autoPlay
+                        className="work-bg"
+                        loop
+                        muted
+                        playsInline
+                        src={project.video}
                       />
                     )}
                     <div className="work-image-overlay"></div>
-                    
+
                     <div className="work-card-content">
                       <div className="work-card-content-top-layout">
                         <div className="work-label">{numberLabel}</div>
@@ -67,13 +67,13 @@ export default function Work() {
                           ))}
                         </div>
                       </div>
-                      
+
                       <div className="work-card-content-bottom-layout">
                         <h3 className="work-card-heading">{project.title}</h3>
                         {project.description && (
                           <p className="op80">{project.description}</p>
                         )}
-                        
+
                         <div className="work-card-arrow-wrap">
                           <div className="work-card-arrow-icon">
                             <svg className="work-card-arrow" fill="none" viewBox="0 0 23 23" width="100%" xmlns="http://www.w3.org/2000/svg">

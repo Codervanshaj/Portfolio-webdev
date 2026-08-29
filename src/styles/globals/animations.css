@@ -62,7 +62,7 @@
 }
 
 .hero-heading {
- visibility: hidden;
+  visibility: hidden;
 }
 
 /*
@@ -96,7 +96,7 @@
   z-index: 4;
 }
 
-  /* ============================================
+/* ============================================
    DESIGN MODE — reveal hidden entrance elements
    ============================================ */
 .wf-design-mode .profile-img-item,
@@ -223,25 +223,30 @@
 
 
 @media (min-width: 992px) {
+
   /* When any card is hovered, show overlay on ALL cards */
   .work-track:hover .work-card .work-image-overlay {
     opacity: 1 !important;
   }
+
   /* Undo for the hovered card */
   .work-track:hover .work-card:hover .work-image-overlay {
     opacity: 0 !important;
   }
+
   /* When any card is hovered, dim ALL arrow wraps */
   .work-track:hover .work-card .work-card-arrow-wrap {
     background-color: #2F2F2F !important;
     color: #8C8C8C !important;
   }
+
   /* Undo for the hovered card */
   .work-track:hover .work-card:hover .work-card-arrow-wrap {
     background-color: #FFFF23 !important;
     color: black !important;
   }
 }
+
 /* Navigation marquee animation */
 .nav-comapny-wrap {
   display: flex !important;
@@ -258,8 +263,8 @@
   animation: marquee-move 25s linear infinite;
 }
 
-.nav-comapny-item > svg,
-.nav-comapny-item > div {
+.nav-comapny-item>svg,
+.nav-comapny-item>div {
   flex-shrink: 0 !important;
 }
 
@@ -267,6 +272,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -336,31 +342,31 @@
 }
 
 .capa-card-item:hover .capa-card-arrow {
- rotate: 180deg;
+  rotate: 180deg;
 }
 
 .hero-navigation-link.w--current {
- color: black !important;
+  color: black !important;
 }
 
-.hero-navigation-link.w--current ~ .nav-item-bg {
+.hero-navigation-link.w--current~.nav-item-bg {
   background-color: #FFFF23 !Important;
 }
 
-.hero-navigation-link.w--current ~ .nav-item-icon {
+.hero-navigation-link.w--current~.nav-item-icon {
   color: black !Important;
 }
 
 .faq-list.w--open .faq-answer-wrap {
- grid-template-rows: 1fr;
+  grid-template-rows: 1fr;
 }
 
 .faq-toggle.w--open .faq-icon-v-line {
- transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .faq-toggle:hover .faq-icon {
- background-color: #EDECDA;
+  background-color: #EDECDA;
 }
 
 [data-origin] {
@@ -395,66 +401,66 @@
   left: 0;
 }
 
-.nav-link:hover ~ .nav-item-bg {
- background-color: #C9C8BA !important;
+.nav-link:hover~.nav-item-bg {
+  background-color: #C9C8BA !important;
 }
 
-.nav-link.w--current:hover ~ .nav-item-bg {
- background-color: #ffff23 !important;
-}
-
-
-.nav-link:hover ~ .nav-item-bg.nav-item-dark {
- background: rgba(94, 94, 94, 0.50)!important;
-}
-
-.nav-link.w--current:hover ~ .nav-item-bg.nav-item-dark {
+.nav-link.w--current:hover~.nav-item-bg {
   background-color: #ffff23 !important;
 }
 
-.nav-link:hover ~ .nav-item-icon {
- color: #ffff23 !important;
+
+.nav-link:hover~.nav-item-bg.nav-item-dark {
+  background: rgba(94, 94, 94, 0.50) !important;
 }
 
-.nav-link.w--current:hover ~ .nav-item-icon {
- color: black !important;
+.nav-link.w--current:hover~.nav-item-bg.nav-item-dark {
+  background-color: #ffff23 !important;
 }
 
-	.nav-webflow-bg {
-	backdrop-filter: blur(15px) !important;
+.nav-link:hover~.nav-item-icon {
+  color: #ffff23 !important;
+}
+
+.nav-link.w--current:hover~.nav-item-icon {
+  color: black !important;
+}
+
+.nav-webflow-bg {
+  backdrop-filter: blur(15px) !important;
 }
 
 .social-link:hover {
- background-color: #C9C8BA !important;
+  background-color: #C9C8BA !important;
 }
 
 .social-link.social-dark:hover {
- 	background-color: #5E5E5E !important;
+  background-color: #5E5E5E !important;
 }
 
 .social-link:hover .social-bg-path {
- color: #ffff23 !important;
+  color: #ffff23 !important;
 }
 
 .social-link:hover .social-path-white {
- fill: #000 !important;
+  fill: #000 !important;
 }
 
-.popup-close:hover .popup-close-path-1{
+.popup-close:hover .popup-close-path-1 {
   transform: rotate(90deg);
   background-color: white;
 }
 
-.popup-close:hover .popup-close-path-2{
+.popup-close:hover .popup-close-path-2 {
   transform: rotate(-90deg);
   background-color: white;
-} 
+}
 
 .work-card:hover .work-card-arrow-2 {
   margin: 0%;
 }
 
-  .work-card:hover .work-card-arrow {
+.work-card:hover .work-card-arrow {
   margin-left: 100%;
 }
 
@@ -463,51 +469,52 @@
    ============================================ */
 
 @media (width < 767px) {
+
   /* ============================================
    4. LAYOUT & ENTRANCE ANIMATIONS
    ============================================ */
-      /* Hide entrance elements initially */
-      .profile-img-wrap,
-      .hero-navigation-link,
-      .hero-navigation-sep,
-      .nav-stats-card,
-      .hero-cards-left,
-      .hero-card-3,
-      .hero-cards-wrap,
-      .hero-left-text,
-      .hero-right-text,
-      .hero-buttons-wrap {
-        opacity: 1;
-        visibility: visible;
-      }
-      
-      .hero-heading {
-         visibility: visible;
-        }
-        
-      
-      .swiper-pagination {
-        width: auto !important;
-        display: flex;
-        margin-bottom: 0vw;
-        padding: clamp(0.53rem, 2.67vw, 1.28rem);
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: clamp(0.43rem, 2.13vw, 1.02rem);
-        position: relative !important;
-      }
-      
-      .swiper-bullet.is-active {
-          width: clamp(1.92rem, 9.6vw, 4.61rem);
-          background-color: #ffff23;
-			}
-      
-      .capa-card-item:hover .capa-card-arrow {
-           rotate: 0deg;
-          }
-          
-      .faq-toggle:hover .faq-icon {
-         background-color: transparent;
-        }
+  /* Hide entrance elements initially */
+  .profile-img-wrap,
+  .hero-navigation-link,
+  .hero-navigation-sep,
+  .nav-stats-card,
+  .hero-cards-left,
+  .hero-card-3,
+  .hero-cards-wrap,
+  .hero-left-text,
+  .hero-right-text,
+  .hero-buttons-wrap {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-heading {
+    visibility: visible;
+  }
+
+
+  .swiper-pagination {
+    width: auto !important;
+    display: flex;
+    margin-bottom: 0vw;
+    padding: clamp(0.53rem, 2.67vw, 1.28rem);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: clamp(0.43rem, 2.13vw, 1.02rem);
+    position: relative !important;
+  }
+
+  .swiper-bullet.is-active {
+    width: clamp(1.92rem, 9.6vw, 4.61rem);
+    background-color: #ffff23;
+  }
+
+  .capa-card-item:hover .capa-card-arrow {
+    rotate: 0deg;
+  }
+
+  .faq-toggle:hover .faq-icon {
+    background-color: transparent;
+  }
 }
 
 /* ============================================
@@ -597,13 +604,18 @@
 }
 
 @media (min-width: 768px) {
+
   /* Restore original Webflow sticky-bottom behavior.
-   * The parent .work_section acts as the scroll track with 400vh height.
+   * The .work-sticky-support sibling provides 3600px of scroll track height.
    * The .work-sticky div sticks to the bottom of the viewport natively.
    * GSAP is only used to translate .work-track horizontally (x coordinate).
    */
+  .work-sticky-support {
+    height: 3600px !important;
+  }
+
   .work_section {
-    min-height: 400vh !important;
+    min-height: auto !important;
     height: auto !important;
     position: relative !important;
     overflow: visible !important;
@@ -670,4 +682,100 @@
     max-width: 90% !important;
   }
 }
+
+/* ============================================
+   COMPONENT-BY-COMPONENT SIDEBAR TRANSITION
+   ============================================ */
+.nav-top-layout.is-dark-theme .nav-top-bg,
+.nav-stats-wrap.is-dark-theme .nav-top-bg,
+.nav-menu-wrap.is-dark-theme .nav-menu-bg,
+.nav-comapny-wrap.is-dark-theme,
+.nav-email-wrap.is-dark-theme {
+  background-color: rgba(30, 30, 30, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-email-wrap.is-dark-theme .nav-email-item {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.nav-top-layout.is-dark-theme .nav-top-text,
+.nav-top-layout.is-dark-theme .nav-top-text .line {
+  color: white !important;
+}
+
+.social-bg-path {
+  display: none !important;
+}
+
+.nav-top-layout.is-dark-theme .social-link {
+  background-color: rgba(45, 45, 45, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.nav-top-layout.is-dark-theme .social-path-white {
+  color: white !important;
+}
+
+.nav-top-layout.is-dark-theme .social-link:hover {
+  background-color: var(--yellow) !important;
+  color: black !important;
+}
+
+.nav-top-layout.is-dark-theme .social-link:hover .social-path-white {
+  fill: black !important;
+}
+
+.nav-stats-wrap.is-dark-theme .nav-webflow-bg,
+.nav-stats-wrap.is-dark-theme .nav-experience-bg {
+  background-color: rgba(30, 30, 30, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-stats-wrap.is-dark-theme .nav-webflow-text,
+.nav-stats-wrap.is-dark-theme .nav-experience-text {
+  color: white !important;
+}
+
+.nav-menu-wrap.is-dark-theme .nav-item-bg {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-bg,
+.nav-menu-wrap.is-dark-theme .nav-item-bg.is-active {
+  background-color: var(--yellow) !important;
+}
+
+.nav-menu-wrap.is-dark-theme .hero-navigation-link,
+.nav-menu-wrap.is-dark-theme .nav-item-icon {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .hero-navigation-link,
+.nav-menu-wrap.is-dark-theme .nav-menu-item.is-active .nav-item-icon,
+.nav-menu-wrap.is-dark-theme .hero-navigation-link.w--current {
+  color: black !important;
+}
+
+.nav-email-wrap.is-dark-theme .email-text {
+  color: white !important;
+}
+
+.nav-email-wrap.is-dark-theme .copy-email-icon {
+  color: white !important;
+}
+
+.nav-button-wrap.is-dark-theme .nav-button-secondary {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(45, 45, 45, 0.8) !important;
+  color: white !important;
+}
+
+.nav-comapny-wrap.is-dark-theme {
+  color: white !important;
+  opacity: 0.8 !important;
+}
+
 /* Force Turbopack Cache Rebuild */
