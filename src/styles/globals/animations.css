@@ -839,4 +839,47 @@
   background-color: #e4e0ce !important;
   opacity: 1 !important;
 }
+
+/* ============================================
+   11. INTERACTIVE LOGO SECTION (VANSH MASKING)
+   ============================================ */
+.big-logo-section {
+  position: relative;
+  background-color: #d5cfbe;
+  padding: 8vw 1.39vw 6vw 1.39vw;
+  width: 100%;
+  overflow: visible; /* Prevent clipping of scaled SVG letters */
+}
+
+.vansh-mask-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Scale horizontally by 1.06 and vertically by 1.22 for correct bold proportions */
+  transform: scale(1.06, 1.22);
+  transform-origin: top center;
+}
+
+.vansh-logo-base-rect {
+  transition: fill 0.3s ease;
+}
+
+/* Sidebar clearing offset and proper gaps on desktop */
+@media (min-width: 768px) {
+  .big-logo-section {
+    padding: 6vw 1.39vw 12vw 21vw !important;
+    margin-top: 0 !important; /* Proper spacing, no negative margin */
+  }
+}
+
+/* Responsive fallbacks on mobile */
+@media (max-width: 767px) {
+  .big-logo-section {
+    padding: 8vw 5vw 16vw 5vw;
+  }
+}
+
+
+
+
 
