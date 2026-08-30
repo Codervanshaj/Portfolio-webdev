@@ -16,8 +16,6 @@ import WhatYouGet from "@/components/sections/WhatYouGet";
 import Services from "@/components/sections/Services";
 import CTA from "@/components/sections/CTA";
 import Testimonials from "@/components/sections/Testimonials";
-import BigLogo from "@/components/sections/BigLogo";
-import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
@@ -162,8 +160,6 @@ export default function Home() {
         <Services />
         <CTA />
         <Testimonials />
-        <BigLogo />
-        <FAQ />
         <Footer />
       </main>
     </div>

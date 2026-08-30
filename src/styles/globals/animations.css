@@ -879,6 +879,20 @@
   }
 }
 
+/* Smooth fade-in/slide-up for FAQ answer text when expanded */
+.faq-answer {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.faq-list.w--open .faq-answer {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+
 
 
 
