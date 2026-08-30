@@ -141,7 +141,7 @@ export const SERVICES: Service[] = [
     id: "starter",
     name: "Starter Build",
     price: "$5,000",
-    hours: "1-2 weeks",
+    hours: "",
     desc: "A clean Webflow site ready to launch in one to two weeks. Perfect for brands that need a solid online presence without the complexity.",
     items: [
       "Up to 6 pages",
@@ -157,7 +157,7 @@ export const SERVICES: Service[] = [
     id: "custom",
     name: "Custom Project",
     price: "Book a Call",
-    hours: "Varies",
+    hours: "",
     desc: "High-end Webflow development for complex projects. Every scope is different, so every project starts with a conversation.",
     items: [
       "Advanced interaction and animation systems",

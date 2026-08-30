@@ -8,9 +8,40 @@ export default function Services() {
       <div className="container">
         
         {/* Left header column */}
-        <div className="service-left" id="w-node-_5e7c5502-ddba-215f-98c3-2549ffbe62bb-be2d4114">
-          <div className="label">SERVICES</div>
-          <h2 className="h2-style">Tailored pricing <br/>for your needs.</h2>
+        <div className="column" id="services_column">
+          <div
+            className="label"
+            data-tl-type="trigger"
+            data-tl-trigger="#services_column"
+            data-tl-start="top 90%"
+            data-tl-from="{'width':'0vw','opacity':0}"
+            data-tl-to="{'width':'auto','opacity':1,'duration':0.7,'ease':'expo.inOut'}"
+            style={{ width: "0vw" }}
+          >
+            SERVICES
+          </div>
+          <h2
+            className="h2-style margin-bottom-s"
+            data-tl-type="trigger"
+            data-tl-trigger="#services_column"
+            data-tl-start="top 90%"
+            data-tl-split="lines"
+            data-tl-from="{'yPercent':100}"
+            data-tl-to="{'yPercent':0,'duration':0.6,'stagger':0.1,'delay':0.3,'ease':'power2.out'}"
+          >
+            Solutions <br/>That Deliver
+          </h2>
+          <div
+            className="max-width-389"
+            data-tl-type="trigger"
+            data-tl-trigger="#services_column"
+            data-tl-start="top 90%"
+            data-tl-split="lines"
+            data-tl-from="{'yPercent':100}"
+            data-tl-to="{'yPercent':0,'duration':0.6,'stagger':0.1,'delay':0.45,'ease':'power2.out'}"
+          >
+            Same quality, same attention to detail. The only difference is the size of the project and what you need right now.
+          </div>
         </div>
 
         {/* Right service/pricing cards wrap */}
