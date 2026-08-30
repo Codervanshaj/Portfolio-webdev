@@ -131,7 +131,7 @@ export default function BigLogo() {
   };
 
   return (
-    <div className="footer-logo">
+    <div className="footer-logo" id="big_logo_section">
       <div className="w-embed">
         <svg
           className="vansh-mask-svg footer-logo-icon"
