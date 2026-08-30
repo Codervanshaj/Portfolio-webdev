@@ -28,9 +28,11 @@ export interface Service {
 export interface Testimonial {
   id: string;
   quote: string;
+  text: string;
   author: string;
   role: string;
   company: string;
+  companyHref?: string;
   avatar: string;
 }
 
