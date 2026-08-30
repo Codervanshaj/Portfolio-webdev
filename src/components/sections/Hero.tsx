@@ -1,12 +1,10 @@
 "use client";
 
 import { useGSAP } from "@/hooks/useGSAP";
-import { initTextReveal } from "@/lib/animations/textReveal";
 
 export default function Hero() {
   useGSAP(() => {
-    // Reveal text headers
-    initTextReveal(".hero-heading");
+    // Entrance animations are handled in page.tsx
   }, []);
 
   return (

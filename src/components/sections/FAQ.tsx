@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
-import { initTextReveal } from "@/lib/animations/textReveal";
+import { gsap } from "@/lib/animations/gsap";
 import { FAQS } from "@/lib/constants/data";
 
 export default function FAQ() {
@@ -10,11 +10,47 @@ export default function FAQ() {
 
   useGSAP(() => {
     // Scroll reveal headers inside FAQ section
-    initTextReveal(".faq-column-main h2");
+    const chars = document.querySelectorAll(".faq-column-main h2 .anim-char");
+    if (chars.length > 0) {
+      gsap.fromTo(chars,
+        { color: "#E0DFC5", filter: "blur(0px)", opacity: 0.1, y: 5 },
+        {
+          color: "black",
+          filter: "blur(0px)",
+          opacity: 1,
+          y: 0,
+          force3D: true,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: ".faq-column-main h2",
+            start: "top 92%",
+            end: "top 25%",
+            scrub: 1,
+            markers: false
+          }
+        }
+      );
+    }
   }, []);
 
   const toggleFaq = (id: string) => {
     setActiveFaq(prev => (prev === id ? null : id));
+  };
+
+  const renderSplitTextWithBr = (text: string) => {
+    const lines = text.split("\n");
+    return lines.map((line, lineIdx) => (
+      <span key={lineIdx} style={{ display: "inline-block" }}>
+        {[...line].map((char, charIdx) => (
+          <span key={charIdx} className="anim-char">
+            {char}
+          </span>
+        ))}
+        {lineIdx < lines.length - 1 && <br />}
+      </span>
+    ));
   };
 
   return (
@@ -22,7 +58,9 @@ export default function FAQ() {
       <div className="container">
         <div className="column faq-column-main" id="faq">
           <div className="label">FAQ</div>
-          <h2 className="h2-style">Got any <br/>questions?</h2>
+          <h2 className="h2-style">
+            {renderSplitTextWithBr("Got any \nquestions?")}
+          </h2>
           
           <div className="faq-column">
             {FAQS.map(faq => {
