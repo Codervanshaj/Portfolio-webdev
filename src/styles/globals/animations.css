@@ -805,3 +805,38 @@
 }
 
 /* Force Turbopack Cache Rebuild */
+
+/* ─── CTA Section — scoped overrides (safe, no bleed to other sections) ───── */
+.cta_section .cta-span-heading {
+  color: #ffffff !important;
+  -webkit-text-stroke-width: 0 !important;
+  -webkit-text-stroke-color: transparent !important;
+}
+
+/* Circular avatar crop */
+.cta_section .cta_img {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  aspect-ratio: 1 !important;
+}
+
+/* Ensure bright, opaque backgrounds and styling for chat bubble and button */
+.cta_section .cta-chat {
+  background-color: #e4e0ce !important;
+  opacity: 1 !important;
+  transform: none; /* reset any layout translations on container itself */
+}
+
+.cta_section .cta-button {
+  background-color: #ffff23 !important;
+  color: #000000 !important;
+  opacity: 1 !important;
+  transform: none; /* reset any layout translations on container itself */
+}
+
+.cta_section .cta-chat-typing-wrap {
+  background-color: #e4e0ce !important;
+  opacity: 1 !important;
+}
+

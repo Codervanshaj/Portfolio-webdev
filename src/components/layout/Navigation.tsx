@@ -16,7 +16,7 @@ export default function Navigation() {
     if (typeof window === "undefined" || window.innerWidth < 768) return;
 
     const t = setTimeout(() => {
-      const darkSections = Array.from(document.querySelectorAll(".work_section, .cta_section, footer, .footer"));
+      const darkSections = Array.from(document.querySelectorAll(".work_section"));
       if (darkSections.length === 0) return;
 
       const widgets = [
