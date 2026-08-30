@@ -41,98 +41,92 @@ export function initHorizontalScroll() {
   gsap.set(track, { clearProps: "transform,x" });
 
   const runSetup = () => {
-    // Force layout so measurements are fresh
-    section.getBoundingClientRect();
-    stickyEl.getBoundingClientRect();
-    track.getBoundingClientRect();
-    wrap.getBoundingClientRect();
-
-    const measureAndCreate = () => {
-      // Calculate dynamic padding-left in pixels
+    // Measure dynamic values
+    const getScrollMove = () => {
       const paddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
-
-      // Total translation is track width minus the visible (inner) wrap width
-      const totalXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - paddingLeft));
-
-      if (totalXMove === 0) {
-        // All cards fit - no horizontal scroll needed
-        return;
-      }
-
-      workTween = gsap.to(track, {
-        x: -totalXMove,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1,
-          invalidateOnRefresh: true,
-          onRefresh() {
-            const newPaddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
-            const newXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - newPaddingLeft));
-
-            if (workTween) {
-              gsap.set(track, { x: 0 });
-              workTween.vars.x = -newXMove;
-              workTween.invalidate();
-            }
-          },
-        },
-      });
-
-      // Entrance animations for visible cards
-      const workCards = document.querySelectorAll<HTMLElement>(".work-card");
-      if (workCards.length > 0) {
-        gsap.set(workCards, { y: "8%", opacity: 0, scale: 0.92 });
-
-        const inView: HTMLElement[] = [];
-        const offScreen: HTMLElement[] = [];
-
-        workCards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          if (rect.left < wrap.getBoundingClientRect().right + 50) {
-            inView.push(card);
-          } else {
-            offScreen.push(card);
-          }
-        });
-
-        if (inView.length > 0) {
-          gsap.to(inView, {
-            y: "0%",
-            opacity: 1,
-            scale: 1,
-            duration: 1.0,
-            ease: "expo.out",
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: section,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          });
-        }
-
-        offScreen.forEach((card) => {
-          gsap.to(card, {
-            y: "0%",
-            opacity: 1,
-            scale: 1,
-            duration: 1.0,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: workTween || undefined,
-              start: "left 95%",
-              toggleActions: "play none none none",
-            },
-          });
-        });
-      }
+      return Math.max(0, track.scrollWidth - (wrap.offsetWidth - paddingLeft));
     };
 
-    measureAndCreate();
+    const totalXMove = getScrollMove();
+    if (totalXMove === 0) {
+      // All cards fit - no horizontal scroll needed
+      return;
+    }
+
+    // Set up horizontal scroll using native CSS sticky bottom (no GSAP pin: true)
+    workTween = gsap.to(track, {
+      x: -totalXMove,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+        onRefresh() {
+          const newPaddingLeft = parseFloat(window.getComputedStyle(wrap).paddingLeft) || 0;
+          const newXMove = Math.max(0, track.scrollWidth - (wrap.offsetWidth - newPaddingLeft));
+
+          if (workTween) {
+            gsap.set(track, { x: 0 });
+            workTween.vars.x = -newXMove;
+            workTween.invalidate();
+          }
+        },
+      },
+    });
+
+    // Entrance animations for visible cards
+    const workCards = document.querySelectorAll<HTMLElement>(".work-card");
+    if (workCards.length > 0) {
+      gsap.set(workCards, { y: "8%", opacity: 0, scale: 0.92 });
+
+      const inView: HTMLElement[] = [];
+      const offScreen: HTMLElement[] = [];
+
+      workCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        if (rect.left < wrap.getBoundingClientRect().right + 50) {
+          inView.push(card);
+        } else {
+          offScreen.push(card);
+        }
+      });
+
+      if (inView.length > 0) {
+        gsap.to(inView, {
+          y: "0%",
+          opacity: 1,
+          scale: 1,
+          duration: 1.0,
+          ease: "expo.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+
+      offScreen.forEach((card) => {
+        gsap.to(card, {
+          y: "0%",
+          opacity: 1,
+          scale: 1,
+          duration: 1.0,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: workTween || undefined,
+            start: "left 95%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+    }
+
+    // Crucial: Refresh ScrollTrigger to calculate the trigger boundaries
     ScrollTrigger.refresh();
   };
 

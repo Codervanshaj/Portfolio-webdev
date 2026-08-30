@@ -24,3 +24,14 @@
     max-width: 100%;
   }
 }
+
+/* Selected Work horizontal scroll fixes */
+@media (min-width: 768px) {
+  .work-card {
+    flex-shrink: 0 !important;
+    max-width: none !important;
+  }
+}
+
+
+
