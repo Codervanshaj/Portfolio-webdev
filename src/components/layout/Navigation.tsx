@@ -148,8 +148,8 @@ export default function Navigation() {
               fetchPriority="high"
               loading="lazy"
               sizes="100vw"
-              src="/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final-201.avif"
-              srcSet="/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final-201-p-500.avif 500w, /heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/6926f8e053a878c5f61cc622_nenad_edit-photo_final-201.avif 1670w"
+              src="/vanshaj-assets/avatar.png"
+              srcSet="/vanshaj-assets/avatar.png 500w, /vanshaj-assets/avatar.png 1670w"
             />
           </div>
         </div>

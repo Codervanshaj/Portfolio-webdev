@@ -184,11 +184,11 @@ export default function Hero() {
           {/* Mobile profile photo */}
           <div className="mobile-hero-image-wrap">
             <img
-              alt="Nenad Popadic"
+              alt="Vanshaj"
               className="mobile-hero-image"
               fetchPriority="high"
               loading="lazy"
-              src="/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/69708b99545c57d03ebb5cd9_Frame-202147258154.avif"
+              src="/vanshaj-assets/avatar.png"
             />
           </div>
         </div>
