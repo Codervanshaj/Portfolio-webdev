@@ -1,1 +1,0 @@
-# Constants files go here
