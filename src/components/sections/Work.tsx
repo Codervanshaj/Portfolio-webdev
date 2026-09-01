@@ -14,8 +14,8 @@ export default function Work() {
 
   return (
     <section className="work_section" id="projects">
-      <div className="work-sticky-support"></div>
-      <div className="work-sticky">
+      <div className="work-sticky-support">
+        <div className="work-sticky">
         <div className="work-container">
 
           {/* Header section with Label, Title, and Description */}
@@ -98,6 +98,7 @@ export default function Work() {
           </div>
 
         </div>
+      </div>
       </div>
     </section>
   );

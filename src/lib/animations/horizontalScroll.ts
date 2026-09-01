@@ -130,29 +130,6 @@ export function initHorizontalScroll() {
     ScrollTrigger.refresh();
   };
 
-  // Wait for images to load before measuring so card widths/heights are correct
-  const images = Array.from(section.querySelectorAll<HTMLImageElement>("img"));
-  const total = images.length;
-
-  if (total === 0) {
-    setupTimeout = setTimeout(runSetup, 250);
-    return;
-  }
-
-  let loaded = 0;
-  const onLoad = () => {
-    loaded++;
-    if (loaded >= total) {
-      setupTimeout = setTimeout(runSetup, 250);
-    }
-  };
-
-  images.forEach((img) => {
-    if (img.complete) {
-      onLoad();
-    } else {
-      img.addEventListener("load", onLoad, { once: true });
-      img.addEventListener("error", onLoad, { once: true });
-    }
-  });
+  // Initialize runSetup with a short delay to let Next.js render layout settle
+  setupTimeout = setTimeout(runSetup, 100);
 }

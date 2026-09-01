@@ -540,61 +540,55 @@
 /* ============================================
    SIDEBAR DARK THEME TRANSITION
    ============================================ */
-.navigation.is-dark .nav-top-bg,
-.navigation.is-dark .nav-menu-bg,
-.navigation.is-dark .nav-email-wrap {
-  background-color: rgba(30, 30, 30, 0.75) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
+/* The old blanket `.navigation.is-dark` rule set has been removed. It darkened
+ * every sidebar card simultaneously and was driven by React state that only
+ * ever set the active section and never cleared it, so the sidebar stayed dark
+ * after scrolling back up out of the work section. The per-card
+ * `.is-dark-theme` rules further down are the single source of truth now —
+ * each of the six sidebar widgets flips at its own scroll boundary. */
 
-.navigation.is-dark .nav-item-bg {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-}
+/* Per-card crossfade for the sidebar dark-theme wave.
+ * Each widget toggles `.is-dark-theme` at its own boundary (see
+ * Navigation.tsx), so easing these properties turns six discrete flips into one
+ * smooth wave travelling up/down the sidebar. The wave's duration comes mostly
+ * from the geometric spread of the six boundaries across the sidebar height;
+ * this transition just removes the hard snap at each one. 0.3s deliberately
+ * matches Webflow's own duration on .nav-email-item / .nav-item-bg so their
+ * hover feel is unchanged.
+ *
+ * Deliberately excluded, because GSAP scrubs these same properties during the
+ * hero -> sidebar transition and a CSS transition would smear the scrub:
+ *   .nav-logo                                (color + background-color)
+ *   .nav-webflow-text / .nav-experience-text (color)
+ *   .nav-webflow-bg / .nav-experience-bg     (background-color, via Flip)
+ * `transform` is never listed here for the same reason, and `opacity` only
+ * where GSAP does not drive it (see .email-text below). */
+@media (min-width: 768px) {
+  .navigation .nav-top-bg,
+  .navigation .nav-menu-bg,
+  .navigation .nav-comapny-wrap,
+  .navigation .nav-email-wrap,
+  .navigation .nav-email-item,
+  .navigation .nav-item-bg,
+  .navigation .social-link,
+  .navigation .social-path-white,
+  .navigation .nav-top-text,
+  .navigation .nav-top-text .line,
+  .navigation .hero-navigation-link,
+  .navigation .nav-item-icon,
+  .navigation .copy-email-icon,
+  .navigation .nav-button-secondary {
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+      color 0.3s ease, fill 0.3s ease !important;
+  }
 
-.navigation.is-dark .nav-item-bg.is-active {
-  background-color: var(--yellow) !important;
-}
-
-.navigation.is-dark .nav-webflow-bg,
-.navigation.is-dark .nav-experience-bg {
-  background-color: rgba(30, 30, 30, 0.75) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.navigation.is-dark .nav-top-text,
-.navigation.is-dark .nav-webflow-text,
-.navigation.is-dark .nav-experience-text,
-.navigation.is-dark .email-text,
-.navigation.is-dark .hero-navigation-link {
-  color: white !important;
-}
-
-.navigation.is-dark .hero-navigation-link.w--current {
-  color: black !important;
-}
-
-.navigation.is-dark .social-link,
-.navigation.is-dark .nav-email-item {
-  background-color: rgba(45, 45, 45, 0.8) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  color: white !important;
-}
-
-.navigation.is-dark .social-path-white {
-  color: white !important;
-}
-
-.navigation.is-dark .social-link:hover {
-  background-color: var(--yellow) !important;
-  color: black !important;
-}
-
-.navigation.is-dark .social-link:hover .social-path-white {
-  fill: black !important;
-}
-
-.navigation.is-dark .nav-email-item:hover {
-  background-color: rgba(60, 60, 60, 0.9) !important;
+  /* Listed separately so Webflow's own `transition: opacity .3s` on .email-text
+   * survives the shorthand. GSAP scrubs opacity on the .nav-email-wrap parent,
+   * not on this element, so keeping it here is safe. */
+  .navigation .email-text {
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+      color 0.3s ease, fill 0.3s ease, opacity 0.3s ease !important;
+  }
 }
 
 /* Ensure work images are visible after JS loads */
@@ -605,13 +599,14 @@
 
 @media (min-width: 768px) {
 
-  /* Restore original Webflow sticky-bottom behavior.
-   * The .work-sticky-support sibling provides 3600px of scroll track height.
-   * The .work-sticky div sticks to the bottom of the viewport natively.
+  /* Restore original Webflow sticky behavior.
+   * .work-sticky-support is the scroll track (400vh, matching the original
+   * `.work_section { min-height: 400vh }`); .work-sticky is its child and
+   * sticks natively for `400vh - 100vh = 300vh` of scrolling.
    * GSAP is only used to translate .work-track horizontally (x coordinate).
    */
   .work-sticky-support {
-    height: 3600px !important;
+    height: 400vh !important;
   }
 
   .work_section {
@@ -622,25 +617,47 @@
     pointer-events: auto !important;
   }
 
+  /* Locked to exactly one viewport tall so that the point where CSS sticky
+   * releases coincides with GSAP's `end: "bottom bottom"`. Everything inside
+   * is sized to fit within this box (see .work-card below), so nothing is
+   * clipped by `overflow: hidden`. */
   .work-sticky {
     position: sticky !important;
-    bottom: 0px !important;
-    top: auto !important;
-    height: auto !important;
+    top: 0px !important;
+    bottom: auto !important;
+    height: 100vh !important;
     min-height: 100vh !important;
+    max-height: 100vh !important;
     width: 100% !important;
     overflow: hidden !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    padding: 3vw 1.39vw 3vw 21vw !important;
+    padding: 2.2vw 1.39vw 2.2vw 21vw !important;
     background-image: linear-gradient(rgb(0, 0, 0), rgb(34, 34, 34) 44%) !important;
+    color: var(--white) !important;
   }
 
   .work-container {
     width: 100% !important;
     pointer-events: auto !important;
     display: block !important;
+  }
+
+  /* Webflow caps this heading at `.max-width-700` (= 32vw, ~609px at a 1904px
+   * viewport) while the grid column it sits in is ~728px wide, so
+   * "Built in Webflow," was forced to wrap. The `max-width: 100%` release below
+   * is the same rule Webflow applies at mobile widths, just extended to
+   * desktop. The font-size is then bounded by both axes so the two lines the
+   * <br> produces always fit the column AND leave room for the cards. */
+  .work_section .work-top-layout .h2-style-white.max-width-700 {
+    max-width: 100% !important;
+    font-size: max(1.8rem, min(3.85vw, 8.6vh, 4.5rem)) !important;
+  }
+
+  /* 4.17vw is too much vertical spend on short viewports */
+  .work_section .work-top-layout {
+    margin-bottom: min(3vw, 4vh) !important;
   }
 
   .work-track-wrap {
@@ -657,19 +674,49 @@
     height: auto !important;
   }
 
+  /* Webflow gives .work-card a width only; its height came from the image's
+   * intrinsic ratio, which is why a fixed `36vw` height overflowed the 100vh
+   * sticky box and clipped the cards. Both axes are now bounded by viewport
+   * height as well as width, so the card always fits in the space left over
+   * after the label + 2-line heading. The two expressions are the same values
+   * scaled by 0.714, which preserves the original portrait ratio. */
   .work-card {
     border-radius: 0.83vw !important;
-    width: clamp(17rem, 27vw, 30rem) !important;
-    height: clamp(22rem, 36vw, 42rem) !important;
+    width: min(25.7vw, 37.8vh, 30rem) !important;
+    height: min(36vw, 53vh, 42rem) !important;
     position: relative !important;
     overflow: hidden !important;
-    flex-shrink: 0 !important;
+    flex: 0 0 auto !important;
+    color: var(--white) !important;
+  }
+
+  /* The arrow badge is a black glyph on yellow, and its SVGs use
+   * `fill: currentColor`, so a blanket white on every descendant made them
+   * invisible. Excluding that subtree instead of overriding it keeps `color`
+   * inheriting into the SVGs, which is what the hover-dim rules above rely on. */
+  .work-card *:not(.work-card-arrow-wrap, .work-card-arrow-wrap *) {
+    color: var(--white) !important;
+  }
+
+  .work-card .work-card-arrow-wrap {
+    color: var(--black) !important;
   }
 
   .work-image {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+  }
+
+  /* Restore visibility for section label */
+  .work-sticky .label {
+    color: var(--white) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+  }
+
+  /* Restore visibility for header paragraph text */
+  .work-sticky .paragraph {
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 
   /* Card description text styling */
@@ -680,6 +727,7 @@
     margin-top: 0.5vw !important;
     margin-bottom: 0px !important;
     max-width: 90% !important;
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 }
 
@@ -718,6 +766,10 @@
 .navigation .nav-email-wrap.is-dark-theme .nav-email-item {
   background-color: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.navigation .nav-email-wrap.is-dark-theme .nav-email-item:hover {
+  background-color: rgba(60, 60, 60, 0.9) !important;
 }
 
 .navigation .nav-top-layout.is-dark-theme .social-link {

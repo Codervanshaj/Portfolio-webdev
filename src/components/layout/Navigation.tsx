@@ -29,12 +29,23 @@ export default function Navigation() {
       ];
 
       const triggers: any[] = [];
+      const themedWidgets: HTMLElement[] = [];
 
       widgets.forEach(({ selector, threshold }) => {
         const widget = document.querySelector<HTMLElement>(selector);
         if (!widget) return;
+        themedWidgets.push(widget);
 
         darkSections.forEach((section) => {
+          // Reconcile the class from the trigger's own active state rather than
+          // from directional callbacks. onToggle covers every crossing in both
+          // directions and onRefresh re-syncs after any layout change, so the
+          // dark state can never be left stranded on a widget after scrolling
+          // back up out of the section.
+          const sync = (self: any) => {
+            widget.classList.toggle("is-dark-theme", !!self.isActive);
+          };
+
           const trigger = ScrollTrigger.create({
             trigger: section,
             start: () => {
@@ -47,18 +58,8 @@ export default function Navigation() {
               const widgetRect = widget.getBoundingClientRect();
               return `bottom ${widgetRect.top}px`;
             },
-            onEnter: () => {
-              widget.classList.add("is-dark-theme");
-            },
-            onLeave: () => {
-              widget.classList.remove("is-dark-theme");
-            },
-            onEnterBack: () => {
-              widget.classList.add("is-dark-theme");
-            },
-            onLeaveBack: () => {
-              widget.classList.remove("is-dark-theme");
-            },
+            onToggle: sync,
+            onRefresh: sync,
           });
 
           triggers.push(trigger);
@@ -67,6 +68,7 @@ export default function Navigation() {
 
       ScrollTrigger.refresh();
       (window as any).__navThemeTriggers = triggers;
+      (window as any).__navThemeWidgets = themedWidgets;
     }, 150);
 
     return () => {
@@ -80,20 +82,37 @@ export default function Navigation() {
         });
         (window as any).__navThemeTriggers = null;
       }
+      // Killing a trigger does not undo the class it applied, so clear it here
+      // to avoid a stale dark widget surviving an unmount / fast refresh.
+      const themed = (window as any).__navThemeWidgets;
+      if (themed && Array.isArray(themed)) {
+        themed.forEach((widget: HTMLElement) => widget.classList.remove("is-dark-theme"));
+        (window as any).__navThemeWidgets = null;
+      }
     };
   }, []);
 
   useEffect(() => {
     const sections = ["hero", "about", "projects", "overview", "services", "testimonial", "webflow_journey", "big_logo_section", "faq"];
+    const visible = new Set<string>();
+
     const observers = sections.map(id => {
       const el = document.getElementById(id);
       if (!el) return null;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            setActiveSection(id);
+            visible.add(id);
+          } else {
+            visible.delete(id);
           }
         });
+        // Resolve against everything currently in view and pick the section
+        // highest up the page, so the highlight tracks the scroll position in
+        // both directions instead of sticking on whichever section reported
+        // itself last (which left it stale when scrolling back up).
+        const topMost = sections.find(s => visible.has(s));
+        if (topMost) setActiveSection(topMost);
       }, {
         threshold: 0,
         rootMargin: "-30% 0px -30% 0px"
@@ -121,7 +140,7 @@ export default function Navigation() {
 
   return (
     <header
-      className={`navigation ${activeSection === "projects" ? "is-dark" : ""}`}
+      className="navigation"
       data-tl-desktop=""
       data-tl-from="{'zIndex': 2}"
       data-tl-start="53% top"
