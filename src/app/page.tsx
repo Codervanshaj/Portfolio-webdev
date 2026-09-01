@@ -95,6 +95,8 @@ export default function Home() {
 
         // Fade in morphed elements without changing their y/translate coordinates
         // to prevent property conflicts with GSAP FLIP offsets.
+        tl.add("stats-reveal-start", "-=0.14");
+
         tl.fromTo([
           ".hero-navigation-link",
           ".nav-button",
@@ -129,10 +131,8 @@ export default function Home() {
         // original timing: the cards were items 10 and 11 of the 0.04s stagger.
         gsap.set(".nav-stats-card", { visibility: "hidden" });
 
-        const statsRevealAt = (tl.recent()?.startTime() ?? 0) + 0.36;
-
         (["#stats_projects", "#stats_years"] as const).forEach((card, i) => {
-          const at = statsRevealAt + i * 0.04;
+          const at = i === 0 ? "stats-reveal-start" : `stats-reveal-start+=${i * 0.04}`;
           tl.set(card, { visibility: "visible" }, at);
           tl.fromTo(`${card} > *:not([class$="-bg"])`, {
             opacity: 0,
