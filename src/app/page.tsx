@@ -99,7 +99,6 @@ export default function Home() {
           ".hero-navigation-link",
           ".nav-button",
           ".nav-button-secondary",
-          ".nav-stats-card",
         ], {
           opacity: 0,
           visibility: "hidden"
@@ -110,6 +109,39 @@ export default function Home() {
           stagger: 0.04,
           ease: "power2.out",
         }, "-=0.5");
+
+        // ─── Step 5: Reveal the two sidebar stats cards.
+        //
+        // These are what the hero paints as the "80+ Projects" and "Years of
+        // experience" glass panels: FLIP morphs the real sidebar nodes onto the
+        // hero ghosts, so .nav-webflow-bg / .nav-experience-bg is what actually
+        // sits on top of the hero navigation links. The only thing hiding those
+        // links is the panel's backdrop-filter, and a backdrop-filter can never
+        // sample past its nearest "backdrop root" — which any ancestor with
+        // opacity < 1 creates. Fading .nav-stats-card therefore switched the
+        // blur off for the length of the entrance and left "PROJECTS" fully
+        // readable through the card on load/refresh, until an unrelated repaint
+        // (a small scroll) rebuilt the layer.
+        //
+        // So the card is revealed with visibility, which is not a backdrop-root
+        // trigger, and the opacity fade moves to its inner wrappers, which sit
+        // beside the blurred panels instead of above them. Offsets keep the
+        // original timing: the cards were items 10 and 11 of the 0.04s stagger.
+        gsap.set(".nav-stats-card", { visibility: "hidden" });
+
+        const statsRevealAt = (tl.recent()?.startTime() ?? 0) + 0.36;
+
+        (["#stats_projects", "#stats_years"] as const).forEach((card, i) => {
+          const at = statsRevealAt + i * 0.04;
+          tl.set(card, { visibility: "visible" }, at);
+          tl.fromTo(`${card} > *:not([class$="-bg"])`, {
+            opacity: 0,
+          }, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          }, at);
+        });
       }
     };
 
