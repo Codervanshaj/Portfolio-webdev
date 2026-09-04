@@ -35,5 +35,110 @@
   }
 }
 
+/* Responsive Layout Optimizations */
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden !important;
+  }
+
+  main.main-wrap {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-top: 60px !important; /* Header clear offset */
+    width: 100% !important;
+  }
+
+  .hero {
+    padding-top: 2rem !important;
+    min-height: auto !important;
+  }
+
+  .hero-container {
+    padding: 1.5rem 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  .hero-heading {
+    font-size: clamp(2.2rem, 9vw, 3.8rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .hero-left-text,
+  .hero-right-text {
+    font-size: 1rem !important;
+    max-width: 100% !important;
+  }
+
+  /* Work section mobile touch horizontal scroll track */
+  .work_section {
+    padding: 3rem 1rem !important;
+  }
+
+  .work-sticky-support,
+  .work-sticky {
+    height: auto !important;
+    position: relative !important;
+  }
+
+  .work-track-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    padding: 1rem 0 !important;
+    margin: 0 -1rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .work-track {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1.25rem !important;
+    width: max-content !important;
+    transform: none !important;
+  }
+
+  .work-card {
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    max-width: 340px !important;
+    scroll-snap-align: start !important;
+  }
+
+  /* About section mobile layout */
+  .about-section {
+    padding: 3rem 1rem !important;
+  }
+
+  .about-section .container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .about-wrap {
+    width: 100% !important;
+    padding-left: 0 !important;
+  }
+
+  /* Services & WhatYouGet card grid mobile overrides */
+  .services_section,
+  .what_you_get_section {
+    padding: 3rem 1rem !important;
+  }
+
+  /* CTA Section mobile alignment */
+  .cta_section {
+    padding: 4rem 1rem !important;
+  }
+
+  .cta_heading {
+    font-size: clamp(2rem, 8vw, 3.5rem) !important;
+  }
+}
+
+
 
 

@@ -13,6 +13,17 @@ export default function Navigation() {
   const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth < 768) return;
 
     const t = setTimeout(() => {
@@ -576,6 +587,75 @@ export default function Navigation() {
         </div>
 
       </div>
+
+      {/* Mobile Drawer Backdrop */}
+      {mobileMenuOpen && (
+        <div
+          className="mobile-drawer-backdrop"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Nav Drawer */}
+      <div className={`mobile-nav-drawer ${mobileMenuOpen ? "is-open" : ""}`}>
+        <div className="mobile-drawer-header">
+          <span style={{ fontWeight: 700, fontSize: "1.2rem", letterSpacing: "0.05em" }}>NESH</span>
+          <button
+            aria-label="Close navigation menu"
+            className="mobile-drawer-close"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            ✕
+          </button>
+        </div>
+
+        <nav className="mobile-drawer-nav">
+          {NAV_LINKS.map((link) => {
+            const isLinkActive = activeSection === link.sectionId;
+            return (
+              <a
+                key={link.id}
+                className={`mobile-drawer-link ${isLinkActive ? "is-active" : ""}`}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>{link.label}</span>
+                <span style={{ opacity: 0.5, fontSize: "0.85rem" }}>→</span>
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="mobile-drawer-footer">
+          <div
+            onClick={handleCopyEmail}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0.75rem 1rem",
+              background: "rgba(0,0,0,0.04)",
+              borderRadius: "8px",
+              cursor: "pointer"
+            }}
+          >
+            <span style={{ fontSize: "0.9rem", fontWeight: 500 }}>nenad@popadic.co</span>
+            <span style={{ fontSize: "0.8rem", color: copied ? "#008000" : "#666", fontWeight: copied ? 600 : 400 }}>
+              {copied ? "Copied!" : "Copy"}
+            </span>
+          </div>
+
+          <a
+            className="mobile-drawer-cta"
+            href="https://cal.com/nenad-popadic/intro-call"
+            target="_blank"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Book a Call
+          </a>
+        </div>
+      </div>
     </header>
   );
 }
+
