@@ -208,7 +208,7 @@
     display: block !important;
   }
 
-  /* Hero Section Spacing Overrides */
+  /* Hero Section Mobile Layout & Scaling */
   main.main-wrap {
     margin-left: 0 !important;
     padding-left: 0 !important;
@@ -217,15 +217,39 @@
   }
 
   .hero {
+    position: relative !important;
     padding-top: 0 !important;
-    min-height: auto !important;
+    padding-bottom: 0 !important;
+    width: 100% !important;
+    height: 100svh !important;
+    min-height: clamp(620px, 140vw, 820px) !important;
+    overflow: hidden !important;
+    background: transparent !important;
   }
 
+  .hero-sticky {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Giant Yellow Background Text */
   .nesh-logo-preload {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     padding-top: clamp(3.8rem, 16vw, 4.6rem) !important;
     padding-left: clamp(1rem, 4vw, 1.5rem) !important;
     padding-right: clamp(1rem, 4vw, 1.5rem) !important;
     width: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
   }
 
   .nesh-logo-wrap {
@@ -244,22 +268,170 @@
     display: block !important;
   }
 
-  .hero-container {
-    padding: 1.5rem 1rem !important;
+  /* Centered Large Person Image (Uncropped) */
+  .mobile-hero-image-wrap {
+    position: absolute !important;
+    top: clamp(3.2rem, 13vw, 4.2rem) !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
     display: flex !important;
-    flex-direction: column !important;
-    gap: 1.5rem !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
   }
 
-  .hero-heading {
-    font-size: clamp(2.2rem, 9vw, 3.8rem) !important;
-    line-height: 1.1 !important;
+  .mobile-hero-image {
+    width: clamp(280px, 86vw, 420px) !important;
+    max-width: 95% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  /* Hero Container and Card Layering */
+  .hero-container {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    pointer-events: none !important;
   }
 
   .hero-left-text,
   .hero-right-text {
-    font-size: 1rem !important;
-    max-width: 100% !important;
+    display: none !important;
+  }
+
+  .hero-buttons-wrap {
+    display: none !important;
+  }
+
+  /* Main Headline Over Torso */
+  .hero-content-layout {
+    position: absolute !important;
+    bottom: clamp(4.8rem, 20vw, 7rem) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 0 clamp(1rem, 5.33vw, 2rem) !important;
+    z-index: 15 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    pointer-events: none !important;
+  }
+
+  .hero-heading {
+    color: #ffffff !important;
+    font-family: var(--tra) !important;
+    font-size: clamp(2.3rem, 10vw, 3.4rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.05 !important;
+    margin: 0 !important;
+    text-align: left !important;
+    visibility: visible !important;
+  }
+
+  /* Floating Badges & Cards */
+  .hero-cards-wrap {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+  }
+
+  .hero-cards-left {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  /* Left Skill List Card */
+  .hero-card-3 {
+    position: absolute !important;
+    top: clamp(14rem, 58vw, 19rem) !important;
+    left: clamp(1rem, 4vw, 1.5rem) !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 10 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    background: rgba(194, 184, 172, 0.45) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    font-size: clamp(0.75rem, 3.2vw, 0.95rem) !important;
+    transform: none !important;
+  }
+
+  /* Right Years Experience Card */
+  .hero-card-1-wrap {
+    position: absolute !important;
+    top: clamp(17.5rem, 72vw, 23.5rem) !important;
+    right: clamp(1rem, 4vw, 1.5rem) !important;
+    left: auto !important;
+    bottom: auto !important;
+    z-index: 10 !important;
+    display: flex !important;
+    pointer-events: auto !important;
+    margin: 0 !important;
+  }
+
+  .hero-card-1 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: rgba(194, 184, 172, 0.45) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Bottom Left Projects Card */
+  .hero-card-2-wrap {
+    position: absolute !important;
+    bottom: clamp(1rem, 4vw, 1.8rem) !important;
+    left: clamp(1rem, 4vw, 1.5rem) !important;
+    right: auto !important;
+    top: auto !important;
+    z-index: 10 !important;
+    display: flex !important;
+    pointer-events: auto !important;
+  }
+
+  .hero-card-2 {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: rgba(194, 184, 172, 0.45) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 8px !important;
+    padding: 0.6rem 0.9rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
   }
 
   /* Work section mobile touch horizontal scroll track */
