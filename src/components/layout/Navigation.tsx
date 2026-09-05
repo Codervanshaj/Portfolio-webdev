@@ -186,9 +186,9 @@ export default function Navigation() {
 
         {/* Top Logo, Socials & Mobile Menu bar */}
         <div className="nav-top-layout" id="w-node-_5e7c5502-ddba-215f-98c3-2549ffbe61a2-be2d4114">
-          <div className="nav-top-bg" data-tl-desktop="" data-tl-end="39% top" data-tl-from="{'scale' : 0.5, 'opacity' : 0}" data-tl-start="35% top" data-tl-to="{'scale' : 1, 'opacity' : 1}" data-tl-trigger=".hero" data-tl-type="scroll"></div>
+          <div className="nav-top-bg hidden md:block" data-tl-desktop="" data-tl-end="39% top" data-tl-from="{'scale' : 0.5, 'opacity' : 0}" data-tl-start="35% top" data-tl-to="{'scale' : 1, 'opacity' : 1}" data-tl-trigger=".hero" data-tl-type="scroll"></div>
           <div className="nav-top-item">
-            <div className="nav-logo" data-tl-desktop="" data-tl-end="44% top" data-tl-from="{'color' : '#ffff23', 'backgroundColor': 'transparent'}" data-tl-start="42% top" data-tl-to="{'color' : '#000', 'backgroundColor': '#ffff23'}" data-tl-trigger=".hero" data-tl-type="scroll" style={{ backgroundColor: "transparent", color: "#ffff23" }}>
+            <div className="nav-logo" data-tl-desktop="" data-tl-end="44% top" data-tl-from="{'color' : '#ffff23', 'backgroundColor': 'transparent'}" data-tl-start="42% top" data-tl-to="{'color' : '#000', 'backgroundColor': '#ffff23'}" data-tl-trigger=".hero" data-tl-type="scroll">
               <div className="nav-logo-item">
 
                 {/* SVG Logo */}
@@ -237,8 +237,11 @@ export default function Navigation() {
               <a className="nav-button-mobile w-button" href="https://cal.com/nenad-popadic/intro-call" target="_blank" onClick={e => e.stopPropagation()}>Book a Call</a>
               <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
                 <div className="mobile-menu-icons">
-                  <svg className="mobile-menu-icon" fill="none" viewBox="0 0 16 7" width="100%" xmlns="http://www.w3.org/2000/svg">
-                    <path clipRule="evenodd" d="M13.6 0H11.2C9.8744 0 8.8 1.00725 8.8 2.25V4.5C8.8 5.74275 9.8744 6.75 11.2 6.75H13.6C14.9256 6.75 16 5.74275 16 4.5V2.25C16 1.00725 14.9256 0 13.6 0ZM7.2 2.25V4.5C7.2 5.74275 6.1256 6.75 4.8 6.75H2.4C1.0744 6.75 0 5.74275 0 4.5V2.25C0 1.00725 1.0744 0 2.4 0H4.8C6.1256 0 7.2 1.00725 7.2 2.25Z" fill="currentColor" fillRule="evenodd"></path>
+                  <svg className="mobile-menu-icon" viewBox="0 0 16 16" width="100%" height="100%" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" width="6.5" height="6.5" rx="1.5" />
+                    <rect x="9.5" y="0" width="6.5" height="6.5" rx="1.5" />
+                    <rect x="0" y="9.5" width="6.5" height="6.5" rx="1.5" />
+                    <rect x="9.5" y="9.5" width="6.5" height="6.5" rx="1.5" />
                   </svg>
                 </div>
               </div>

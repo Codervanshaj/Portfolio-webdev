@@ -41,16 +41,207 @@
     overflow-x: hidden !important;
   }
 
+  /* Top Mobile Navigation Alignment */
+  .navigation,
+  header.navigation,
+  .nav-container,
+  .nav-top-layout,
+  #w-node-_5e7c5502-ddba-215f-98c3-2549ffbe61a2-be2d4114,
+  .nav-top-item {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: clamp(0.75rem, 3.5vw, 1.25rem) clamp(1rem, 4vw, 1.5rem) 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    z-index: 300 !important;
+  }
+
+  .nav-container,
+  .nav-top-layout,
+  #w-node-_5e7c5502-ddba-215f-98c3-2549ffbe61a2-be2d4114,
+  .nav-top-item {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .nav-top-bg,
+  .nav-stats-bg,
+  .nav-menu-bg,
+  .nav-top-text {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+  }
+
+  .nav-top-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    background: transparent !important;
+  }
+
+  /* Navbar Logo Yellow Badge */
+  .nav-logo {
+    background-color: var(--yellow) !important;
+    color: #000000 !important;
+    border-radius: 8px !important;
+    padding: 0 0.85rem !important;
+    height: 38px !important;
+    width: auto !important;
+    min-width: unset !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+  }
+
+  .nav-logo-item {
+    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+
+  .nesh-logo {
+    width: 62px !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .nesh-logo-svg {
+    width: 54px !important;
+    height: auto !important;
+    color: #000000 !important;
+    fill: #000000 !important;
+    display: block !important;
+  }
+
+  .nesh-copyright-wrap {
+    position: relative !important;
+    inset: auto !important;
+    margin-left: 2px !important;
+    width: 6px !important;
+    height: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+
+  .nesh-copyright-icon {
+    width: 6px !important;
+    height: 6px !important;
+    color: #000000 !important;
+    fill: #000000 !important;
+    display: block !important;
+  }
+
+  /* Mobile CTA and 4-Square Menu Button */
+  .mobile-menu-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  .nav-button-mobile {
+    background-color: var(--yellow) !important;
+    color: #000000 !important;
+    border-radius: 8px !important;
+    height: 38px !important;
+    padding: 0 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: var(--tra) !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-menu {
+    background-color: #ebeada !important;
+    border-radius: 8px !important;
+    width: 38px !important;
+    height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .mobile-menu-icons {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .mobile-menu-icon {
+    width: 14px !important;
+    height: 14px !important;
+    color: #000000 !important;
+    display: block !important;
+  }
+
+  /* Hero Section Spacing Overrides */
   main.main-wrap {
     margin-left: 0 !important;
     padding-left: 0 !important;
-    padding-top: 60px !important; /* Header clear offset */
+    padding-top: 0 !important;
     width: 100% !important;
   }
 
   .hero {
-    padding-top: 2rem !important;
+    padding-top: 0 !important;
     min-height: auto !important;
+  }
+
+  .nesh-logo-preload {
+    padding-top: clamp(3.8rem, 16vw, 4.6rem) !important;
+    padding-left: clamp(1rem, 4vw, 1.5rem) !important;
+    padding-right: clamp(1rem, 4vw, 1.5rem) !important;
+    width: 100% !important;
+  }
+
+  .nesh-logo-wrap {
+    aspect-ratio: auto !important;
+    width: 100% !important;
+  }
+
+  .nesh-logo-ghost-wrap {
+    width: 100% !important;
+  }
+
+  .nesh-logo-ghost {
+    width: 100% !important;
+    opacity: 1 !important;
+    color: #ffff23 !important;
+    display: block !important;
   }
 
   .hero-container {

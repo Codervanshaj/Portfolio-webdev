@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import "./globals.css";
 import "../../public/heynesh-assets/cdn.prod.website-files.com/691d7c9f14d0280ebe2d4108/css/nesh-staging.webflow.shared.bea9f6170.min.css";
 import "../../public/heynesh-assets/cdn.jsdelivr.net/npm/swiper-11/swiper-bundle.min.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "NESH Portfolio Rebuild",
