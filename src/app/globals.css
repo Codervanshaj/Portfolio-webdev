@@ -27,11 +27,91 @@
   }
 }
 
-/* Selected Work horizontal scroll fixes */
+/* Desktop Layout Rules */
 @media (min-width: 768px) {
   .work-card {
     flex-shrink: 0 !important;
     max-width: none !important;
+  }
+
+  .hero-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    width: 93.06vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative !important;
+  }
+
+  .hero-content-layout {
+    position: absolute !important;
+    inset: auto 0% 0% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+  }
+
+  .hero-heading {
+    text-align: center !important;
+  }
+
+  .hero-buttons-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    grid-column-gap: 0.83vw !important;
+    grid-row-gap: 0.83vw !important;
+  }
+
+  .hero-cards-wrap {
+    position: fixed !important;
+    inset: auto 0% 2.78% !important;
+    width: clamp(500px, 64.24vw, 1200px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    z-index: 30 !important;
+    pointer-events: none !important;
+  }
+
+  .hero-cards-left {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .hero-card-1-wrap {
+    position: relative !important;
+    left: 3vw !important;
+    display: flex !important;
+  }
+
+  .hero-card-3 {
+    position: absolute !important;
+    inset: -10% 7% auto auto !important;
+    display: flex !important;
+  }
+
+  .hero-left-text {
+    display: block !important;
+    position: relative !important;
+    width: clamp(8rem, 11vw, 14rem) !important;
+    z-index: 11 !important;
+  }
+
+  .hero-right-text {
+    display: block !important;
+    position: relative !important;
+    width: clamp(200px, 24.64vw, 420px) !important;
+    z-index: 10 !important;
   }
 }
 

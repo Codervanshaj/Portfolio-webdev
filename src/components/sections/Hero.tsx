@@ -188,7 +188,7 @@ export default function Hero() {
               className="mobile-hero-image"
               fetchPriority="high"
               loading="lazy"
-              src="/vanshaj-assets/avatar.png"
+              src="/vanshaj-assets/mobile-avatar.png"
             />
           </div>
         </div>
