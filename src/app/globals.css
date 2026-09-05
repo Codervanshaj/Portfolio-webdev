@@ -268,12 +268,13 @@
     display: block !important;
   }
 
-  /* Centered Large Person Image (Uncropped) */
+  /* Centered Large Person Image (Scaled to fill left, right, and bottom) */
   .mobile-hero-image-wrap {
     position: absolute !important;
     top: clamp(3.2rem, 13vw, 4.2rem) !important;
-    left: 0 !important;
-    right: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
     bottom: auto !important;
     width: 100% !important;
     height: auto !important;
@@ -282,15 +283,18 @@
     align-items: flex-start !important;
     z-index: 2 !important;
     pointer-events: none !important;
+    overflow: visible !important;
   }
 
   .mobile-hero-image {
-    width: clamp(280px, 86vw, 420px) !important;
-    max-width: 95% !important;
+    width: clamp(370px, 122vw, 560px) !important;
+    min-width: 115vw !important;
+    max-width: none !important;
     height: auto !important;
     object-fit: contain !important;
     display: block !important;
     margin: 0 auto !important;
+    transform-origin: top center !important;
   }
 
   /* Hero Container and Card Layering */
