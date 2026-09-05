@@ -181,7 +181,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Mobile profile photo */}
+          {/* Mobile profile photo with progressive bottom blur transition */}
           <div className="mobile-hero-image-wrap">
             <img
               alt="Vanshaj"
@@ -190,7 +190,20 @@ export default function Hero() {
               loading="lazy"
               src="/vanshaj-assets/mobile-avatar.png"
             />
+            <div className="mobile-hero-blur-1" aria-hidden="true"></div>
+            <div className="mobile-hero-blur-2" aria-hidden="true"></div>
+            <div className="mobile-hero-blur-3" aria-hidden="true"></div>
           </div>
+        </div>
+
+        {/* Mobile Intro Text before About Section */}
+        <div className="hero-mobile-intro">
+          <p className="hero-mobile-intro-heading">
+            The Webflow Expert. That’s Nenad.
+          </p>
+          <p className="hero-mobile-intro-text">
+            Working closely with your team to deliver Webflow builds that merge creativity, technical excellence, and long-term value.
+          </p>
         </div>
       </div>
     </section>

@@ -113,6 +113,13 @@
     width: clamp(200px, 24.64vw, 420px) !important;
     z-index: 10 !important;
   }
+
+  .hero-mobile-intro,
+  .mobile-hero-blur-1,
+  .mobile-hero-blur-2,
+  .mobile-hero-blur-3 {
+    display: none !important;
+  }
 }
 
 /* Responsive Layout Optimizations */
@@ -301,17 +308,17 @@
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     width: 100% !important;
-    height: 100svh !important;
-    min-height: clamp(620px, 140vw, 820px) !important;
-    overflow: hidden !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow: visible !important;
     background: transparent !important;
   }
 
   .hero-sticky {
     position: relative !important;
     width: 100% !important;
-    height: 100% !important;
-    min-height: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
     padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -348,45 +355,20 @@
     display: block !important;
   }
 
-  /* Centered Large Person Image (Scaled to fill left, right, and bottom) */
-  .mobile-hero-image-wrap {
-    position: absolute !important;
-    top: clamp(3.2rem, 13vw, 4.2rem) !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    z-index: 2 !important;
-    pointer-events: none !important;
-    overflow: visible !important;
-  }
-
-  .mobile-hero-image {
-    width: clamp(370px, 122vw, 560px) !important;
-    min-width: 115vw !important;
-    max-width: none !important;
-    height: auto !important;
-    object-fit: contain !important;
-    display: block !important;
-    margin: 0 auto !important;
-    transform-origin: top center !important;
-  }
-
   /* Hero Container and Card Layering */
   .hero-container {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
-    height: 100% !important;
+    height: clamp(730px, 188vw, 880px) !important;
     padding: 0 !important;
     margin: 0 !important;
     display: block !important;
+    overflow: hidden !important;
     pointer-events: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .hero-left-text,
@@ -398,31 +380,76 @@
     display: none !important;
   }
 
-  /* Main Headline Over Torso */
-  .hero-content-layout {
+  /* Centered Large Person Image with Progressive Bottom Fade Mask */
+  .mobile-hero-image-wrap {
     position: absolute !important;
-    bottom: clamp(4.8rem, 20vw, 7rem) !important;
-    left: 0 !important;
-    right: 0 !important;
+    inset: 0 !important;
     width: 100% !important;
-    padding: 0 clamp(1rem, 5.33vw, 2rem) !important;
-    z-index: 15 !important;
+    height: 100% !important;
     display: flex !important;
-    flex-direction: column !important;
+    justify-content: center !important;
     align-items: flex-start !important;
-    text-align: left !important;
+    z-index: 2 !important;
     pointer-events: none !important;
+    overflow: hidden !important;
+    border: none !important;
+    outline: none !important;
   }
 
-  .hero-heading {
-    color: #ffffff !important;
-    font-family: var(--tra) !important;
-    font-size: clamp(2.3rem, 10vw, 3.4rem) !important;
-    font-weight: 700 !important;
-    line-height: 1.05 !important;
-    margin: 0 !important;
-    text-align: left !important;
-    visibility: visible !important;
+  .mobile-hero-image {
+    width: clamp(480px, 136vw, 640px) !important;
+    min-width: 130vw !important;
+    max-width: none !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: clamp(2.4rem, 9.5vw, 3.5rem) auto 0 !important;
+    transform-origin: top center !important;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgba(0, 0, 0, 0.6) 82%, rgba(0, 0, 0, 0.15) 94%, transparent 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgba(0, 0, 0, 0.6) 82%, rgba(0, 0, 0, 0.15) 94%, transparent 100%) !important;
+  }
+
+  /* Intense, Smooth Progressive Bottom Blur Layers */
+  .mobile-hero-blur-1 {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 55% !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 30%, black 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 30%, black 100%) !important;
+  }
+
+  .mobile-hero-blur-2 {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 40% !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
+    backdrop-filter: blur(32px) !important;
+    -webkit-backdrop-filter: blur(32px) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.75) 35%, black 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.75) 35%, black 100%) !important;
+  }
+
+  .mobile-hero-blur-3 {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 26% !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+    backdrop-filter: blur(48px) !important;
+    -webkit-backdrop-filter: blur(48px) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 40%, black 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.9) 40%, black 100%) !important;
   }
 
   /* Floating Badges & Cards */
@@ -445,77 +472,249 @@
     display: block !important;
   }
 
-  /* Left Skill List Card */
+  /* Left Strengths / Skills Card */
   .hero-card-3 {
     position: absolute !important;
-    top: clamp(14rem, 58vw, 19rem) !important;
-    left: clamp(1rem, 4vw, 1.5rem) !important;
+    top: clamp(14rem, 55vw, 18rem) !important;
+    left: clamp(0.75rem, 3.5vw, 1.25rem) !important;
     right: auto !important;
     bottom: auto !important;
-    z-index: 10 !important;
+    z-index: 12 !important;
     display: flex !important;
     flex-direction: column !important;
+    gap: 0.85rem !important;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
-    background: rgba(194, 184, 172, 0.45) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-radius: 8px !important;
-    padding: 0.75rem 1rem !important;
-    font-size: clamp(0.75rem, 3.2vw, 0.95rem) !important;
+    width: clamp(140px, 36vw, 170px) !important;
+    background: rgba(180, 172, 160, 0.42) !important;
+    backdrop-filter: blur(24px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 14px !important;
+    padding: 1.15rem 1.15rem !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1) !important;
     transform: none !important;
   }
 
-  /* Right Years Experience Card */
+  .hero-card-3-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+  }
+
+  .hero-card-3-icon {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    color: #ffff23 !important;
+    fill: #ffff23 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .hero-card-3-item p {
+    color: #ffffff !important;
+    font-size: clamp(0.92rem, 2.4vw, 1.02rem) !important;
+    font-weight: 700 !important;
+    font-family: var(--tra) !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  /* Right Years Experience Card (Taller, Slimmer Profile) */
   .hero-card-1-wrap {
     position: absolute !important;
-    top: clamp(17.5rem, 72vw, 23.5rem) !important;
-    right: clamp(1rem, 4vw, 1.5rem) !important;
+    top: clamp(18.5rem, 74vw, 23.5rem) !important;
+    right: clamp(0.75rem, 3.5vw, 1.25rem) !important;
     left: auto !important;
     bottom: auto !important;
-    z-index: 10 !important;
+    z-index: 12 !important;
     display: flex !important;
     pointer-events: auto !important;
     margin: 0 !important;
+    width: clamp(105px, 27vw, 122px) !important;
   }
 
   .hero-card-1 {
     opacity: 1 !important;
     visibility: visible !important;
-    background: rgba(194, 184, 172, 0.45) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-radius: 8px !important;
-    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    background: rgba(180, 172, 160, 0.42) !important;
+    backdrop-filter: blur(24px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 14px !important;
+    padding: 1.35rem 0.85rem 1.25rem !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1) !important;
   }
 
-  /* Bottom Left Projects Card */
+  .experience-number-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-bottom: 0.55rem !important;
+  }
+
+  .experience-number {
+    width: clamp(52px, 13vw, 64px) !important;
+    height: auto !important;
+    color: #ffff23 !important;
+    fill: #ffff23 !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  .experience-text-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .experience-text {
+    color: #ffffff !important;
+    font-size: clamp(0.82rem, 2.1vw, 0.92rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    font-family: var(--tra) !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  /* Main Headline Over Torso (Centered in view, left-aligned lines, below Experience card) */
+  .hero-content-layout {
+    position: absolute !important;
+    top: clamp(30.5rem, 114vw, 37.5rem) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    width: max-content !important;
+    max-width: 90vw !important;
+    bottom: auto !important;
+    padding: 0 !important;
+    z-index: 15 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+    pointer-events: none !important;
+  }
+
+  .hero-heading {
+    color: #ffffff !important;
+    font-family: var(--tra) !important;
+    font-size: clamp(2.75rem, 11.8vw, 3.8rem) !important;
+    font-weight: 700 !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.025em !important;
+    margin: 0 !important;
+    text-align: left !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .hero-heading .line {
+    text-align: left !important;
+    display: block !important;
+  }
+
+  /* Bottom Left Projects Card ("80+ Projects" with center-aligned text on the right) */
   .hero-card-2-wrap {
     position: absolute !important;
-    bottom: clamp(1rem, 4vw, 1.8rem) !important;
-    left: clamp(1rem, 4vw, 1.5rem) !important;
-    right: auto !important;
+    bottom: clamp(0.6rem, 2vw, 1.25rem) !important;
     top: auto !important;
-    z-index: 10 !important;
+    left: clamp(1rem, 4.5vw, 1.5rem) !important;
+    right: auto !important;
+    z-index: 12 !important;
     display: flex !important;
     pointer-events: auto !important;
+    width: auto !important;
+    min-width: clamp(125px, 32vw, 150px) !important;
   }
 
   .hero-card-2 {
     opacity: 1 !important;
     visibility: visible !important;
-    background: rgba(194, 184, 172, 0.45) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-radius: 8px !important;
-    padding: 0.6rem 0.9rem !important;
+    width: 100% !important;
+    background: rgba(180, 172, 160, 0.42) !important;
+    backdrop-filter: blur(24px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 14px !important;
+    padding: 0.75rem 1rem !important;
     display: flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
+    gap: 0.75rem !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .hero-webflow-icon-wrap {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .hero-webflow-icon {
+    width: 38px !important;
+    height: auto !important;
+    color: #ffff23 !important;
+    fill: #ffff23 !important;
+    display: block !important;
+  }
+
+  .hero-c-projects-text-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .hero-webflow-projects-text {
+    color: #ffffff !important;
+    font-size: clamp(0.85rem, 2.2vw, 0.95rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+    font-family: var(--tra) !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  /* Mobile Intro Text before About Section */
+  .hero-mobile-intro {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    padding: 2.5rem clamp(1.25rem, 5vw, 2rem) 3.5rem clamp(1.25rem, 5vw, 2rem) !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 10 !important;
+    background: transparent !important;
+  }
+
+  .hero-mobile-intro-heading {
+    font-family: var(--tra) !important;
+    font-size: clamp(1.15rem, 4.8vw, 1.4rem) !important;
+    font-weight: 400 !important;
+    color: #111111 !important;
+    line-height: 1.38 !important;
+    margin: 0 !important;
+  }
+
+  .hero-mobile-intro-text {
+    font-family: var(--tra) !important;
+    font-size: clamp(1.15rem, 4.8vw, 1.4rem) !important;
+    font-weight: 400 !important;
+    color: #111111 !important;
+    line-height: 1.38 !important;
+    margin: 0 !important;
   }
 
   /* Work section mobile touch horizontal scroll track */
